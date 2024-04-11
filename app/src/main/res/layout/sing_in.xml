@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ImageView para el fondo de pantalla -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo" />
+
+    <!-- LinearLayout vertical para los campos de texto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <!-- Campo de texto para el usuario -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#77CDCDCD"
+                android:hint="Usuario" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo de texto para el correo electrónico -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#77CDCDCD"
+                android:hint="Correo Electrónico" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo de texto para la contraseña -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputContraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="50dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#77CDCDCD"
+                android:hint="Contraseña"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <!-- Botón de registrarse -->
+
+    <!-- Texto para ir al login -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRegistrarse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewSiTengo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="30dp"
+        android:text="Registrarse"
+        app:cornerRadius="4dp" />
+
+    <TextView
+        android:id="@+id/textViewSiTengo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="138dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="IrALogIn"
+        android:text="Ya tengo cuenta creada" />
+
+</RelativeLayout>
