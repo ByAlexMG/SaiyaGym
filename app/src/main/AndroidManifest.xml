@@ -30,6 +30,8 @@
         <activity android:name="com.example.saiyagym.IntroducirDatos" />
         <activity android:name="com.example.saiyagym.ElegirMeta" />
         <activity android:name="com.example.saiyagym.Principal" />
+        <activity android:name="com.google.android.youtube.player.YouTubePlayerActivity" />
+
     </application>
 
 </manifest>
