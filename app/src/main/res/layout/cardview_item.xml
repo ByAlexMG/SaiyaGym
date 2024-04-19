@@ -17,26 +17,29 @@
         <!-- VideoView para mostrar el video -->
         <VideoView
             android:id="@+id/videoView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
             android:visibility="gone" />
 
         <!-- Descripción -->
         <TextView
             android:id="@+id/descriptionTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="119dp"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:text="Descripción del video"
             android:textSize="16sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <!-- Botón -->
         <Button
             android:id="@+id/playButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="142dp"
+            android:layout_height="match_parent"
             android:text="Reproducir"
-            android:visibility="gone"/>
+            android:layout_gravity="center"
+            android:visibility="gone" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

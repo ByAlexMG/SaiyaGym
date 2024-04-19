@@ -8,4 +8,5 @@
     <!-- Agrega tu CardView aquí -->
     <include layout="@layout/cardview_item"/>
 
+
 </RelativeLayout>

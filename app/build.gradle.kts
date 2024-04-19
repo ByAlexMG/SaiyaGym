@@ -46,7 +46,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.material.v140)
-    implementation (libs.youtube.android.player)
+
 
 
 }

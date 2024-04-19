@@ -1,10 +1,12 @@
 package com.example.saiyagym
-import android.net.Uri
+
+
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 
@@ -18,6 +20,9 @@ class Principal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.principal)
 
+
+        
+
         val cardView = findViewById<CardView>(R.id.cardView)
         initialParams = cardView.layoutParams
         originalHeight = initialParams.height
@@ -26,35 +31,41 @@ class Principal : AppCompatActivity() {
             if (!expanded) {
                 expandCardView(cardView)
             } else {
-                restoreCardView(cardView)
+                collapseCardView(cardView)
             }
         }
     }
 
     private fun expandCardView(cardView: CardView) {
+        val expandAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.expand_anim)
+        cardView.startAnimation(expandAnimation)
         cardView.layoutParams.apply {
             width = ViewGroup.LayoutParams.MATCH_PARENT
             height = ViewGroup.LayoutParams.WRAP_CONTENT
         }
-        cardView.findViewById<VideoView>(R.id.videoView).visibility = View.VISIBLE
+        cardView.findViewById<View>(R.id.videoView).visibility = View.VISIBLE
         cardView.findViewById<View>(R.id.descriptionTextView).visibility = View.VISIBLE
-        cardView.findViewById<Button>(R.id.playButton).visibility = View.VISIBLE
-
-        // Configurar el VideoView para reproducir un video local
-        val videoView = cardView.findViewById<VideoView>(R.id.videoView)
-        val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.Video)
-        videoView.setVideoURI(videoUri)
-        videoView.start()
-
+        cardView.findViewById<View>(R.id.playButton).visibility = View.VISIBLE
         expanded = true
     }
 
     private fun restoreCardView(cardView: CardView) {
         cardView.layoutParams = initialParams
-        cardView.findViewById<VideoView>(R.id.videoView).visibility = View.GONE
+        cardView.findViewById<View>(R.id.videoView).visibility = View.GONE
         cardView.findViewById<View>(R.id.descriptionTextView).visibility = View.GONE
-        cardView.findViewById<Button>(R.id.playButton).visibility = View.GONE
+        cardView.findViewById<View>(R.id.playButton).visibility = View.GONE
+        expanded = false
+    }
+    private fun collapseCardView(cardView: CardView) {
+        val collapseAnimation = AnimationUtils.loadAnimation(this, R.anim.collapse_anim)
+        cardView.startAnimation(collapseAnimation)
+        cardView.layoutParams.apply {
+            width = ViewGroup.LayoutParams.MATCH_PARENT
+            height = originalHeight // Restablecer la altura original
+        }
+        cardView.findViewById<View>(R.id.videoView).visibility = View.GONE
+        cardView.findViewById<View>(R.id.descriptionTextView).visibility = View.GONE
+        cardView.findViewById<View>(R.id.playButton).visibility = View.GONE
         expanded = false
     }
 }
-
