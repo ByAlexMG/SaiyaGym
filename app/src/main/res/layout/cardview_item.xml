@@ -1,4 +1,5 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
@@ -13,21 +14,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <!-- VideoView para mostrar el video -->
-        <VideoView
-            android:id="@+id/videoView"
+        <TextView
+            android:id="@+id/exerciseNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del ejercicio"
+            android:textSize="18sp"
+            android:visibility="visible" />
+        <!-- YouTubePlayerView para mostrar el video de YouTube -->
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtubePlayerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:layout_height="150dp"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <!-- Descripción -->
         <TextView
             android:id="@+id/descriptionTextView"
-            android:layout_width="119dp"
-            android:layout_gravity="center"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Descripción del video"
             android:textSize="16sp"
             android:visibility="gone" />
@@ -35,11 +41,10 @@
         <!-- Botón -->
         <Button
             android:id="@+id/playButton"
-            android:layout_width="142dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Reproducir"
             android:layout_gravity="center"
             android:visibility="gone" />
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

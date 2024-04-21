@@ -11,6 +11,7 @@ activity = "1.8.0"
 constraintlayout = "2.1.4"
 materialVersion = "1.4.0"
 youtubeAndroidPlayer = "10.0.5"
+youtubeAndroidPlayerVersion = "1.2.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -22,7 +23,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 material-v140 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
-youtube-android-player = { module = "com.google.android.youtube:youtube-android-player", version.ref = "youtubeAndroidPlayer" }
+
+youtube-android-player-v122 = { module = "com.google.android.youtube:youtube-android-player", version.ref = "youtubeAndroidPlayerVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
