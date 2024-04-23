@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -23,22 +24,25 @@ class Principal : AppCompatActivity() {
         setContentView(R.layout.principal)
         val youTubePlayerView = findViewById<YouTubePlayerView>(R.id.youtubePlayerView)
         val cardView = findViewById<CardView>(R.id.cardView)
+        val playButton = findViewById<Button>(R.id.playButton)
         initialParams = cardView.layoutParams
         originalHeight = initialParams.height
 
         cardView.setOnClickListener {
             if (!expanded) {
                 expandCardView(cardView, youTubePlayerView)
-            } else {
-                collapseCardView(cardView, youTubePlayerView)
             }
+        }
+
+        playButton.setOnClickListener{
+            collapseCardView(cardView, youTubePlayerView)
         }
 
         // Inicializa el reproductor de YouTube
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                // Cambia "VIDEO_ID" por el ID real del video de YouTube
+
                 youTubePlayer.loadVideo("TXvwdNM_43I", 0F)
             }
         })
@@ -65,14 +69,14 @@ class Principal : AppCompatActivity() {
         cardView.startAnimation(collapseAnimation)
         cardView.layoutParams.apply {
             width = ViewGroup.LayoutParams.MATCH_PARENT
-            height = originalHeight // Restablecer la altura original
+            height = originalHeight
         }
         cardView.findViewById<View>(R.id.youtubePlayerView).visibility = View.GONE
         cardView.findViewById<View>(R.id.descriptionTextView).visibility = View.GONE
         cardView.findViewById<View>(R.id.playButton).visibility = View.GONE
         expanded = false
 
-        // Pausa el reproductor de YouTube
+
         youTubePlayerView.getYouTubePlayerWhenReady(object : YouTubePlayerCallback {
             override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
                 youTubePlayer.pause()
