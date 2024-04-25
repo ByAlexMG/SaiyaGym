@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_option1"
-        android:title="Opción 1"
-        android:icon="@drawable/ajustes" />
+        android:title="Calendario"
+        android:icon="@drawable/calendario" />
     <item
         android:id="@+id/navigation_option2"
-        android:title="Opción 2"
-        android:icon="@drawable/ajustes" />
+        android:title="Rutina"
+        android:icon="@drawable/ejercicios_logo" />
     <item
         android:id="@+id/navigation_option3"
-        android:title="Opción 3"
+        android:title="Ajustes"
         android:icon="@drawable/ajustes" />
 </menu>
