@@ -36,9 +36,18 @@ class Principal : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+
+        // Add animations
+        fragmentTransaction.setCustomAnimations(
+            R.anim.slide_in_left, // Enter animation
+            R.anim.slide_out_right, // Exit animation
+            R.anim.slide_in_right, // Pop enter animation
+            R.anim.slide_out_left // Pop exit animation
+        )
+
+        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.commit()
     }
 
 }

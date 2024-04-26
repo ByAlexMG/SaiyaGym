@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import java.lang.Integer.max
 class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
@@ -27,15 +28,27 @@ class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAda
 
             holder.youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
                 override fun onReady(youTubePlayer: YouTubePlayer) {
-
                     youTubePlayer.loadVideo("TXvwdNM_43I", 0F)
                 }
             })
         }
         holder.playButton.setOnClickListener {
             collapseCardView(holder.cardView, holder.youTubePlayerView, holder.itemView)
+
+            // Create a YouTubePlayerCallback
+            val playerCallback = object : YouTubePlayerCallback {
+                override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
+                    youTubePlayer.pause()
+                }
+            }
+
+            // Pause the video directly using the callback
+            holder.youTubePlayerView.getYouTubePlayerWhenReady(playerCallback)
         }
     }
+
+
+
     override fun getItemCount(): Int {
         return itemCount
     }
@@ -78,10 +91,14 @@ class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAda
             override fun onAnimationStart(animation: Animation?) {}
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
+
+
                 // Restablecer la altura original después del colapso
                 cardView.layoutParams.height = originalHeight
                 cardView.requestLayout()
+
             }
+
         })
 
         cardView.startAnimation(collapseAnimation)
@@ -104,6 +121,7 @@ class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAda
             override fun willChangeBounds(): Boolean {
                 return true
             }
+
         }
 
         animation.duration = 500 // Duración de la animación en milisegundos
