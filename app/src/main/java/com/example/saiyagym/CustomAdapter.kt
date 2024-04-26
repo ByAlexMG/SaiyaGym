@@ -9,6 +9,8 @@ import android.widget.Button
 import androidx.cardview.widget.CardView
 
 import androidx.recyclerview.widget.RecyclerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import java.lang.Integer.max
 class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
@@ -22,6 +24,13 @@ class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAda
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.cardView.setOnClickListener {
             expandCardView(holder.cardView, holder.youTubePlayerView, holder.itemView, holder)
+
+            holder.youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+
+                    youTubePlayer.loadVideo("TXvwdNM_43I", 0F)
+                }
+            })
         }
         holder.playButton.setOnClickListener {
             collapseCardView(holder.cardView, holder.youTubePlayerView, holder.itemView)
