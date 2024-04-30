@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "624674348048",
+    "project_id": "saiyagym-9000",
+    "storage_bucket": "saiyagym-9000.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624674348048:android:5e7f801dbf798350febe95",
+        "android_client_info": {
+          "package_name": "com.example.saiyagym"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7JoitriZLLt5ALCxHGzf4MQIuEDUJUIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
