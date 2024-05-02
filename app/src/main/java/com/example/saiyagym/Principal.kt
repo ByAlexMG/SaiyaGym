@@ -33,6 +33,8 @@ class Principal : AppCompatActivity() {
 
         // Mostrar el primer fragmento por defecto
         replaceFragment(Option1Fragment())
+
+
     }
 
     private fun replaceFragment(fragment: Fragment) {

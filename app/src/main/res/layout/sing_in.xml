@@ -75,9 +75,7 @@
 
     </LinearLayout>
 
-    <!-- Botón de registrarse -->
 
-    <!-- Texto para ir al login -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonRegistrarse"
         android:layout_width="match_parent"
