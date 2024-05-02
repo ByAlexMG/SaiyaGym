@@ -13,24 +13,22 @@ class Option3Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val view = inflater.inflate(R.layout.fragment_option3, container, false)
 
-        // Encuentra el botón de cerrar sesión en el diseño inflado
+
         val closeButton = view.findViewById<MaterialButton>(R.id.CerrarSesion)
 
-        // Agrega un oyente de clic al botón
+
         closeButton.setOnClickListener {
-            // Obtener las SharedPreferences desde la actividad asociada al fragmento
+
             val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
 
-            // Aquí puedes agregar el código para cerrar la sesión del usuario
-            // Por ejemplo, puedes limpiar las SharedPreferences
+
             val editor = sharedPreferences.edit()
             editor.clear().apply()
             requireActivity().finish()
-            // Luego, puedes realizar alguna acción, como iniciar una actividad de inicio de sesión
-        }
+           }
 
         return view
     }

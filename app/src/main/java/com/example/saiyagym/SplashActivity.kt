@@ -7,7 +7,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
-    private val SPLASH_TIME_OUT: Long = 3000 // 3 segundos
+    private val SPLASH_TIME_OUT: Long = 3000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +18,9 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             val username = getUsernameFromSharedPreferences()
             if (username != null) {
-                // Si hay un nombre de usuario guardado, inicia sesión automáticamente
                 val intent = Intent(this, Principal::class.java)
                 startActivity(intent)
             } else {
-                // Si no hay un nombre de usuario guardado, lleva al usuario a la pantalla de inicio de sesión
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }

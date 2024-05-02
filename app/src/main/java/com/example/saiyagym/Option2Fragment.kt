@@ -14,16 +14,15 @@ class Option2Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val view = inflater.inflate(R.layout.fragment_option2, container, false)
 
-        // Find the RecyclerView in the inflated layout
+
         val recyclerViewOption2: RecyclerView = view.findViewById(R.id.recyclerViewOption2)
 
-        // Set up the RecyclerView
-        recyclerViewOption2.layoutManager = LinearLayoutManager(requireContext())
-        recyclerViewOption2.adapter = CustomAdapter(5) // Assuming CustomAdapter is your adapter
 
+        recyclerViewOption2.layoutManager = LinearLayoutManager(requireContext())
+        recyclerViewOption2.adapter = CustomAdapter(5)
         return view
     }
 }

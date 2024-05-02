@@ -31,7 +31,7 @@ class Principal : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        // Mostrar el primer fragmento por defecto
+
         replaceFragment(Option1Fragment())
 
 
@@ -42,10 +42,10 @@ class Principal : AppCompatActivity() {
 
         // Add animations
         fragmentTransaction.setCustomAnimations(
-            R.anim.slide_in_left, // Enter animation
-            R.anim.slide_out_right, // Exit animation
-            R.anim.slide_in_right, // Pop enter animation
-            R.anim.slide_out_left // Pop exit animation
+            R.anim.slide_in_left,
+            R.anim.slide_out_right,
+            R.anim.slide_in_right,
+            R.anim.slide_out_left
         )
 
         fragmentTransaction.replace(R.id.fragment_container, fragment)

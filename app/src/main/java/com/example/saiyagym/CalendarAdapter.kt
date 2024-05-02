@@ -25,7 +25,7 @@ class CalendarAdapter(private val days: List<String>) :
         val day = days[position]
         holder.dayTextView.text = day
 
-        // Set an image to the ImageView (if needed)
+
          holder.imageView.setImageResource(R.drawable.ajustes)
          holder.imageView.visibility = View.VISIBLE
     }
