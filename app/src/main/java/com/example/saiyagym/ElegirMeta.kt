@@ -15,11 +15,13 @@ class ElegirMeta : AppCompatActivity() {
         val botonVolver: Button = findViewById(R.id.backButton)
         botonVolver.setOnClickListener {
             val intent = Intent(this, IntroducirDatos::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
         val botonTerminar: Button = findViewById(R.id.finishButton)
         botonTerminar.setOnClickListener {
             val intent = Intent(this, Principal::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 

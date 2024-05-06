@@ -1,6 +1,10 @@
 package com.example.saiyagym
 import android.os.Bundle
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -28,28 +32,51 @@ class Principal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.principal)
 
+
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
+        setDayNight()
 
-        replaceFragment(Option1Fragment())
-
+        if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {
+            replaceFragment(Option1Fragment())
+        }
 
     }
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        // Add animations
         fragmentTransaction.setCustomAnimations(
             R.anim.slide_in_left,
             R.anim.slide_out_right,
+            R.anim.slide_out_left,
             R.anim.slide_in_right,
-            R.anim.slide_out_left
+
         )
 
         fragmentTransaction.replace(R.id.fragment_container, fragment)
         fragmentTransaction.commit()
     }
+
+    fun setDayNight() {
+
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_animation)
+
+           val mainContainer = findViewById<View>(R.id.padre)
+        mainContainer.startAnimation(fadeInAnimation)
+
+
+        val sp = getSharedPreferences("my_preferences", MODE_PRIVATE)
+        val theme = sp.getInt("theme", 1)
+        if (theme == 0) {
+            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+        }
+    }
+
+
+
 
 }

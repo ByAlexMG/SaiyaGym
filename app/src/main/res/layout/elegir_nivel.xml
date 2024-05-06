@@ -2,104 +2,110 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TextView con una línea divisora debajo -->
+
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="¿Qué nivel quieres alcanzar?"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="362dp"
+        android:layout_height="540dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-
-
-        />
-
-    <!-- RadioGroup para los RadioButtons -->
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
-
-        <!-- RadioButton 1 con ImageView -->
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:gravity="center_vertical"
-            android:text=""
-            android:textSize="18sp"
-            android:background="@drawable/dragonbal"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        app:layout_constraintVertical_bias="0.0">
 
 
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            />
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:text="X > 30%" />
 
-        <!-- RadioButton 2 con ImageView -->
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:text="30% < X > 20%" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:text="20% < X > 10%" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:text="X < 10%" />
+
+        </RadioGroup>
 
 
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:gravity="center_vertical"
-            android:text=""
-            android:textSize="18sp"
-            android:scaleType="fitCenter"
-            android:background="@drawable/dragonbal"/>
+            <ImageView
+                android:id="@+id/imageView1"
 
-        <!-- RadioButton 3 con ImageView -->
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:src="@drawable/ajustes" />
 
-        <!-- RadioButton 4 con ImageView -->
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:background="@drawable/dragonbal"
-            android:gravity="center_vertical"
-            android:text=""
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:src="@drawable/ajustes" />
 
-            android:textSize="18sp" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:src="@drawable/ajustes" />
 
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:gravity="center_vertical"
-            android:text=""
-            android:textSize="18sp"
-            android:background="@drawable/dragonbal"
-            />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:src="@drawable/ajustes" />
 
-    </RadioGroup>
+        </LinearLayout>
 
-    <!-- LinearLayout horizontal para los botones -->
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/buttonsLayout"
         android:layout_width="0dp"
@@ -112,24 +118,24 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="16dp">
 
-        <!-- Botón Volver -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/backButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Volver"
             android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            />
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginEnd="8dp"/>
 
-        <!-- Botón Terminar -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/finishButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Terminar"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            app:cornerRadius="4dp"
+            />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

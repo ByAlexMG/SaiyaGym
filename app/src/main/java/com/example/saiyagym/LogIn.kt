@@ -92,11 +92,13 @@ class LoginActivity : AppCompatActivity() {
 
     fun IrAPasswordOlvidada(view: View) {
         val intent = Intent(this, PasswordOlvidada::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
 
     fun IrASingIn(view: View) {
         val intent = Intent(this, SingIn::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
 }

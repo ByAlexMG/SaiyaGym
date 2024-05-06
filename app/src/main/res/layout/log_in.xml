@@ -3,28 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<!--
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/fondo" />
-
+-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textInputContraseña"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="69dp">
+        android:layout_marginBottom="69dp"
+        app:hintTextColor="@color/orange"
+        android:imeOptions="actionDone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#77CDCDCD"
-            android:hint="Usuario" />
+            android:inputType="text"
+            android:hint="Usuario"
+            android:textColorHint="@color/orange"
+            android:imeOptions="actionDone"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -33,17 +39,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/checkboxRecordar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        app:hintTextColor="@color/orange"
+        android:imeOptions="actionDone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
-            android:background="#77CDCDCD"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="@color/orange"
+            android:imeOptions="actionDone"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,43 +63,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonLogIn"
-        android:layout_marginStart="40dp"
-        android:checked="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="150dp"
         android:layout_marginBottom="48dp"
-        android:text="Recordar contraseña" />
+        android:checked="false"
+        android:shadowColor="@color/orange"
+        android:text="Recordar contraseña"
+        app:useMaterialThemeColors="true" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLogIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textViewOlvidad"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:onClick="IrAIntroduciratos"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="63dp"
+        android:gravity="center"
+        android:onClick="IrAIntroduciratos"
         android:text="Iniciar Sesión"
         app:cornerRadius="4dp" />
 
     <TextView
         android:id="@+id/textViewOlvidad"
-        android:layout_width="wrap_content"
+        android:layout_width="292dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textViewSiTengo"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="151dp"
-        android:layout_marginBottom="1dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
         android:onClick="IrAPasswordOlvidada"
-        android:text="Olvidad" />
+        android:text="He olvidado mi contraseña" />
 
     <TextView
         android:id="@+id/textViewSiTengo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="154dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="27dp"
         android:onClick="IrASingIn"
-        android:text="No tengo" />
+        android:text="No tengo cuenta" />
 
 </RelativeLayout>

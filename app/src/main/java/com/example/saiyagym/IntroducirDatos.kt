@@ -25,6 +25,7 @@ class IntroducirDatos : AppCompatActivity() {
         val buttonGuardarCambios: Button = findViewById(R.id.buttonGuardarCambios)
         buttonGuardarCambios.setOnClickListener {
             val intent = Intent(this, ElegirMeta::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
     }

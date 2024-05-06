@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:textColor="@color/orange"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -20,11 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:hint="Ingrese su peso"
-            app:hintTextColor="#000000">
+            app:hintTextColor="@color/orange">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPeso"
+                android:hint="Ingrese su peso"
+                android:textColorHint="@color/orange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal" />
@@ -37,9 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:hint="Ingrese su altura"
-            app:hintTextColor="#000000">
+            app:hintTextColor="@color/orange">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:textColorHint="@color/orange"
                 android:id="@+id/editTextAltura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,10 +56,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:hint="Ingrese su edad"
-            app:hintTextColor="#000000">
+            app:hintTextColor="@color/orange">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextEdad"
+                android:textColorHint="@color/orange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -85,19 +89,12 @@
                 android:text="% de Masa Corporal :  "
                 android:textSize="20sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_weight="1"
-                app:hintTextColor="#000000">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textMultiLine"
+                android:shadowColor="@color/orange"
+                android:text="" />
 
         </LinearLayout>
 
@@ -106,7 +103,7 @@
             android:layout_width="293dp"
             android:layout_height="62dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="120dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="30dp"
             android:text="Guardar cambios"
