@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SaiyaGym</string>
+    <string name="_30_x_20"><![CDATA[30% < X > 20%]]></string>
+    <string name="x_30"><![CDATA[X > 30%]]></string>
+    <string name="_20_x_10"><![CDATA[20% < X > 10%]]></string>
+    <string name="x_10"><![CDATA[X < 10%]]></string>
 </resources>

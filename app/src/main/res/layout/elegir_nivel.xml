@@ -49,25 +49,25 @@
                 android:id="@+id/radioButton1"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="X > 30%" />
+                android:text="@string/x_30" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="30% < X > 20%" />
+                android:text="@string/_30_x_20" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="20% < X > 10%" />
+                android:text="@string/_20_x_10" />
 
             <RadioButton
                 android:id="@+id/radioButton4"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="X < 10%" />
+                android:text="@string/x_10" />
 
         </RadioGroup>
 
