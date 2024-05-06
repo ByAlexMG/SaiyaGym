@@ -7,12 +7,9 @@
     <item name="colorPrimary">@color/blue</item>
     <item name="android:navigationBarColor">@color/blue</item>
 </style>
-
-
 <style name="Theme.SaiyaGym" parent="Base.Theme.SaiyaGym" />
 
 <style name="NoActionBar">
-
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">false</item>
     <item name="colorPrimary">@color/blue</item>

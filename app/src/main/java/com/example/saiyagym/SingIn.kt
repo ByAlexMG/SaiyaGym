@@ -9,9 +9,11 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SingIn : AppCompatActivity() {
 
+    private val db = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sing_in)
@@ -32,6 +34,11 @@ class SingIn : AppCompatActivity() {
 
                     if (it.isSuccessful){
 
+
+                       db.collection("users").document(editTextUsuario.text.toString()).set(
+                           hashMapOf("contraseña" to editTextContrasena.text.toString())
+                       )
+
                         val intent = Intent(this, LoginActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)
@@ -46,16 +53,19 @@ class SingIn : AppCompatActivity() {
             else if(editTextUsuario.text.isEmpty()){
                 AlertCorreo()
             }
+
         }
     }
 
-    private fun showAlert(){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("se ha producido un error al registrarse")
-        builder.setPositiveButton("Aceptar",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
+    private fun showAlert() {
+        if (!isFinishing) { // Verifica si la actividad no ha sido finalizada
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Error")
+            builder.setMessage("Se ha producido un error al registrarse")
+            builder.setPositiveButton("Aceptar", null)
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
     }
     private fun AlertCorreo(){
         val builder = AlertDialog.Builder(this)

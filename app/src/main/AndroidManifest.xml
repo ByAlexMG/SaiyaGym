@@ -24,10 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name="com.example.saiyagym.LoginActivity" />
         <activity android:name="com.example.saiyagym.MainActivity" />
         <activity android:name="com.example.saiyagym.PasswordOlvidada" />
-        <activity android:name="com.example.saiyagym.SingIn" />
+        <activity android:name="com.example.saiyagym.SingIn"/>
         <activity android:name="com.example.saiyagym.IntroducirDatos" />
         <activity android:name="com.example.saiyagym.ElegirMeta" />
         <activity android:name="com.example.saiyagym.Principal" />
