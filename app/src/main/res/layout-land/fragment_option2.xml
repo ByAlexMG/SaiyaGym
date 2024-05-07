@@ -1,21 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TextView para el título "Rutina" -->
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="207dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="207dp"
+        android:elevation="8dp"
+        android:gravity="center"
         android:text="Rutina"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp" />
+        android:textStyle="bold" />
 
-    <!-- RecyclerView para mostrar opciones -->
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="30dp"
+
+        android:layout_marginTop="10dp"
         android:id="@+id/recyclerViewOption2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

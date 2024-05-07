@@ -25,13 +25,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.saiyagym.LoginActivity" />
-        <activity android:name="com.example.saiyagym.MainActivity" />
-        <activity android:name="com.example.saiyagym.PasswordOlvidada" />
-        <activity android:name="com.example.saiyagym.SingIn"/>
-        <activity android:name="com.example.saiyagym.IntroducirDatos" />
-        <activity android:name="com.example.saiyagym.ElegirMeta" />
-        <activity android:name="com.example.saiyagym.Principal" />
+        <activity android:name="com.example.saiyagym.LoginActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.saiyagym.MainActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.saiyagym.PasswordOlvidada"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.saiyagym.SingIn"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.saiyagym.IntroducirDatos"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.saiyagym.ElegirMeta"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.saiyagym.Principal"
+               android:screenOrientation="portrait"/>
 
 
     </application>
