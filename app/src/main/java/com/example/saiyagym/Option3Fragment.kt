@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
 import android.widget.Toast
@@ -28,7 +29,10 @@ class Option3Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_option3, container, false)
 
         val closeButton = view.findViewById<MaterialButton>(R.id.CerrarSesion)
-
+        val button1 = view.findViewById<Button>(R.id.button1)
+        button1.setOnClickListener {
+            showChangeEmailDialog()
+        }
         closeButton.setOnClickListener {
             val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
@@ -111,6 +115,60 @@ class Option3Fragment : Fragment() {
             }
     }
 
+    private fun showChangeEmailDialog() {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Cambiar Correo Electrónico")
+
+        // Layout para el diálogo
+        val view = layoutInflater.inflate(R.layout.change_email_dialog, null)
+        val currentEmailEditText = view.findViewById<EditText>(R.id.currentEmailEditText)
+        val newEmailEditText = view.findViewById<EditText>(R.id.newEmailEditText)
+        builder.setView(view)
+
+        // Botón para cambiar el correo electrónico
+        builder.setPositiveButton("Cambiar") { dialog, _ ->
+            val currentEmail = currentEmailEditText.text.toString()
+            val newEmail = newEmailEditText.text.toString()
+
+            // Llamar a la función changeEmail con los correos electrónicos proporcionados
+            changeEmail(currentEmail, newEmail)
+            dialog.dismiss()
+        }
+
+        // Botón para cancelar
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        // Mostrar el diálogo
+        builder.show()
+    }
+    private fun changeEmail(currentPassword: String, newEmail: String) {
+        val user = FirebaseAuth.getInstance().currentUser
+        val credential = EmailAuthProvider.getCredential(user!!.email!!, currentPassword)
+
+        user.reauthenticate(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    user.updateEmail(newEmail)
+                        .addOnCompleteListener { updateTask ->
+                            if (updateTask.isSuccessful) {
+                                // El correo electrónico se ha actualizado con éxito
+                                // Aquí puedes mostrar un mensaje de éxito o realizar alguna otra acción
+                                showToast("Correo electrónico actualizado con éxito")
+                            } else {
+                                // No se pudo actualizar el correo electrónico
+                                // Aquí puedes mostrar un mensaje de error o realizar alguna otra acción
+                                showToast("Error al actualizar el correo electrónico")
+                            }
+                        }
+                } else {
+                    // La reautenticación falló, la contraseña actual es incorrecta
+                    // Aquí puedes mostrar un mensaje de error o realizar alguna otra acción
+                    showToast("El correo actual es incorrecto")
+                }
+            }
+    }
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
