@@ -19,7 +19,7 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
 class Option3Fragment : Fragment() {
-
+    private  lateinit var firebaseAuth:FirebaseAuth
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,7 +100,6 @@ class Option3Fragment : Fragment() {
         user.reauthenticate(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
                     user.updatePassword(newPassword)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
@@ -119,56 +118,49 @@ class Option3Fragment : Fragment() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Cambiar Correo Electrónico")
 
-        // Layout para el diálogo
         val view = layoutInflater.inflate(R.layout.change_email_dialog, null)
         val currentEmailEditText = view.findViewById<EditText>(R.id.currentEmailEditText)
         val newEmailEditText = view.findViewById<EditText>(R.id.newEmailEditText)
+        val currentPasswordEditText = view.findViewById<EditText>(R.id.currentPasswordEditText)
         builder.setView(view)
 
-        // Botón para cambiar el correo electrónico
         builder.setPositiveButton("Cambiar") { dialog, _ ->
             val currentEmail = currentEmailEditText.text.toString()
+            val currentPassword = currentPasswordEditText.text.toString()
             val newEmail = newEmailEditText.text.toString()
 
-            // Llamar a la función changeEmail con los correos electrónicos proporcionados
-            changeEmail(currentEmail, newEmail)
+            changeEmail(currentEmail,currentPassword, newEmail)
             dialog.dismiss()
         }
 
-        // Botón para cancelar
         builder.setNegativeButton("Cancelar") { dialog, _ ->
             dialog.dismiss()
         }
-
-        // Mostrar el diálogo
         builder.show()
     }
-    private fun changeEmail(currentPassword: String, newEmail: String) {
-        val user = FirebaseAuth.getInstance().currentUser
-        val credential = EmailAuthProvider.getCredential(user!!.email!!, currentPassword)
+    private fun changeEmail(currentEmail: String, currentPassword: String, newEmail: String) {
+        val auth = FirebaseAuth.getInstance()
+        auth.signInWithEmailAndPassword(currentEmail, currentPassword)
+            .addOnCompleteListener { signInTask ->
+                if (signInTask.isSuccessful) {
 
-        user.reauthenticate(credential)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    user.updateEmail(newEmail)
+                    auth.currentUser!!.updateEmail(newEmail)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
-                                // El correo electrónico se ha actualizado con éxito
-                                // Aquí puedes mostrar un mensaje de éxito o realizar alguna otra acción
-                                showToast("Correo electrónico actualizado con éxito")
+
+                                showToast("Correo actualizado")
                             } else {
-                                // No se pudo actualizar el correo electrónico
-                                // Aquí puedes mostrar un mensaje de error o realizar alguna otra acción
-                                showToast("Error al actualizar el correo electrónico")
+                                showToast("Error al actualizar el correo")
                             }
                         }
                 } else {
-                    // La reautenticación falló, la contraseña actual es incorrecta
-                    // Aquí puedes mostrar un mensaje de error o realizar alguna otra acción
-                    showToast("El correo actual es incorrecto")
+
+                    showToast("Datos de sesión fallidos")
                 }
             }
     }
+
+
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
