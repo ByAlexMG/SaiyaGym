@@ -22,7 +22,7 @@ class IntroducirDatos : AppCompatActivity() {
         setContentView(R.layout.introducir_datos)
 
         val spinnerGenero: Spinner = findViewById(R.id.spinnerGenero)
-        val generoOptions = listOf("Mujer", "Hombre", "Otro")
+        val generoOptions = listOf("Hombre","Mujer", "Otro")
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, generoOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -47,6 +47,9 @@ class IntroducirDatos : AppCompatActivity() {
 
             if (peso != null && altura != null && edad != null) {
                 val userData = hashMapOf(
+                    "email" to user.email,
+                    //no creo que sea muy seguro mostrar esto en la bd la vrdad
+                    //"ID" to user.uid,
                     "peso" to peso,
                     "altura" to altura,
                     "edad" to edad,
@@ -61,7 +64,7 @@ class IntroducirDatos : AppCompatActivity() {
                         startActivity(intent)
                     }
             } else {
-                // Mostrar un Toast si faltan campos por rellenar
+
                 Toast.makeText(this, "Faltan campos por rellenar", Toast.LENGTH_SHORT).show()
             }
         }
