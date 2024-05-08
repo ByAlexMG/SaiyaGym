@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
-
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +19,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.log_in)
 
         setup()
-
-
     }
+
     private fun setup(){
         title= "LogIn"
         val botonEntrar = findViewById<MaterialButton>(R.id.buttonLogIn)
@@ -31,81 +29,65 @@ class LoginActivity : AppCompatActivity() {
         val checkBoxRecordar = findViewById<CheckBox>(R.id.checkboxRecordar)
 
         botonEntrar.setOnClickListener {
-            if (correo.text.isNotEmpty() && contra.text.isNotEmpty()) {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(correo.text.toString(),
+            val email = correo.text.toString()
+            val password = contra.text.toString()
 
-
-                    contra.text.toString()).addOnCompleteListener { signInTask ->
-                    if (checkBoxRecordar.isChecked) {
-                        saveUsernameToSharedPreferences(correo)
-                    }
-                    if (signInTask.isSuccessful) {
-                        val currentUser = FirebaseAuth.getInstance().currentUser
-                        currentUser?.let { user ->
-
-                            val userDocument = db.collection("users").document(user.email!!)
-                            userDocument.get().addOnSuccessListener { document ->
-                                if (document.exists()) {
-                                    val peso = document.getDouble("peso")
-                                    val altura = document.getDouble("altura")
-                                    val edad = document.getLong("edad")
-                                    if (peso != null && altura != null && edad != null) {
-                                        // si están llenos, ir a la actividad principal
-                                        val intent = Intent(this, Principal::class.java)
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { signInTask ->
+                        if (checkBoxRecordar.isChecked) {
+                            saveUsernameToSharedPreferences(email)
+                        }
+                        if (signInTask.isSuccessful) {
+                            val currentUser = FirebaseAuth.getInstance().currentUser
+                            currentUser?.let { user ->
+                                val userDocument = db.collection("users").document(user.email!!)
+                                userDocument.get().addOnSuccessListener { document ->
+                                    if (document.exists()) {
+                                        val peso = document.getDouble("peso")
+                                        val altura = document.getDouble("altura")
+                                        val edad = document.getLong("edad")
+                                        if (peso != null && altura != null && edad != null) {
+                                            // Si los datos están llenos, ir a la actividad principal
+                                            val intent = Intent(this, Principal::class.java)
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                            startActivity(intent)
+                                            finish()
+                                        }
+                                    } else {
+                                        // Si los datos aún no están llenos, ir a la actividad IntroducirDatos
+                                        val intent = Intent(this, IntroducirDatos::class.java)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                         startActivity(intent)
                                         finish()
                                     }
-                                }else {
-                                    // si los datos aún no están llenos, ir a la actividad IntroducirDatos
-                                    val intent = Intent(this, IntroducirDatos::class.java)
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                    startActivity(intent)
-                                    finish()
                                 }
                             }
+                        } else {
+                            showAlert("Error", "Se ha producido un error al iniciar sesión")
                         }
-                    } else {
-                        showAlert()
                     }
-                }
-            } else if (contra.text.isEmpty()) {
-                AlertPassword()
-            } else if (correo.text.isEmpty()) {
-                AlertCorreo()
-            }
+            } else if (password.isEmpty()) {
+                showAlert("Error", "Contraseña vacía")
+            } else if (email.isEmpty()) {
+                showAlert("Error", "Correo electrónico vacío")
+            }else{
+         }
         }
     }
-    private fun saveUsernameToSharedPreferences(username: TextView) {
+
+    private fun saveUsernameToSharedPreferences(username: String) {
         val sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("username", username.toString())
+        editor.putString("username", username)
         editor.apply()
     }
 
-    private fun showAlert(){
+    private fun showAlert(title: String, message: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("se ha producido un error al iniciar sesion")
-        builder.setPositiveButton("Aceptar",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    private fun AlertCorreo(){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Datos erroneos")
-        builder.setPositiveButton("aceptar",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    private fun AlertPassword(){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Datos erroneos")
-        builder.setPositiveButton("Aceptar",null)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }

@@ -53,7 +53,7 @@ class IntroducirDatos : AppCompatActivity() {
                     "genero" to genero
                 )
 
-                val userDocument = db.collection("users").document(user.email!!)
+                val userDocument = db.collection("users").document(user.uid)
                 userDocument.set(userData)
                     .addOnSuccessListener {
                         val intent = Intent(this, ElegirMeta::class.java)

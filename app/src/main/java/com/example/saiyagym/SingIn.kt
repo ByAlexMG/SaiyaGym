@@ -1,6 +1,5 @@
 package com.example.saiyagym
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,77 +13,67 @@ import com.google.firebase.firestore.FirebaseFirestore
 class SingIn : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sing_in)
 
         setup()
     }
+
     private fun setup(){
         title= "Registro"
         val botonRegistrar = findViewById<Button>(R.id.buttonRegistrarse)
         val editTextUsuario = findViewById<EditText>(R.id.editTextCorreo)
         val editTextContrasena = findViewById<EditText>(R.id.editTextContraseña)
 
-
         botonRegistrar.setOnClickListener {
-            if(editTextUsuario.text.isNotEmpty()&& editTextContrasena.text.isNotEmpty()){
+            if(editTextUsuario.text.isNotEmpty() && editTextContrasena.text.isNotEmpty()) {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(editTextUsuario.text.toString(),
-                    editTextContrasena.text.toString()).addOnCompleteListener {
+                    editTextContrasena.text.toString()).addOnCompleteListener { task ->
 
-                    if (it.isSuccessful){
+                    if (task.isSuccessful){
+                        val currentUser = FirebaseAuth.getInstance().currentUser
+                        currentUser?.let { user ->
+                            val userDocument = db.collection("users").document(user.uid)
+                            val userData = hashMapOf(
+                                "email" to editTextUsuario.text.toString(),
+                                "contraseña" to editTextContrasena.text.toString()
+                            )
 
-
-                       db.collection("users").document(editTextUsuario.text.toString()).set(
-                           hashMapOf("contraseña" to editTextContrasena.text.toString())
-                       )
-
-                        val intent = Intent(this, LoginActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        startActivity(intent)
-
-                    }else{
-                        showAlert()
+                            userDocument.set(userData).addOnSuccessListener {
+                                val intent = Intent(this, LoginActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                startActivity(intent)
+                            }.addOnFailureListener {
+                                showAlert("Error", "Se ha producido un error al registrar los datos")
+                            }
+                        }
+                    } else {
+                        showAlert("Error", "Se ha producido un error al registrarse")
                     }
                 }
-            }else if( editTextContrasena.text.isEmpty()){
-                AlertPassword()
+            } else if(editTextContrasena.text.isEmpty()) {
+                showAlert("Error", "Contraseña vacía")
+            } else if(editTextUsuario.text.isEmpty()) {
+                showAlert("Error", "Correo electrónico vacío")
             }
-            else if(editTextUsuario.text.isEmpty()){
-                AlertCorreo()
-            }
-
         }
     }
 
-    private fun showAlert() {
-        if (!isFinishing) { // Verifica si la actividad no ha sido finalizada
+    private fun showAlert(title: String, message: String) {
+        if (!isFinishing) {
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Error")
-            builder.setMessage("Se ha producido un error al registrarse")
+            builder.setTitle(title)
+            builder.setMessage(message)
             builder.setPositiveButton("Aceptar", null)
             val dialog: AlertDialog = builder.create()
             dialog.show()
         }
     }
-    private fun AlertCorreo(){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Correo electronico no valido o vacio")
-        builder.setPositiveButton("aceptar",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-    private fun AlertPassword(){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Contraseña vacia o no valida(debe tener al menos 6 caracteres, numeros y letras")
-        builder.setPositiveButton("Aceptar",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
+
     fun IrALogIn(view: View) {
-        val intent = Intent(this,LoginActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
