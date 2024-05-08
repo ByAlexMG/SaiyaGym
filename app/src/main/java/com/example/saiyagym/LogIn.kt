@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
                         if (signInTask.isSuccessful) {
                             val currentUser = FirebaseAuth.getInstance().currentUser
                             currentUser?.let { user ->
-                                val userDocument = db.collection("users").document(user.email!!)
+                                val userDocument = db.collection("users").document(user.uid)
                                 userDocument.get().addOnSuccessListener { document ->
                                     if (document.exists()) {
                                         val peso = document.getDouble("peso")
