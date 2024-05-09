@@ -48,8 +48,8 @@ class IntroducirDatos : AppCompatActivity() {
             if (peso != null && altura != null && edad != null) {
                 val userData = hashMapOf(
                     "email" to user.email,
-                    //no creo que sea muy seguro mostrar esto en la bd la vrdad
-                    //"ID" to user.uid,
+                    // No creo que sea muy seguro mostrar esto en la bd la verdad
+                    // "ID" to user.uid,
                     "peso" to peso,
                     "altura" to altura,
                     "edad" to edad,
@@ -63,10 +63,13 @@ class IntroducirDatos : AppCompatActivity() {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)
                     }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error al guardar los datos: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             } else {
-
                 Toast.makeText(this, "Faltan campos por rellenar", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 }

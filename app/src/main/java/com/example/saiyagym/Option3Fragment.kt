@@ -183,27 +183,35 @@ class Option3Fragment : Fragment() {
             builder.setView(view)
 
             builder.setPositiveButton("Guardar") { _, _ ->
-                val weight = weightEditText.text.toString()
-                val height = heightEditText.text.toString()
-                val age = ageEditText.text.toString()
+                val weightString = weightEditText.text.toString()
+                val heightString = heightEditText.text.toString()
+                val ageString = ageEditText.text.toString()
                 val gender = genderEditText.text.toString()
-                
-                userDocument.update(
-                    mapOf(
-                        "peso" to weight,
-                        "altura" to height,
-                        "edad" to age,
-                        "genero" to gender
+
+                val weight = weightString.toFloatOrNull()
+                val height = heightString.toFloatOrNull()
+                val age = ageString.toIntOrNull()
+
+                if (weight != null && height != null && age != null) {
+                    userDocument.update(
+                        mapOf(
+                            "peso" to weight,
+                            "altura" to height,
+                            "edad" to age,
+                            "genero" to gender
+                        )
                     )
-                )
-                    .addOnSuccessListener {
-                        val result = "Peso: $weight\nAltura: $height\nEdad: $age\nGénero: $gender"
-                        resultTextView.text = result
-                        Toast.makeText(requireContext(), "Medidas actualizadas correctamente", Toast.LENGTH_SHORT).show()
-                    }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(requireContext(), "Error al actualizar las medidas: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
+                        .addOnSuccessListener {
+                            val result = "Peso: $weightString\nAltura: $heightString\nEdad: $ageString\nGénero: $gender"
+                            resultTextView.text = result
+                            Toast.makeText(requireContext(), "Medidas actualizadas correctamente", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(requireContext(), "Error al actualizar las medidas: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(requireContext(), "Los valores de peso, altura y edad deben ser números válidos", Toast.LENGTH_SHORT).show()
+                }
             }
             builder.setNegativeButton("Cancelar") { dialog, _ ->
                 dialog.dismiss()
@@ -212,6 +220,7 @@ class Option3Fragment : Fragment() {
             dialog.show()
         }
     }
+
 
 
     private fun showToast(message: String) {
