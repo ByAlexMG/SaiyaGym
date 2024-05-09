@@ -14,15 +14,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.log_in)
-
         setup()
     }
 
-    private fun setup(){
-        title= "LogIn"
+    private fun setup() {
+        title = "LogIn"
         val botonEntrar = findViewById<MaterialButton>(R.id.buttonLogIn)
         val correo = findViewById<TextView>(R.id.editTextUsuario)
         val contra = findViewById<TextView>(R.id.editTextContraseña)
@@ -53,6 +53,12 @@ class LoginActivity : AppCompatActivity() {
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                             startActivity(intent)
                                             finish()
+                                        } else {
+                                            // Si los datos aún no están llenos, ir a la actividad IntroducirDatos
+                                            val intent = Intent(this, IntroducirDatos::class.java)
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                            startActivity(intent)
+                                            finish()
                                         }
                                     } else {
                                         // Si los datos aún no están llenos, ir a la actividad IntroducirDatos
@@ -71,8 +77,7 @@ class LoginActivity : AppCompatActivity() {
                 showAlert("Error", "Contraseña vacía")
             } else if (email.isEmpty()) {
                 showAlert("Error", "Correo electrónico vacío")
-            }else{
-         }
+            }
         }
     }
 

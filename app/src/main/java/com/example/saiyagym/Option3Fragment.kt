@@ -151,7 +151,6 @@ class Option3Fragment : Fragment() {
         auth.signInWithEmailAndPassword(currentEmail, currentPassword)
             .addOnCompleteListener { signInTask ->
                 if (signInTask.isSuccessful) {
-
                     auth.currentUser!!.updateEmail(newEmail)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
@@ -162,8 +161,7 @@ class Option3Fragment : Fragment() {
                             }
                         }
                 } else {
-
-                    showToast("Datos de sesión fallidos")
+                    showToast("Datos de sesión erroneos")
                 }
             }
     }
