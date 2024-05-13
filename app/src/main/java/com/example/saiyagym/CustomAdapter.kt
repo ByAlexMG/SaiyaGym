@@ -7,14 +7,15 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import androidx.cardview.widget.CardView
-
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import org.json.JSONObject
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import java.lang.Integer.max
-class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(private val exercises: List<String>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
     private val originalHeights = mutableMapOf<Int, Int>() // Map para almacenar las alturas originales de cada CardView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,7 +23,12 @@ class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAda
         return ViewHolder(view)
     }
 
+    override fun getItemCount(): Int {
+        return exercises.size
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.exerciseNameTextView.text = exercises[position]
         holder.cardView.setOnClickListener {
             expandCardView(holder.cardView)
 
@@ -33,7 +39,7 @@ class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAda
             })
         }
         holder.playButton.setOnClickListener {
-            collapseCardView(holder.cardView, holder.youTubePlayerView)
+            collapseCardView(holder.cardView, holder.itemView)
 
 
             val playerCallback = object : YouTubePlayerCallback {
@@ -49,15 +55,13 @@ class CustomAdapter(private val itemCount: Int) : RecyclerView.Adapter<CustomAda
 
 
 
-    override fun getItemCount(): Int {
-        return itemCount
-    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var expanded = false
         val youTubePlayerView: YouTubePlayerView = itemView.findViewById(R.id.youtubePlayerView)
         val cardView: CardView = itemView.findViewById(R.id.cardView)
         val playButton: Button = itemView.findViewById(R.id.playButton)
+        val exerciseNameTextView: TextView = itemView.findViewById(R.id.exerciseNameTextView)
+
     }
 
     private fun expandCardView(cardView: CardView) {
