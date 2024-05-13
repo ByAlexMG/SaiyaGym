@@ -19,19 +19,18 @@ import java.net.HttpURLConnection
 import java.net.URL
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.saiyagym.databinding.FragmentOption2Binding // Importa tu clase de enlace de vistas
+import com.example.saiyagym.databinding.FragmentOption2Binding
 import org.json.JSONArray
 
 class Option2Fragment : Fragment() {
-    private lateinit var binding: FragmentOption2Binding // Declara tu variable de enlace de vistas
+    private lateinit var binding: FragmentOption2Binding
     private lateinit var recyclerViewOption2: RecyclerView
-    private val diasSemana = arrayOf("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado")
+    
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Infla el diseño utilizando el objeto de enlace de vistas
         binding = FragmentOption2Binding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -70,17 +69,14 @@ class Option2Fragment : Fragment() {
                     val planDeEjerciciosArray = jsonObject.getJSONArray("PlanDeEjercicios")
 
                     val dayOfWeek = getDayOfWeek()
-                    val exerciseNames = mutableListOf<String>() // Lista para almacenar los ejercicios del día actual
+
+                    val exerciseNames = mutableListOf<String>()
 
                     for (i in 0 until planDeEjerciciosArray.length()) {
                         val planDeEjerciciosObject = planDeEjerciciosArray.getJSONObject(i)
                         val diaSemana = planDeEjerciciosObject.getString("DiaSemana")
                         val ejerciciosArray = planDeEjerciciosObject.getJSONArray("Ejercicios")
-
-                        // Guardar los ejercicios para todos los días en la base de datos
                         saveExercisesForDay(uid, diaSemana, ejerciciosArray)
-
-                        // Si el día de la semana obtenido coincide con el día actual, agregar los ejercicios a la lista
                         if (diaSemana == dayOfWeek) {
                             for (j in 0 until ejerciciosArray.length()) {
                                 val ejercicioObject = ejerciciosArray.getJSONObject(j)
@@ -90,11 +86,9 @@ class Option2Fragment : Fragment() {
                         }
                     }
 
-                    // Mostrar solo los ejercicios del día actual en la pantalla
                     recyclerViewOption2.adapter = CustomAdapter(exerciseNames)
                 }
-            } catch (e: Exception) {
-                // Handle error
+            } catch (_: Exception) {
             }
         }
     }
@@ -111,7 +105,6 @@ class Option2Fragment : Fragment() {
             val nombre = ejercicioObject.getString("Nombre")
             val ID = ejercicioObject.getString("ID")
 
-            // Guardar el ejercicio en Firestore con el nombre como clave y el ID como valor
             val exerciseData = hashMapOf(
                 "name" to nombre,
                 "id" to ID
@@ -119,7 +112,6 @@ class Option2Fragment : Fragment() {
             exercisesCollection.document(ID).set(exerciseData)
         }
     }
-
 
     private suspend fun fetchJsonStringFromUrl(urlString: String): String {
         return withContext(Dispatchers.IO) {
