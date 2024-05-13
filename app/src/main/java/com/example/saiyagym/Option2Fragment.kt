@@ -14,6 +14,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.Calendar
 import java.net.HttpURLConnection
 import java.net.URL
 import com.google.firebase.auth.FirebaseAuth
@@ -23,6 +24,7 @@ import com.example.saiyagym.databinding.FragmentOption2Binding // Importa tu cla
 class Option2Fragment : Fragment() {
     private lateinit var binding: FragmentOption2Binding // Declara tu variable de enlace de vistas
     private lateinit var recyclerViewOption2: RecyclerView
+    private val diasSemana = arrayOf("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +44,19 @@ class Option2Fragment : Fragment() {
     }
 
     private fun getDayOfWeek(): String {
-        // Cambiar proximamente
-        return "Martes"
+        val calendar = Calendar.getInstance()
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+        return when (dayOfWeek) {
+            Calendar.SUNDAY -> "Domingo"
+            Calendar.MONDAY -> "Lunes"
+            Calendar.TUESDAY -> "Martes"
+            Calendar.WEDNESDAY -> "Miércoles"
+            Calendar.THURSDAY -> "Jueves"
+            Calendar.FRIDAY -> "Viernes"
+            Calendar.SATURDAY -> "Sábado"
+            else -> throw IllegalStateException("Error al obtener el día de la semana")
+        }
     }
 
     private fun getExerciseNames(dayOfWeek: String) {
@@ -83,7 +96,23 @@ class Option2Fragment : Fragment() {
             }
         }
     }
-
+    private fun saveExerciseToFirestore(userId: String, dayOfWeek: String, exerciseName: String, exerciseId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val exercisesCollection = db.collection("users").document(userId)
+            .collection("Exercises").document(dayOfWeek)
+            .collection("ExerciseList").document(exerciseId)
+        val exerciseData = hashMapOf(
+            "name" to exerciseName,
+            "id" to exerciseId
+        )
+        exercisesCollection.set(exerciseData)
+            .addOnSuccessListener {
+                // Éxito al guardar el ejercicio en Firestore
+            }
+            .addOnFailureListener { exception ->
+                // Manejar error
+            }
+    }
     private suspend fun fetchJsonStringFromUrl(urlString: String): String {
         return withContext(Dispatchers.IO) {
             val url = URL(urlString)
@@ -98,15 +127,5 @@ class Option2Fragment : Fragment() {
         }
     }
 
-    private fun saveExerciseToFirestore(userId: String, dayOfWeek: String, exerciseName: String, exerciseId: String) {
-        val db = FirebaseFirestore.getInstance()
-        val exercisesCollection = db.collection("users").document(userId)
-            .collection("Exercises").document(dayOfWeek)
-            .collection("ExerciseList")
-        val exerciseData = hashMapOf(
-            "name" to exerciseName,
-            "id" to exerciseId
-        )
-        exercisesCollection.add(exerciseData)
-    }
+
 }
