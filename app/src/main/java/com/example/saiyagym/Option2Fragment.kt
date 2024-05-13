@@ -16,6 +16,8 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.example.saiyagym.databinding.FragmentOption2Binding // Importa tu clase de enlace de vistas
 
 class Option2Fragment : Fragment() {
@@ -47,27 +49,33 @@ class Option2Fragment : Fragment() {
     private fun getExerciseNames(dayOfWeek: String) {
         lifecycleScope.launch {
             try {
-                val jsonString =
-                    fetchJsonStringFromUrl("https://saiyagym-9000-default-rtdb.firebaseio.com/Categorias/0.json")
-                val jsonObject = JSONObject(jsonString)
-                val planDeEjerciciosArray = jsonObject.getJSONArray("PlanDeEjercicios")
+                val userId = FirebaseAuth.getInstance().currentUser?.uid
+                userId?.let { uid ->
+                    val jsonString =
+                        fetchJsonStringFromUrl("https://saiyagym-9000-default-rtdb.firebaseio.com/Categorias/0.json")
+                    val jsonObject = JSONObject(jsonString)
+                    val planDeEjerciciosArray = jsonObject.getJSONArray("PlanDeEjercicios")
 
-                for (i in 0 until planDeEjerciciosArray.length()) {
-                    val planDeEjerciciosObject = planDeEjerciciosArray.getJSONObject(i)
-                    val diaSemana = planDeEjerciciosObject.getString("DiaSemana")
-                    if (diaSemana == dayOfWeek) {
-                        val ejerciciosArray = planDeEjerciciosObject.getJSONArray("Ejercicios")
-                        val exerciseNames = mutableListOf<String>()
-                        for (j in 0 until ejerciciosArray.length()) {
-                            val ejercicioObject = ejerciciosArray.getJSONObject(j)
-                            val nombre = ejercicioObject.getString("Nombre")
-                            val ID = ejercicioObject.getString("ID")
+                    for (i in 0 until planDeEjerciciosArray.length()) {
+                        val planDeEjerciciosObject = planDeEjerciciosArray.getJSONObject(i)
+                        val diaSemana = planDeEjerciciosObject.getString("DiaSemana")
+                        if (diaSemana == dayOfWeek) {
+                            val ejerciciosArray = planDeEjerciciosObject.getJSONArray("Ejercicios")
+                            val exerciseNames = mutableListOf<String>()
+                            for (j in 0 until ejerciciosArray.length()) {
+                                val ejercicioObject = ejerciciosArray.getJSONObject(j)
+                                val nombre = ejercicioObject.getString("Nombre")
+                                val ID = ejercicioObject.getString("ID")
 
-                            exerciseNames.add(nombre)
+                                // Guardar en Firestore
+                                saveExerciseToFirestore(uid, dayOfWeek, nombre, ID)
+
+                                exerciseNames.add(nombre)
+                            }
+                            // Update UI here
+                            recyclerViewOption2.adapter = CustomAdapter(exerciseNames)
+                            break // No need to continue looping once we found exercise names
                         }
-                        // Update UI here
-                        recyclerViewOption2.adapter = CustomAdapter(exerciseNames)
-                        break // No need to continue looping once we found exercise names
                     }
                 }
             } catch (e: Exception) {
@@ -88,5 +96,17 @@ class Option2Fragment : Fragment() {
                 connection.disconnect()
             }
         }
+    }
+
+    private fun saveExerciseToFirestore(userId: String, dayOfWeek: String, exerciseName: String, exerciseId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val exercisesCollection = db.collection("users").document(userId)
+            .collection("Exercises").document(dayOfWeek)
+            .collection("ExerciseList")
+        val exerciseData = hashMapOf(
+            "name" to exerciseName,
+            "id" to exerciseId
+        )
+        exercisesCollection.add(exerciseData)
     }
 }
