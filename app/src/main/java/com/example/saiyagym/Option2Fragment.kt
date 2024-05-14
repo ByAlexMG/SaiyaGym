@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,12 +20,14 @@ import java.net.URL
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.saiyagym.databinding.FragmentOption2Binding
+import com.google.android.material.snackbar.Snackbar
 import org.json.JSONArray
 
 class Option2Fragment : Fragment() {
     private lateinit var binding: FragmentOption2Binding
     private lateinit var recyclerViewOption2: RecyclerView
-    
+
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +35,10 @@ class Option2Fragment : Fragment() {
     ): View {
         binding = FragmentOption2Binding.inflate(inflater, container, false)
         val view = binding.root
+        progressBar = view.findViewById(R.id.progressBar)
+
+        // Mostrar ProgressBar mientras se cargan los datos
+        progressBar.visibility = View.VISIBLE
 
         recyclerViewOption2 = view.findViewById(R.id.recyclerViewOption2)
         recyclerViewOption2.layoutManager = LinearLayoutManager(requireContext())
@@ -88,10 +95,12 @@ class Option2Fragment : Fragment() {
                         }
                     }
                     recyclerViewOption2.adapter = CustomAdapter(exerciseList)
+                    progressBar.visibility = View.GONE
                 }
             } catch (e: Exception) {
-                Log.e("alex", e.message.toString())
-            }
+                progressBar.visibility = View.GONE
+                val snackbar = Snackbar.make(requireView(), "Error al cargar ejercicios", Snackbar.LENGTH_SHORT)
+                snackbar.show()  }
         }
     }
 

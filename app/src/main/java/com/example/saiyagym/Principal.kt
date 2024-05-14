@@ -44,18 +44,20 @@ class Principal : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (currentFragment?.javaClass != fragment.javaClass) {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        fragmentTransaction.setCustomAnimations(
-            R.anim.slide_in_left,
-            R.anim.slide_out_right,
-            R.anim.slide_out_left,
-            R.anim.slide_in_right,
+            fragmentTransaction.setCustomAnimations(
+                R.anim.slide_in_left,
+                R.anim.slide_out_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_right
+            )
 
-        )
-
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
-        fragmentTransaction.commit()
+            fragmentTransaction.replace(R.id.fragment_container, fragment)
+            fragmentTransaction.commit()
+        }
     }
 
     fun setDayNight() {

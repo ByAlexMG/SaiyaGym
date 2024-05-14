@@ -21,12 +21,14 @@
             android:text="Nombre del ejercicio"
             android:textSize="18sp"
             android:visibility="visible" />
-        <!-- YouTubePlayerView para mostrar el video de YouTube -->
+        <!-- Video de YouTube -->
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/youtubePlayerView"
+            android:layout_marginTop="7dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            app:cornerRadius="4dp"
             android:visibility="gone"/>
 
         <!-- Descripción -->
@@ -36,15 +38,18 @@
             android:layout_height="wrap_content"
             android:text="Descripción del video"
             android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginVertical="10dp"
             android:visibility="gone" />
 
         <!-- Botón -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/playButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Entendido"
             android:layout_gravity="center"
+            app:cornerRadius="4dp"
             android:visibility="gone" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -2,7 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TextView para el título "Rutina" -->
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
@@ -13,12 +12,29 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp" />
 
-    <!-- RecyclerView para mostrar opciones -->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="30dp"
         android:id="@+id/recyclerViewOption2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/textViewTitle" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ajustes"
+        android:contentDescription="Dia terminado" />
 
 </RelativeLayout>

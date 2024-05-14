@@ -9,14 +9,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Switch
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
@@ -111,13 +115,16 @@ class Option3Fragment : Fragment() {
                     user.updatePassword(newPassword)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
-                                showToast("Contraseña actualizada con éxito")
+                                val snackbar = Snackbar.make(requireView(), "Contraseña actualizada", Snackbar.LENGTH_SHORT)
+                                snackbar.show()
                             } else {
-                                showToast("Error al actualizar la contraseña")
+                                val snackbar = Snackbar.make(requireView(), "Error al actualizar", Snackbar.LENGTH_SHORT)
+                                snackbar.show()
                             }
                         }
                 } else {
-                    showToast("La contraseña actual es incorrecta")
+                    val snackbar = Snackbar.make(requireView(), "Contraseña actual incorrecta", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
                 }
             }
     }
@@ -154,14 +161,16 @@ class Option3Fragment : Fragment() {
                     auth.currentUser!!.updateEmail(newEmail)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
-
-                                showToast("Correo actualizado")
+                                val snackbar = Snackbar.make(requireView(), "Correo Actualizado", Snackbar.LENGTH_SHORT)
+                                snackbar.show()
                             } else {
-                                showToast("Error al actualizar el correo")
+                                val snackbar = Snackbar.make(requireView(), "Error al actualizar el correo", Snackbar.LENGTH_SHORT)
+                                snackbar.show()
                             }
                         }
                 } else {
-                    showToast("Datos de sesión erroneos")
+                    val snackbar = Snackbar.make(requireView(), "Datos de sesión erroneos", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
                 }
             }
     }
@@ -177,8 +186,17 @@ class Option3Fragment : Fragment() {
             val weightEditText = view.findViewById<EditText>(R.id.weightEditText)
             val heightEditText = view.findViewById<EditText>(R.id.heightEditText)
             val ageEditText = view.findViewById<EditText>(R.id.ageEditText)
-            val genderEditText = view.findViewById<EditText>(R.id.genderEditText)
-            val resultTextView = view.findViewById<TextView>(R.id.resultTextView)
+            val genderSpinner = view.findViewById<Spinner>(R.id.genderSpinner)
+
+
+            ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.gender_array,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                genderSpinner.adapter = adapter
+            }
 
             builder.setView(view)
 
@@ -186,7 +204,7 @@ class Option3Fragment : Fragment() {
                 val weightString = weightEditText.text.toString()
                 val heightString = heightEditText.text.toString()
                 val ageString = ageEditText.text.toString()
-                val gender = genderEditText.text.toString()
+                val gender = genderSpinner.selectedItem.toString()
 
                 val weight = weightString.toFloatOrNull()
                 val height = heightString.toFloatOrNull()
@@ -202,16 +220,17 @@ class Option3Fragment : Fragment() {
                         )
                     )
                         .addOnSuccessListener {
-                            val result = "Peso: $weightString\nAltura: $heightString\nEdad: $ageString\nGénero: $gender"
-                            resultTextView.text = result
-                            Toast.makeText(requireContext(), "Medidas actualizadas correctamente", Toast.LENGTH_SHORT).show()
+                            val snackbar = Snackbar.make(requireView(), "Medidas actualizadas correctamente", Snackbar.LENGTH_SHORT)
+                            snackbar.show()
                         }
                         .addOnFailureListener { e ->
-                            Toast.makeText(requireContext(), "Error al actualizar las medidas: ${e.message}", Toast.LENGTH_SHORT).show()
+                            val snackbar = Snackbar.make(requireView(), "Error al actualizar las medidas", Snackbar.LENGTH_SHORT)
+                            snackbar.show()
                         }
                 } else {
-                    Toast.makeText(requireContext(), "Los valores de peso, altura y edad deben ser números válidos", Toast.LENGTH_SHORT).show()
-                }
+                    val snackbar = Snackbar.make(requireView(), "Los valores de peso, altura y edad deben ser números válidos", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
+               }
             }
             builder.setNegativeButton("Cancelar") { dialog, _ ->
                 dialog.dismiss()
