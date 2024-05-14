@@ -2,10 +2,13 @@ package com.example.saiyagym;
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,19 +25,95 @@ class IntroducirDatos : AppCompatActivity() {
         setContentView(R.layout.introducir_datos)
 
         val spinnerGenero: Spinner = findViewById(R.id.spinnerGenero)
-        val generoOptions = listOf("Hombre","Mujer", "Otro")
+        val generoOptions = listOf("Hombre", "Mujer", "Otro")
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, generoOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerGenero.adapter = adapter
 
+        val editTextPeso = findViewById<EditText>(R.id.editTextPeso)
+        val editTextAltura = findViewById<EditText>(R.id.editTextAltura)
+        val editTextEdad = findViewById<EditText>(R.id.editTextEdad)
+        val porcentajeTextView = findViewById<TextView>(R.id.porcentaje)
+
+
+        editTextPeso.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                calcularPorcentajeSiEsPosible(porcentajeTextView)
+            }
+        })
+
+
+        editTextAltura.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                calcularPorcentajeSiEsPosible(porcentajeTextView)
+            }
+        })
+
+
+        editTextEdad.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                calcularPorcentajeSiEsPosible(porcentajeTextView)
+            }
+        })
+
         val buttonGuardarCambios: Button = findViewById(R.id.buttonGuardarCambios)
         buttonGuardarCambios.setOnClickListener {
-            guardarDatos(spinnerGenero.selectedItem.toString())
+            guardarDatos(spinnerGenero.selectedItem.toString(), porcentajeTextView)
         }
     }
 
-    private fun guardarDatos(genero: String) {
+    fun calcularPorcentajeSiEsPosible(textViewPorcentaje: TextView) {
+        val editTextPeso = findViewById<EditText>(R.id.editTextPeso)
+        val editTextAltura = findViewById<EditText>(R.id.editTextAltura)
+        val editTextEdad = findViewById<EditText>(R.id.editTextEdad)
+
+        val peso = editTextPeso.text.toString().toFloatOrNull()
+        val altura = editTextAltura.text.toString().toFloatOrNull()
+        val edad = editTextEdad.text.toString().toIntOrNull()
+
+        if (peso != null && altura != null && edad != null) {
+            val spinnerGenero = findViewById<Spinner>(R.id.spinnerGenero)
+            val genero = spinnerGenero.selectedItem.toString()
+            calcularPorcentajeGrasaCorporal(peso, altura, edad, genero, textViewPorcentaje)
+        }
+    }
+
+    private fun calcularPorcentajeGrasaCorporal(
+        peso: Float,
+        altura: Float,
+        edad: Int,
+        genero: String,
+        textViewPorcentaje: TextView
+    ) {
+        val IMC = peso / (altura * altura / 10000)
+
+        val grasa: Float
+
+        if (genero == "Hombre") {
+            grasa = (1.2 * IMC + 0.23 * edad - 16.2).toFloat()
+        } else {
+            grasa = (1.2 * IMC + 0.23 * edad - 5.4).toFloat()
+        }
+
+        textViewPorcentaje.text = "${String.format("%.2f", grasa)}"
+    }
+
+
+
+    private fun guardarDatos(genero: String, porcentajeTextView: TextView) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         currentUser?.let { user ->
             val editTextPeso = findViewById<EditText>(R.id.editTextPeso)
@@ -44,16 +123,18 @@ class IntroducirDatos : AppCompatActivity() {
             val peso = editTextPeso.text.toString().toFloatOrNull()
             val altura = editTextAltura.text.toString().toFloatOrNull()
             val edad = editTextEdad.text.toString().toIntOrNull()
+            val grasa = porcentajeTextView.text.toString().toFloatOrNull()
 
             if (peso != null && altura != null && edad != null) {
+
+
                 val userData = hashMapOf(
                     "email" to user.email,
-                    // No creo que sea muy seguro mostrar esto en la bd la verdad
-                    // "ID" to user.uid,
                     "peso" to peso,
                     "altura" to altura,
                     "edad" to edad,
-                    "genero" to genero
+                    "genero" to genero,
+                    "grasa" to grasa
                 )
 
                 val userDocument = db.collection("users").document(user.uid)
@@ -64,7 +145,11 @@ class IntroducirDatos : AppCompatActivity() {
                         startActivity(intent)
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(this, "Error al guardar los datos: ${e.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Error al guardar los datos: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             } else {
                 Toast.makeText(this, "Faltan campos por rellenar", Toast.LENGTH_SHORT).show()
