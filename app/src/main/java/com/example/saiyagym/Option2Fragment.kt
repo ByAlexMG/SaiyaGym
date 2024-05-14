@@ -69,7 +69,7 @@ class Option2Fragment : Fragment() {
 
                     val dayOfWeek = getDayOfWeek()
 
-                    val exerciseNames = mutableListOf<String>()
+                    val exerciseList = mutableListOf<Exercise>()
 
                     for (i in 0 until planDeEjerciciosArray.length()) {
                         val planDeEjerciciosObject = planDeEjerciciosArray.getJSONObject(i)
@@ -80,11 +80,13 @@ class Option2Fragment : Fragment() {
                             for (j in 0 until ejerciciosArray.length()) {
                                 val ejercicioObject = ejerciciosArray.getJSONObject(j)
                                 val nombre = ejercicioObject.getString("Nombre")
-                                exerciseNames.add(nombre)
+                                val videoURL = ejercicioObject.getString("VideoURL")
+                                val exercise = Exercise(nombre, videoURL)
+                                exerciseList.add(exercise)
                             }
                         }
                     }
-                    recyclerViewOption2.adapter = CustomAdapter(exerciseNames)
+                    recyclerViewOption2.adapter = CustomAdapter(exerciseList)
                 }
             } catch (e: Exception) {
                 Log.e("alex", e.message.toString())
