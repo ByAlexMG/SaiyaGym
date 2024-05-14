@@ -12,4 +12,10 @@
         android:id="@+id/navigation_option3"
         android:title="Ajustes"
         android:icon="@drawable/ajustes" />
+    <item
+        android:id="@+id/navigation_option4"
+        android:title="Admin"
+        android:icon="@drawable/ajustes"
+        android:checkable="true"
+        android:visible="false"/>
 </menu>

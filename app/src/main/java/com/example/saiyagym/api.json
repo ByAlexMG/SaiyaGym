@@ -8,31 +8,31 @@
           "Ejercicios": [
             {
               "Nombre": "Cardio intenso",
-              "Descripcion": "Una sesión de cardio de alta intensidad para quemar calorías",
+              "Descripcion": "15 minutos",
               "VideoURL": "uSD5IxmEQdI",
               "ID": "123456"
             },
             {
               "Nombre": "Correr en cinta",
-              "Descripcion": "Correr en la cinta de correr durante 30 minutos",
+              "Descripcion": "30 minutos",
               "VideoURL": "VxFUL1uvtwo",
               "ID": "789012"
             },
             {
               "Nombre": "Salto de cuerda",
-              "Descripcion": "Ejercicio de salto de cuerda para mejorar la coordinación y la resistencia",
+              "Descripcion": "1min x 5",
               "VideoURL": "qDSXvuYXd-w",
               "ID": "456789"
             },
             {
               "Nombre": "Burpees",
-              "Descripcion": "Un ejercicio que combina flexiones, saltos y sentadillas para un entrenamiento completo",
+              "Descripcion": "20 x 4",
               "VideoURL": "IYusabTdFEo",
               "ID": "987654"
             },
             {
               "Nombre": "Escaleras",
-              "Descripcion": "Subir y bajar escaleras para mejorar la resistencia y fortalecer las piernas",
+              "Descripcion": "15 mins",
               "VideoURL": "vNtmv6sXv_8",
               "ID": "321098"
             }
@@ -43,31 +43,31 @@
           "Ejercicios": [
             {
               "Nombre": "Carrera suave",
-              "Descripcion": "Carrera suave para recuperarse del entrenamiento intenso del día anterior",
+              "Descripcion": "30 mins",
               "VideoURL": "msKcTby4hd8",
               "ID": "135790"
             },
             {
               "Nombre": "Intervalos de alta intensidad",
-              "Descripcion": "Ráfagas cortas de ejercicio intenso seguidas de períodos de descanso",
+              "Descripcion": "30seg x 4 (1 min de descanso)",
               "VideoURL": "26aZsFBaFG8",
               "ID": "246801"
             },
             {
               "Nombre": "Sprints",
-              "Descripcion": "Correr a toda velocidad durante distancias cortas",
+              "Descripcion": "50metros x 4",
               "VideoURL": "9XzXr-RNoOk",
               "ID": "579013"
             },
             {
               "Nombre": "Ciclismo",
-              "Descripcion": "Andar en bicicleta para mejorar la resistencia cardiovascular",
+              "Descripcion": "20 mins",
               "VideoURL": "em-NSkZVjkA",
               "ID": "802468"
             },
             {
               "Nombre": "Step aeróbico",
-              "Descripcion": "Ejercicio aeróbico utilizando un step",
+              "Descripcion": "20 x 3",
               "VideoURL": "DYY73hkWZs8",
               "ID": "314785"
             }
@@ -78,19 +78,19 @@
           "Ejercicios": [
             {
               "Nombre": "Natación",
-              "Descripcion": "Nadar durante 30 minutos para mejorar la resistencia y trabajar todo el cuerpo",
+              "Descripcion": "20 mins",
               "VideoURL": "48m8gjbj7hA",
               "ID": "157286"
             },
             {
               "Nombre": "Entrenamiento en elíptica",
-              "Descripcion": "Utilizar la elíptica durante 45 minutos para un entrenamiento cardiovascular de bajo impacto",
+              "Descripcion": "15 mins",
               "VideoURL": "Sbv44Rf-5U0",
               "ID": "628934"
             },
             {
               "Nombre": "Shadowboxing",
-              "Descripcion": "Una sesión de Shadowboxing,para mejorar la resistencia y la coordinación",
+              "Descripcion": "15 mins",
               "VideoURL": "kzlTuxAtpyU",
               "ID": "239571"
             }
@@ -101,19 +101,19 @@
           "Ejercicios": [
             {
               "Nombre": "Entrenamiento en intervalos de escalera",
-              "Descripcion": "Subir y bajar escaleras en intervalos de alta intensidad para un entrenamiento cardiovascular y de fuerza",
+              "Descripcion": "20 mins",
               "VideoURL": "VNMwDR_GBR4",
               "ID": "875320"
             },
             {
               "Nombre": "Carrera en pendiente",
-              "Descripcion": "Correr en una pendiente para aumentar la intensidad del ejercicio y fortalecer las piernas",
+              "Descripcion": "15 mins",
               "VideoURL": "HgbILN3jM3g",
               "ID": "462153"
             },
             {
               "Nombre": "Zumba",
-              "Descripcion": "Clase de Zumba para quemar calorías y mejorar el estado de ánimo",
+              "Descripcion": "40 mins",
               "VideoURL": "9xQPfs0jV0Y",
               "ID": "541237"
             }
@@ -124,19 +124,19 @@
           "Ejercicios": [
             {
               "Nombre": "Entrenamiento en elíptica",
-              "Descripcion": "Utilizar la elíptica durante 45 minutos para un entrenamiento cardiovascular de bajo impacto",
+              "Descripcion": "20 mins",
               "VideoURL": "Sbv44Rf-5U0",
               "ID": "628934"
             },
             {
               "Nombre": "Shadowboxing",
-              "Descripcion": "Una sesión de Shadowboxing,para mejorar la resistencia y la coordinación",
+              "Descripcion": "15 mins",
               "VideoURL": "kzlTuxAtpyU",
               "ID": "239571"
             },
             {
               "Nombre": "Saltos en cajón",
-              "Descripcion": "Ejercicio de saltos en una caja para mejorar la potencia y la resistencia",
+              "Descripcion": "15 x 4",
               "VideoURL": "Y7oZdwP-mcY",
               "ID": "720394"
             }
@@ -147,7 +147,7 @@
           "Ejercicios": [
             {
               "Nombre": "Descanso",
-              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "Descripcion": "Chill",
               "VideoURL": "1wvL99nmIUU",
               "ID": "0"
             }
@@ -158,7 +158,7 @@
           "Ejercicios": [
             {
               "Nombre": "Descanso",
-              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "Descripcion": "Chill",
               "VideoURL": "1wvL99nmIUU",
               "ID": "0"
             }
@@ -174,25 +174,25 @@
           "Ejercicios": [
             {
               "Nombre": "Dominadas",
-              "Descripcion": "Ejercicio para fortalecer la espalda y los brazos",
+              "Descripcion": "15 x 5 (usar peso positivo si es necesario)",
               "VideoURL": "J1r9UtnaY5c",
               "ID": "111111"
             },
             {
               "Nombre": "Peso muerto",
-              "Descripcion": "Ejercicio para trabajar la cadena posterior (espalda baja, glúteos, isquiotibiales)",
+              "Descripcion": "15 x 5(pesado)",
               "VideoURL": "qO87pkO3E2E",
               "ID": "222222"
             },
             {
-              "Nombre": "Bíceps con barra",
-              "Descripcion": "Ejercicio para trabajar los bíceps",
+              "Nombre": "Curl de Bíceps con barra",
+              "Descripcion": "15 x 3(pesado)",
               "VideoURL": "DOat3S4alNA",
               "ID": "333333"
             },
             {
               "Nombre": "Bíceps con mancuernas",
-              "Descripcion": "Ejercicio para trabajar los bíceps",
+              "Descripcion": "15 x 3(pesado)",
               "VideoURL": "AYlobl9M0GU",
               "ID": "444444"
             }
@@ -203,25 +203,25 @@
           "Ejercicios": [
             {
               "Nombre": "Press de banca",
-              "Descripcion": "Ejercicio para fortalecer el pecho, hombros y tríceps",
+              "Descripcion": "15 x 5(pesado)",
               "VideoURL": "fqsTgdTPRQU",
               "ID": "555555"
             },
             {
               "Nombre": "Flexiones de brazos",
-              "Descripcion": "Ejercicio para fortalecer pecho, hombros y tríceps",
+              "Descripcion": "13 x 3(pesado)",
               "VideoURL": "vQ7xzO5lV-E",
               "ID": "666666"
             },
             {
               "Nombre": "Tríceps en polea",
-              "Descripcion": "Ejercicio para trabajar los tríceps",
+              "Descripcion": "13 x 3(pesado)",
               "VideoURL": "Zj1h0ObPsp8",
               "ID": "777777"
             },
             {
               "Nombre": "Fondos para tríceps",
-              "Descripcion": "Ejercicio para trabajar los tríceps",
+              "Descripcion": "13 x 3(pesado)",
               "VideoURL": "H6r0fh2-YNU",
               "ID": "888888"
             }
@@ -232,31 +232,31 @@
           "Ejercicios": [
             {
               "Nombre": "Abdominales",
-              "Descripcion": "Ejercicios variados para fortalecer los músculos abdominales",
+              "Descripcion": "40 x 5(pesado)",
               "VideoURL": "mMieHCr-H0c",
               "ID": "112233"
             },
             {
               "Nombre": "Abdominales laterales",
-              "Descripcion": "Ejercicios variados para fortalecer los músculos abdominales",
+              "Descripcion": "40 x 4(pesado)",
               "VideoURL": "cEZ6ADuuuAA",
               "ID": "112233"
             },
             {
               "Nombre": "Plancha lateral",
-              "Descripcion": "Ejercicio para trabajar los oblicuos",
+              "Descripcion": "1 min x 3",
               "VideoURL": "bRivOELQVOs",
               "ID": "445566"
             },
             {
               "Nombre": "Oblicuos",
-              "Descripcion": "Ejercicio para trabajar los oblicuos",
+              "Descripcion": "20 x 3(pesado)",
               "VideoURL": "jzZ8631dmvo",
               "ID": "445566"
             },
             {
-              "Nombre": "Elevación de piernas colgado",
-              "Descripcion": "Ejercicio para trabajar los abdominales inferiores",
+              "Nombre": "Elevación de piernas colgado/tumbado",
+              "Descripcion": "25 x 4(pesado)",
               "VideoURL": "i7StVAy8RCk",
               "ID": "778899"
             }
@@ -267,31 +267,31 @@
           "Ejercicios": [
             {
               "Nombre": "Sentadillas",
-              "Descripcion": "Ejercicio compuesto para trabajar las piernas",
+              "Descripcion": "25 x 4(pesado)",
               "VideoURL": "VRKdOsad3HQ",
               "ID": "101112"
             },
             {
               "Nombre": "Prensa de piernas",
-              "Descripcion": "Variante del ejercicio para enfocarse en los cuádriceps",
+              "Descripcion": "15 x 3(pesado)",
               "VideoURL": "7II31GoNjSo",
               "ID": "131415"
             },
             {
               "Nombre": "Extensión de gemelos",
-              "Descripcion": "Variante del ejercicio para enfocarse en los gemelos",
+              "Descripcion": "20 x 4(pesado)",
               "VideoURL": "j1yPSb7O8v8",
               "ID": "131415"
             },
             {
               "Nombre": "Extensiones de cuádriceps",
-              "Descripcion": "Ejercicio de aislamiento para los cuádriceps",
+              "Descripcion": "15 x 4(pesado)",
               "VideoURL": "4EbWXcePVIQ",
               "ID": "161718"
             },
             {
               "Nombre": "Curl de piernas tumbado",
-              "Descripcion": "Ejercicio para trabajar los isquiotibiales",
+              "Descripcion": "13 x 3(pesado)",
               "VideoURL": "VEAv16_YIF0",
               "ID": "192021"
             }
@@ -302,31 +302,31 @@
           "Ejercicios": [
             {
               "Nombre": "Flexiones de bíceps",
-              "Descripcion": "Ejercicio para aislar y fortalecer los bíceps",
+              "Descripcion": "20 x 3(pesado)",
               "VideoURL": "mVbgoeMTVS4",
               "ID": "222324"
             },
             {
               "Nombre": "Curl de martillo",
-              "Descripcion": "Variante del curl para trabajar diferentes áreas del bíceps",
+              "Descripcion": "20 x 3(pesado)",
               "VideoURL": "j99intoPKGE",
               "ID": "252627"
             },
             {
               "Nombre": "Press de tríceps con mancuernas",
-              "Descripcion": "Ejercicio para fortalecer los tríceps",
+              "Descripcion": "15 x 4(pesado)",
               "VideoURL": "NbRvgBi19xI",
               "ID": "282930"
             },
             {
               "Nombre": "Tríceps en polea",
-              "Descripcion": "Ejercicio para trabajar los tríceps",
+              "Descripcion": "15 x 3(pesado)",
               "VideoURL": "Zj1h0ObPsp8",
               "ID": "777777"
             },
             {
               "Nombre": "Fondos en banco",
-              "Descripcion": "Ejercicio para trabajar los tríceps y el pecho",
+              "Descripcion": "20 x 3(pesado)",
               "VideoURL": "bR9d6yRH3iA",
               "ID": "313233"
             }
@@ -337,7 +337,7 @@
           "Ejercicios": [
             {
               "Nombre": "Descanso",
-              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "Descripcion": "Chill",
               "ID": "0",
               "VideoURL": "1wvL99nmIUU",
               "ID": "242424"
@@ -349,7 +349,7 @@
           "Ejercicios": [
             {
               "Nombre": "Descanso",
-              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "Descripcion": "Chill",
               "VideoURL": "1wvL99nmIUU",
               "ID": "0"
             }
@@ -365,31 +365,31 @@
           "Ejercicios": [
             {
               "Nombre": "Dominadas",
-              "Descripcion": "Ejercicio para fortalecer la espalda",
+              "Descripcion": "13 x 3",
               "VideoURL": "J1r9UtnaY5c",
               "ID": "101010"
             },
             {
               "Nombre": "Curl de bíceps con barra",
-              "Descripcion": "Ejercicio para desarrollar los bíceps",
+              "Descripcion": "13 x 3",
               "VideoURL": "b8nB33AAYJE",
               "ID": "202020"
             },
             {
               "Nombre": "Remo con barra",
-              "Descripcion": "Ejercicio para fortalecer la espalda baja",
+              "Descripcion": "13 x 3",
               "VideoURL": "Ag6kIw2cT-s",
               "ID": "303030"
             },
             {
               "Nombre": "Peso muerto",
-              "Descripcion": "Ejercicio para trabajar la cadena posterior",
+              "Descripcion": "13 x 4",
               "VideoURL": "qO87pkO3E2E",
               "ID": "404040"
             },
             {
               "Nombre": "Hiperextensiones",
-              "Descripcion": "Ejercicio para fortalecer la parte baja de la espalda",
+              "Descripcion": "13 x 3",
               "VideoURL": "rlFOkKnJDis",
               "ID": "505050"
             }
@@ -400,31 +400,31 @@
           "Ejercicios": [
             {
               "Nombre": "Press de banca",
-              "Descripcion": "Ejercicio para desarrollar el pecho",
+              "Descripcion": "15 x 4",
               "VideoURL": "ICaZxO7RmKs",
               "ID": "606060"
             },
             {
               "Nombre": "Fondos en paralelas",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "13 x 3",
               "VideoURL": "1yXVgh_DbqA",
               "ID": "707070"
             },
             {
               "Nombre": "Press inclinado con mancuernas",
-              "Descripcion": "Ejercicio para trabajar el pecho superior",
+              "Descripcion": "15 x 3",
               "VideoURL": "PYEOeF2zIwc",
               "ID": "808080"
             },
             {
               "Nombre": "Extensiones de tríceps con polea alta",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "13 x 2",
               "VideoURL": "fVDo1Y1vIhs",
               "ID": "909090"
             },
             {
               "Nombre": "Flexiones de tríceps en banco",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "15 x 3",
               "VideoURL": "bR9d6yRH3iA",
               "ID": "101010"
             }
@@ -435,31 +435,31 @@
           "Ejercicios": [
             {
               "Nombre": "Crunches",
-              "Descripcion": "Ejercicio para fortalecer los músculos abdominales",
+              "Descripcion": "20 x 4",
               "VideoURL": "O0pIQ2UqeCY",
               "ID": "111111"
             },
             {
               "Nombre": "Plancha",
-              "Descripcion": "Ejercicio de estabilización del core",
+              "Descripcion": "1 min x 3",
               "VideoURL": "mMieHCr-H0c",
               "ID": "121212"
             },
             {
-              "Nombre": "Elevación de piernas colgado",
-              "Descripcion": "Ejercicio para trabajar los músculos inferiores del abdomen",
+              "Nombre": "Elevación de piernas colgado/tumbado",
+              "Descripcion": "15 x 2",
               "VideoURL": "i7StVAy8RCk",
               "ID": "131313"
             },
             {
               "Nombre": "Giros rusos",
-              "Descripcion": "Ejercicio para fortalecer los oblicuos",
+              "Descripcion": "20 x 3",
               "VideoURL": "VXWd2ROGuSw",
               "ID": "141414"
             },
             {
               "Nombre": "Plancha lateral",
-              "Descripcion": "Ejercicio para fortalecer los oblicuos",
+              "Descripcion": "1 min x 3",
               "VideoURL": "bRivOELQVOs",
               "ID": "151515"
             }
@@ -470,31 +470,31 @@
           "Ejercicios": [
             {
               "Nombre": "Sentadillas",
-              "Descripcion": "Ejercicio para fortalecer las piernas",
+              "Descripcion": "15 x 3",
               "VideoURL": "VRKdOsad3HQ",
               "ID": "161616"
             },
             {
               "Nombre": "Prensa de piernas",
-              "Descripcion": "Ejercicio para trabajar los cuádriceps",
+              "Descripcion": "20 x 3",
               "VideoURL": "7II31GoNjSo",
               "ID": "171717"
             },
             {
               "Nombre": "Extensiones de pierna",
-              "Descripcion": "Ejercicio para los cuádriceps",
+              "Descripcion": "15 x 3",
               "VideoURL": "4EbWXcePVIQ",
               "ID": "181818"
             },
             {
               "Nombre": "Curl de piernas tumbado",
-              "Descripcion": "Ejercicio para trabajar los isquiotibiales",
+              "Descripcion": "15 x 4",
               "VideoURL": "VEAv16_YIF0",
               "ID": "191919"
             },
             {
               "Nombre": "Peso muerto rumano",
-              "Descripcion": "Ejercicio para la cadena posterior",
+              "Descripcion": "13 x 4",
               "VideoURL": "g137Wyypu-w",
               "ID": "202020"
             }
@@ -505,31 +505,31 @@
           "Ejercicios": [
             {
               "Nombre": "Curl de bíceps con mancuernas",
-              "Descripcion": "Ejercicio para desarrollar los bíceps",
+              "Descripcion": "13 x 4",
               "VideoURL": "Sp1L8ZjIAcM",
               "ID": "212121"
             },
             {
               "Nombre": "Martillo con mancuernas",
-              "Descripcion": "Ejercicio para los bíceps",
+              "Descripcion": "14 x 3",
               "VideoURL": "j99intoPKGE",
               "ID": "222222"
             },
             {
               "Nombre": "Press de tríceps con mancuernas",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "15 x 3",
               "VideoURL": "EUm95bHsBds",
               "ID": "232323"
             },
             {
               "Nombre": "Patada de tríceps con mancuernas",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "15 x 2",
               "VideoURL": "wEEP6AOxjpw",
               "ID": "242424"
             },
             {
               "Nombre": "Flexiones diamante",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "14 x 3",
               "VideoURL": "PJmOZaGnScA",
               "ID": "252525"
             }
@@ -540,7 +540,7 @@
           "Ejercicios": [
             {
               "Nombre": "Descanso",
-              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "Descripcion": "Chill",
               "ID": "0",
               "VideoURL": "1wvL99nmIUU",
               "ID": "242424"
@@ -552,7 +552,7 @@
           "Ejercicios": [
             {
               "Nombre": "Descanso",
-              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "Descripcion": "Chill",
               "VideoURL": "1wvL99nmIUU",
               "ID": "0"
             }
@@ -568,31 +568,31 @@
           "Ejercicios": [
             {
               "Nombre": "Dominadas",
-              "Descripcion": "Ejercicio para fortalecer la espalda",
+              "Descripcion": "12 x 3",
               "VideoURL": "J1r9UtnaY5c",
               "ID": "101010"
             },
             {
               "Nombre": "Curl de bíceps con barra",
-              "Descripcion": "Ejercicio para desarrollar los bíceps",
+              "Descripcion": "12 x 3",
               "VideoURL": "b8nB33AAYJE",
               "ID": "202020"
             },
             {
               "Nombre": "Remo con barra",
-              "Descripcion": "Ejercicio para fortalecer la espalda baja",
+              "Descripcion": "12 x 3",
               "VideoURL": "Ag6kIw2cT-s",
               "ID": "303030"
             },
             {
               "Nombre": "Peso muerto",
-              "Descripcion": "Ejercicio para trabajar la cadena posterior",
+              "Descripcion": "14 x 4",
               "VideoURL": "qO87pkO3E2E",
               "ID": "404040"
             },
             {
               "Nombre": "Hiperextensiones",
-              "Descripcion": "Ejercicio para fortalecer la parte baja de la espalda",
+              "Descripcion": "14 x 2",
               "VideoURL": "rlFOkKnJDis",
               "ID": "505050"
             }
@@ -603,31 +603,31 @@
           "Ejercicios": [
             {
               "Nombre": "Press de banca",
-              "Descripcion": "Ejercicio para desarrollar el pecho",
+              "Descripcion": "13 x 2",
               "VideoURL": "ICaZxO7RmKs",
               "ID": "606060"
             },
             {
               "Nombre": "Fondos en paralelas",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "15 x 3",
               "VideoURL": "1yXVgh_DbqA",
               "ID": "707070"
             },
             {
               "Nombre": "Press inclinado con mancuernas",
-              "Descripcion": "Ejercicio para trabajar el pecho superior",
+              "Descripcion": "13 x 4",
               "VideoURL": "PYEOeF2zIwc",
               "ID": "808080"
             },
             {
               "Nombre": "Extensiones de tríceps con polea alta",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "20 x 3",
               "VideoURL": "fVDo1Y1vIhs",
               "ID": "909090"
             },
             {
               "Nombre": "Flexiones de tríceps en banco",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "13 x 4",
               "VideoURL": "bR9d6yRH3iA",
               "ID": "101010"
             }
@@ -638,31 +638,31 @@
           "Ejercicios": [
             {
               "Nombre": "Crunches",
-              "Descripcion": "Ejercicio para fortalecer los músculos abdominales",
+              "Descripcion": "20 x 3",
               "VideoURL": "O0pIQ2UqeCY",
               "ID": "111111"
             },
             {
               "Nombre": "Plancha",
-              "Descripcion": "Ejercicio de estabilización del core",
+              "Descripcion": "1 min x 2",
               "VideoURL": "mMieHCr-H0c",
               "ID": "121212"
             },
             {
-              "Nombre": "Elevación de piernas colgado",
-              "Descripcion": "Ejercicio para trabajar los músculos inferiores del abdomen",
+              "Nombre": "Elevación de piernas colgado/tumbado",
+              "Descripcion": "15 x 3",
               "VideoURL": "i7StVAy8RCk",
               "ID": "131313"
             },
             {
               "Nombre": "Giros rusos",
-              "Descripcion": "Ejercicio para fortalecer los oblicuos",
+              "Descripcion": "13 x 3",
               "VideoURL": "VXWd2ROGuSw",
               "ID": "141414"
             },
             {
               "Nombre": "Plancha lateral",
-              "Descripcion": "Ejercicio para fortalecer los oblicuos",
+              "Descripcion": "30 seg x 3",
               "VideoURL": "bRivOELQVOs",
               "ID": "151515"
             }
@@ -673,31 +673,31 @@
           "Ejercicios": [
             {
               "Nombre": "Sentadillas",
-              "Descripcion": "Ejercicio para fortalecer las piernas",
+              "Descripcion": "15 x 3",
               "VideoURL": "VRKdOsad3HQ",
               "ID": "161616"
             },
             {
               "Nombre": "Prensa de piernas",
-              "Descripcion": "Ejercicio para trabajar los cuádriceps",
+              "Descripcion": "13 x 4",
               "VideoURL": "7II31GoNjSo",
               "ID": "171717"
             },
             {
               "Nombre": "Extensiones de pierna",
-              "Descripcion": "Ejercicio para los cuádriceps",
+              "Descripcion": "15 x 3",
               "VideoURL": "4EbWXcePVIQ",
               "ID": "181818"
             },
             {
               "Nombre": "Curl de piernas tumbado",
-              "Descripcion": "Ejercicio para trabajar los isquiotibiales",
+              "Descripcion": "14 x 4",
               "VideoURL": "VEAv16_YIF0",
               "ID": "191919"
             },
             {
               "Nombre": "Peso muerto rumano",
-              "Descripcion": "Ejercicio para la cadena posterior",
+              "Descripcion": "15 x 4",
               "VideoURL": "g137Wyypu-w",
               "ID": "202020"
             }
@@ -708,31 +708,31 @@
           "Ejercicios": [
             {
               "Nombre": "Curl de bíceps con mancuernas",
-              "Descripcion": "Ejercicio para desarrollar los bíceps",
+              "Descripcion": "13 x 3",
               "VideoURL": "Sp1L8ZjIAcM",
               "ID": "212121"
             },
             {
               "Nombre": "Martillo con mancuernas",
-              "Descripcion": "Ejercicio para los bíceps",
+              "Descripcion": "14 x 3",
               "VideoURL": "j99intoPKGE",
               "ID": "222222"
             },
             {
               "Nombre": "Press de tríceps con mancuernas",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "14 x 4",
               "VideoURL": "EUm95bHsBds",
               "ID": "232323"
             },
             {
               "Nombre": "Patada de tríceps con mancuernas",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "15 x 3",
               "VideoURL": "wEEP6AOxjpw",
               "ID": "242424"
             },
             {
               "Nombre": "Flexiones diamante",
-              "Descripcion": "Ejercicio para tríceps",
+              "Descripcion": "15 x 4",
               "VideoURL": "PJmOZaGnScA",
               "ID": "252525"
             }
@@ -743,7 +743,7 @@
           "Ejercicios": [
             {
               "Nombre": "Descanso",
-              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "Descripcion": "Chill",
               "ID": "0",
               "VideoURL": "1wvL99nmIUU",
               "ID": "242424"
@@ -755,7 +755,7 @@
           "Ejercicios": [
             {
               "Nombre": "Descanso",
-              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "Descripcion": "Chill",
               "VideoURL": "1wvL99nmIUU",
               "ID": "0"
             }

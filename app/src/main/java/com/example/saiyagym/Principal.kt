@@ -1,4 +1,6 @@
 package com.example.saiyagym
+
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -6,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class Principal : AppCompatActivity() {
 
@@ -23,6 +26,12 @@ class Principal : AppCompatActivity() {
                 replaceFragment(Option3Fragment())
                 return@OnNavigationItemSelectedListener true
             }
+            R.id.navigation_option4 -> {
+                if (isAdmin()) {
+                    replaceFragment(AdminFragment())
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
         }
         false
     }
@@ -30,7 +39,6 @@ class Principal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.principal)
-
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
@@ -41,6 +49,9 @@ class Principal : AppCompatActivity() {
             replaceFragment(Option1Fragment())
         }
 
+        // Ocultar opción 4 si el usuario no es administrador
+        val menuItem = bottomNavigationView.menu.findItem(R.id.navigation_option4)
+        menuItem.isVisible = isAdmin()
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -60,13 +71,16 @@ class Principal : AppCompatActivity() {
         }
     }
 
+    private fun isAdmin(): Boolean {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val adminUid = "iiWMCHqIp7Rfg9uyjdOk51NLh932"
+        return currentUser != null && currentUser.uid == adminUid
+    }
+
     fun setDayNight() {
-
         val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_animation)
-
-           val mainContainer = findViewById<View>(R.id.padre)
+        val mainContainer = findViewById<View>(R.id.padre)
         mainContainer.startAnimation(fadeInAnimation)
-
 
         val sp = getSharedPreferences("my_preferences", MODE_PRIVATE)
         val theme = sp.getInt("theme", 1)
@@ -76,8 +90,4 @@ class Principal : AppCompatActivity() {
             delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
         }
     }
-
-
-
-
 }
