@@ -1,40 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- fragment_admin.xml -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Aquí puedes agregar cualquier vista que desees mostrar en el fragmento administrativo -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bienvenido a la sección administrativa"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
-
-    <!-- Por ejemplo, una lista de usuarios -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userRecyclerView"
+    <!-- WebView para mostrar la tabla de usuarios de Firebase Authentication -->
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
-
-    <!-- Botón para agregar nuevo usuario, editar o eliminar usuarios, etc. -->
-    <Button
-        android:id="@+id/addUserNuevoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar Usuario"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
-    <Button
-        android:id="@+id/addUserEliminarButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar Usuario"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
+
