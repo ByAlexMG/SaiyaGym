@@ -1,6 +1,7 @@
 package com.example.saiyagym
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,10 +84,10 @@ class Option2Fragment : Fragment() {
                             }
                         }
                     }
-
                     recyclerViewOption2.adapter = CustomAdapter(exerciseNames)
                 }
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+                Log.e("alex", e.message.toString())
             }
         }
     }
@@ -101,16 +102,19 @@ class Option2Fragment : Fragment() {
         for (j in 0 until exercisesArray.length()) {
             val ejercicioObject = exercisesArray.getJSONObject(j)
             val nombre = ejercicioObject.getString("Nombre")
-            val ID = ejercicioObject.getString("ID")
+            val id = ejercicioObject.getString("ID")
+            val repes = ejercicioObject.getString("Descripcion")
+            val videoURL = ejercicioObject.getString("VideoURL")
 
             val exerciseData = hashMapOf(
                 "name" to nombre,
-                "id" to ID
+                "id" to id,
+                "repes" to repes,
+                "videoURL" to videoURL
             )
-            exercisesCollection.document(ID).set(exerciseData)
+            exercisesCollection.document(id).set(exerciseData)
         }
     }
-
     private suspend fun fetchJsonStringFromUrl(urlString: String): String {
         return withContext(Dispatchers.IO) {
             val url = URL(urlString)

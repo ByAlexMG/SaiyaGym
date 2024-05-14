@@ -82,7 +82,7 @@ class CustomAdapter(private val exercises: List<String>) : RecyclerView.Adapter<
         expandAnimation.duration = 300
         expandAnimation.start()
 
-        // Mostrar los elementos ocultos
+
         cardView.findViewById<View>(R.id.youtubePlayerView).visibility = View.VISIBLE
         cardView.findViewById<View>(R.id.descriptionTextView).visibility = View.VISIBLE
         cardView.findViewById<View>(R.id.playButton).visibility = View.VISIBLE

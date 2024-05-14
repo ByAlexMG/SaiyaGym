@@ -1,0 +1,766 @@
+{
+  "Categorias": [
+    {
+      "NombreCategoria": "Cardio",
+      "PlanDeEjercicios": [
+        {
+          "DiaSemana": "Lunes",
+          "Ejercicios": [
+            {
+              "Nombre": "Cardio intenso",
+              "Descripcion": "Una sesión de cardio de alta intensidad para quemar calorías",
+              "VideoURL": "uSD5IxmEQdI",
+              "ID": "123456"
+            },
+            {
+              "Nombre": "Correr en cinta",
+              "Descripcion": "Correr en la cinta de correr durante 30 minutos",
+              "VideoURL": "VxFUL1uvtwo",
+              "ID": "789012"
+            },
+            {
+              "Nombre": "Salto de cuerda",
+              "Descripcion": "Ejercicio de salto de cuerda para mejorar la coordinación y la resistencia",
+              "VideoURL": "qDSXvuYXd-w",
+              "ID": "456789"
+            },
+            {
+              "Nombre": "Burpees",
+              "Descripcion": "Un ejercicio que combina flexiones, saltos y sentadillas para un entrenamiento completo",
+              "VideoURL": "IYusabTdFEo",
+              "ID": "987654"
+            },
+            {
+              "Nombre": "Escaleras",
+              "Descripcion": "Subir y bajar escaleras para mejorar la resistencia y fortalecer las piernas",
+              "VideoURL": "vNtmv6sXv_8",
+              "ID": "321098"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Martes",
+          "Ejercicios": [
+            {
+              "Nombre": "Carrera suave",
+              "Descripcion": "Carrera suave para recuperarse del entrenamiento intenso del día anterior",
+              "VideoURL": "msKcTby4hd8",
+              "ID": "135790"
+            },
+            {
+              "Nombre": "Intervalos de alta intensidad",
+              "Descripcion": "Ráfagas cortas de ejercicio intenso seguidas de períodos de descanso",
+              "VideoURL": "26aZsFBaFG8",
+              "ID": "246801"
+            },
+            {
+              "Nombre": "Sprints",
+              "Descripcion": "Correr a toda velocidad durante distancias cortas",
+              "VideoURL": "9XzXr-RNoOk",
+              "ID": "579013"
+            },
+            {
+              "Nombre": "Ciclismo",
+              "Descripcion": "Andar en bicicleta para mejorar la resistencia cardiovascular",
+              "VideoURL": "em-NSkZVjkA",
+              "ID": "802468"
+            },
+            {
+              "Nombre": "Step aeróbico",
+              "Descripcion": "Ejercicio aeróbico utilizando un step",
+              "VideoURL": "DYY73hkWZs8",
+              "ID": "314785"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Miércoles",
+          "Ejercicios": [
+            {
+              "Nombre": "Natación",
+              "Descripcion": "Nadar durante 30 minutos para mejorar la resistencia y trabajar todo el cuerpo",
+              "VideoURL": "48m8gjbj7hA",
+              "ID": "157286"
+            },
+            {
+              "Nombre": "Entrenamiento en elíptica",
+              "Descripcion": "Utilizar la elíptica durante 45 minutos para un entrenamiento cardiovascular de bajo impacto",
+              "VideoURL": "Sbv44Rf-5U0",
+              "ID": "628934"
+            },
+            {
+              "Nombre": "Shadowboxing",
+              "Descripcion": "Una sesión de Shadowboxing,para mejorar la resistencia y la coordinación",
+              "VideoURL": "kzlTuxAtpyU",
+              "ID": "239571"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Jueves",
+          "Ejercicios": [
+            {
+              "Nombre": "Entrenamiento en intervalos de escalera",
+              "Descripcion": "Subir y bajar escaleras en intervalos de alta intensidad para un entrenamiento cardiovascular y de fuerza",
+              "VideoURL": "VNMwDR_GBR4",
+              "ID": "875320"
+            },
+            {
+              "Nombre": "Carrera en pendiente",
+              "Descripcion": "Correr en una pendiente para aumentar la intensidad del ejercicio y fortalecer las piernas",
+              "VideoURL": "HgbILN3jM3g",
+              "ID": "462153"
+            },
+            {
+              "Nombre": "Zumba",
+              "Descripcion": "Clase de Zumba para quemar calorías y mejorar el estado de ánimo",
+              "VideoURL": "9xQPfs0jV0Y",
+              "ID": "541237"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Viernes",
+          "Ejercicios": [
+            {
+              "Nombre": "Entrenamiento en elíptica",
+              "Descripcion": "Utilizar la elíptica durante 45 minutos para un entrenamiento cardiovascular de bajo impacto",
+              "VideoURL": "Sbv44Rf-5U0",
+              "ID": "628934"
+            },
+            {
+              "Nombre": "Shadowboxing",
+              "Descripcion": "Una sesión de Shadowboxing,para mejorar la resistencia y la coordinación",
+              "VideoURL": "kzlTuxAtpyU",
+              "ID": "239571"
+            },
+            {
+              "Nombre": "Saltos en cajón",
+              "Descripcion": "Ejercicio de saltos en una caja para mejorar la potencia y la resistencia",
+              "VideoURL": "Y7oZdwP-mcY",
+              "ID": "720394"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Sabado",
+          "Ejercicios": [
+            {
+              "Nombre": "Descanso",
+              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "VideoURL": "1wvL99nmIUU",
+              "ID": "0"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Domingo",
+          "Ejercicios": [
+            {
+              "Nombre": "Descanso",
+              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "VideoURL": "1wvL99nmIUU",
+              "ID": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "NombreCategoria": "Volumen",
+      "PlanDeEjercicios": [
+        {
+          "DiaSemana": "Lunes",
+          "Ejercicios": [
+            {
+              "Nombre": "Dominadas",
+              "Descripcion": "Ejercicio para fortalecer la espalda y los brazos",
+              "VideoURL": "J1r9UtnaY5c",
+              "ID": "111111"
+            },
+            {
+              "Nombre": "Peso muerto",
+              "Descripcion": "Ejercicio para trabajar la cadena posterior (espalda baja, glúteos, isquiotibiales)",
+              "VideoURL": "qO87pkO3E2E",
+              "ID": "222222"
+            },
+            {
+              "Nombre": "Bíceps con barra",
+              "Descripcion": "Ejercicio para trabajar los bíceps",
+              "VideoURL": "DOat3S4alNA",
+              "ID": "333333"
+            },
+            {
+              "Nombre": "Bíceps con mancuernas",
+              "Descripcion": "Ejercicio para trabajar los bíceps",
+              "VideoURL": "AYlobl9M0GU",
+              "ID": "444444"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Martes",
+          "Ejercicios": [
+            {
+              "Nombre": "Press de banca",
+              "Descripcion": "Ejercicio para fortalecer el pecho, hombros y tríceps",
+              "VideoURL": "fqsTgdTPRQU",
+              "ID": "555555"
+            },
+            {
+              "Nombre": "Flexiones de brazos",
+              "Descripcion": "Ejercicio para fortalecer pecho, hombros y tríceps",
+              "VideoURL": "vQ7xzO5lV-E",
+              "ID": "666666"
+            },
+            {
+              "Nombre": "Tríceps en polea",
+              "Descripcion": "Ejercicio para trabajar los tríceps",
+              "VideoURL": "Zj1h0ObPsp8",
+              "ID": "777777"
+            },
+            {
+              "Nombre": "Fondos para tríceps",
+              "Descripcion": "Ejercicio para trabajar los tríceps",
+              "VideoURL": "H6r0fh2-YNU",
+              "ID": "888888"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Miércoles",
+          "Ejercicios": [
+            {
+              "Nombre": "Abdominales",
+              "Descripcion": "Ejercicios variados para fortalecer los músculos abdominales",
+              "VideoURL": "mMieHCr-H0c",
+              "ID": "112233"
+            },
+            {
+              "Nombre": "Abdominales laterales",
+              "Descripcion": "Ejercicios variados para fortalecer los músculos abdominales",
+              "VideoURL": "cEZ6ADuuuAA",
+              "ID": "112233"
+            },
+            {
+              "Nombre": "Plancha lateral",
+              "Descripcion": "Ejercicio para trabajar los oblicuos",
+              "VideoURL": "bRivOELQVOs",
+              "ID": "445566"
+            },
+            {
+              "Nombre": "Oblicuos",
+              "Descripcion": "Ejercicio para trabajar los oblicuos",
+              "VideoURL": "jzZ8631dmvo",
+              "ID": "445566"
+            },
+            {
+              "Nombre": "Elevación de piernas colgado",
+              "Descripcion": "Ejercicio para trabajar los abdominales inferiores",
+              "VideoURL": "i7StVAy8RCk",
+              "ID": "778899"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Jueves",
+          "Ejercicios": [
+            {
+              "Nombre": "Sentadillas",
+              "Descripcion": "Ejercicio compuesto para trabajar las piernas",
+              "VideoURL": "VRKdOsad3HQ",
+              "ID": "101112"
+            },
+            {
+              "Nombre": "Prensa de piernas",
+              "Descripcion": "Variante del ejercicio para enfocarse en los cuádriceps",
+              "VideoURL": "7II31GoNjSo",
+              "ID": "131415"
+            },
+            {
+              "Nombre": "Extensión de gemelos",
+              "Descripcion": "Variante del ejercicio para enfocarse en los gemelos",
+              "VideoURL": "j1yPSb7O8v8",
+              "ID": "131415"
+            },
+            {
+              "Nombre": "Extensiones de cuádriceps",
+              "Descripcion": "Ejercicio de aislamiento para los cuádriceps",
+              "VideoURL": "4EbWXcePVIQ",
+              "ID": "161718"
+            },
+            {
+              "Nombre": "Curl de piernas tumbado",
+              "Descripcion": "Ejercicio para trabajar los isquiotibiales",
+              "VideoURL": "VEAv16_YIF0",
+              "ID": "192021"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Viernes",
+          "Ejercicios": [
+            {
+              "Nombre": "Flexiones de bíceps",
+              "Descripcion": "Ejercicio para aislar y fortalecer los bíceps",
+              "VideoURL": "mVbgoeMTVS4",
+              "ID": "222324"
+            },
+            {
+              "Nombre": "Curl de martillo",
+              "Descripcion": "Variante del curl para trabajar diferentes áreas del bíceps",
+              "VideoURL": "j99intoPKGE",
+              "ID": "252627"
+            },
+            {
+              "Nombre": "Press de tríceps con mancuernas",
+              "Descripcion": "Ejercicio para fortalecer los tríceps",
+              "VideoURL": "NbRvgBi19xI",
+              "ID": "282930"
+            },
+            {
+              "Nombre": "Tríceps en polea",
+              "Descripcion": "Ejercicio para trabajar los tríceps",
+              "VideoURL": "Zj1h0ObPsp8",
+              "ID": "777777"
+            },
+            {
+              "Nombre": "Fondos en banco",
+              "Descripcion": "Ejercicio para trabajar los tríceps y el pecho",
+              "VideoURL": "bR9d6yRH3iA",
+              "ID": "313233"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Sabado",
+          "Ejercicios": [
+            {
+              "Nombre": "Descanso",
+              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "ID": "0",
+              "VideoURL": "1wvL99nmIUU",
+              "ID": "242424"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Domingo",
+          "Ejercicios": [
+            {
+              "Nombre": "Descanso",
+              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "VideoURL": "1wvL99nmIUU",
+              "ID": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "NombreCategoria": "Mantenimiento",
+      "PlanDeEjercicios": [
+        {
+          "DiaSemana": "Lunes",
+          "Ejercicios": [
+            {
+              "Nombre": "Dominadas",
+              "Descripcion": "Ejercicio para fortalecer la espalda",
+              "VideoURL": "J1r9UtnaY5c",
+              "ID": "101010"
+            },
+            {
+              "Nombre": "Curl de bíceps con barra",
+              "Descripcion": "Ejercicio para desarrollar los bíceps",
+              "VideoURL": "b8nB33AAYJE",
+              "ID": "202020"
+            },
+            {
+              "Nombre": "Remo con barra",
+              "Descripcion": "Ejercicio para fortalecer la espalda baja",
+              "VideoURL": "Ag6kIw2cT-s",
+              "ID": "303030"
+            },
+            {
+              "Nombre": "Peso muerto",
+              "Descripcion": "Ejercicio para trabajar la cadena posterior",
+              "VideoURL": "qO87pkO3E2E",
+              "ID": "404040"
+            },
+            {
+              "Nombre": "Hiperextensiones",
+              "Descripcion": "Ejercicio para fortalecer la parte baja de la espalda",
+              "VideoURL": "rlFOkKnJDis",
+              "ID": "505050"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Martes",
+          "Ejercicios": [
+            {
+              "Nombre": "Press de banca",
+              "Descripcion": "Ejercicio para desarrollar el pecho",
+              "VideoURL": "ICaZxO7RmKs",
+              "ID": "606060"
+            },
+            {
+              "Nombre": "Fondos en paralelas",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "1yXVgh_DbqA",
+              "ID": "707070"
+            },
+            {
+              "Nombre": "Press inclinado con mancuernas",
+              "Descripcion": "Ejercicio para trabajar el pecho superior",
+              "VideoURL": "PYEOeF2zIwc",
+              "ID": "808080"
+            },
+            {
+              "Nombre": "Extensiones de tríceps con polea alta",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "fVDo1Y1vIhs",
+              "ID": "909090"
+            },
+            {
+              "Nombre": "Flexiones de tríceps en banco",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "bR9d6yRH3iA",
+              "ID": "101010"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Miércoles",
+          "Ejercicios": [
+            {
+              "Nombre": "Crunches",
+              "Descripcion": "Ejercicio para fortalecer los músculos abdominales",
+              "VideoURL": "O0pIQ2UqeCY",
+              "ID": "111111"
+            },
+            {
+              "Nombre": "Plancha",
+              "Descripcion": "Ejercicio de estabilización del core",
+              "VideoURL": "mMieHCr-H0c",
+              "ID": "121212"
+            },
+            {
+              "Nombre": "Elevación de piernas colgado",
+              "Descripcion": "Ejercicio para trabajar los músculos inferiores del abdomen",
+              "VideoURL": "i7StVAy8RCk",
+              "ID": "131313"
+            },
+            {
+              "Nombre": "Giros rusos",
+              "Descripcion": "Ejercicio para fortalecer los oblicuos",
+              "VideoURL": "VXWd2ROGuSw",
+              "ID": "141414"
+            },
+            {
+              "Nombre": "Plancha lateral",
+              "Descripcion": "Ejercicio para fortalecer los oblicuos",
+              "VideoURL": "bRivOELQVOs",
+              "ID": "151515"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Jueves",
+          "Ejercicios": [
+            {
+              "Nombre": "Sentadillas",
+              "Descripcion": "Ejercicio para fortalecer las piernas",
+              "VideoURL": "VRKdOsad3HQ",
+              "ID": "161616"
+            },
+            {
+              "Nombre": "Prensa de piernas",
+              "Descripcion": "Ejercicio para trabajar los cuádriceps",
+              "VideoURL": "7II31GoNjSo",
+              "ID": "171717"
+            },
+            {
+              "Nombre": "Extensiones de pierna",
+              "Descripcion": "Ejercicio para los cuádriceps",
+              "VideoURL": "4EbWXcePVIQ",
+              "ID": "181818"
+            },
+            {
+              "Nombre": "Curl de piernas tumbado",
+              "Descripcion": "Ejercicio para trabajar los isquiotibiales",
+              "VideoURL": "VEAv16_YIF0",
+              "ID": "191919"
+            },
+            {
+              "Nombre": "Peso muerto rumano",
+              "Descripcion": "Ejercicio para la cadena posterior",
+              "VideoURL": "g137Wyypu-w",
+              "ID": "202020"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Viernes",
+          "Ejercicios": [
+            {
+              "Nombre": "Curl de bíceps con mancuernas",
+              "Descripcion": "Ejercicio para desarrollar los bíceps",
+              "VideoURL": "Sp1L8ZjIAcM",
+              "ID": "212121"
+            },
+            {
+              "Nombre": "Martillo con mancuernas",
+              "Descripcion": "Ejercicio para los bíceps",
+              "VideoURL": "j99intoPKGE",
+              "ID": "222222"
+            },
+            {
+              "Nombre": "Press de tríceps con mancuernas",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "EUm95bHsBds",
+              "ID": "232323"
+            },
+            {
+              "Nombre": "Patada de tríceps con mancuernas",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "wEEP6AOxjpw",
+              "ID": "242424"
+            },
+            {
+              "Nombre": "Flexiones diamante",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "PJmOZaGnScA",
+              "ID": "252525"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Sabado",
+          "Ejercicios": [
+            {
+              "Nombre": "Descanso",
+              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "ID": "0",
+              "VideoURL": "1wvL99nmIUU",
+              "ID": "242424"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Domingo",
+          "Ejercicios": [
+            {
+              "Nombre": "Descanso",
+              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "VideoURL": "1wvL99nmIUU",
+              "ID": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "NombreCategoria": "Definición",
+      "PlanDeEjercicios": [
+        {
+          "DiaSemana": "Lunes",
+          "Ejercicios": [
+            {
+              "Nombre": "Dominadas",
+              "Descripcion": "Ejercicio para fortalecer la espalda",
+              "VideoURL": "J1r9UtnaY5c",
+              "ID": "101010"
+            },
+            {
+              "Nombre": "Curl de bíceps con barra",
+              "Descripcion": "Ejercicio para desarrollar los bíceps",
+              "VideoURL": "b8nB33AAYJE",
+              "ID": "202020"
+            },
+            {
+              "Nombre": "Remo con barra",
+              "Descripcion": "Ejercicio para fortalecer la espalda baja",
+              "VideoURL": "Ag6kIw2cT-s",
+              "ID": "303030"
+            },
+            {
+              "Nombre": "Peso muerto",
+              "Descripcion": "Ejercicio para trabajar la cadena posterior",
+              "VideoURL": "qO87pkO3E2E",
+              "ID": "404040"
+            },
+            {
+              "Nombre": "Hiperextensiones",
+              "Descripcion": "Ejercicio para fortalecer la parte baja de la espalda",
+              "VideoURL": "rlFOkKnJDis",
+              "ID": "505050"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Martes",
+          "Ejercicios": [
+            {
+              "Nombre": "Press de banca",
+              "Descripcion": "Ejercicio para desarrollar el pecho",
+              "VideoURL": "ICaZxO7RmKs",
+              "ID": "606060"
+            },
+            {
+              "Nombre": "Fondos en paralelas",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "1yXVgh_DbqA",
+              "ID": "707070"
+            },
+            {
+              "Nombre": "Press inclinado con mancuernas",
+              "Descripcion": "Ejercicio para trabajar el pecho superior",
+              "VideoURL": "PYEOeF2zIwc",
+              "ID": "808080"
+            },
+            {
+              "Nombre": "Extensiones de tríceps con polea alta",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "fVDo1Y1vIhs",
+              "ID": "909090"
+            },
+            {
+              "Nombre": "Flexiones de tríceps en banco",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "bR9d6yRH3iA",
+              "ID": "101010"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Miércoles",
+          "Ejercicios": [
+            {
+              "Nombre": "Crunches",
+              "Descripcion": "Ejercicio para fortalecer los músculos abdominales",
+              "VideoURL": "O0pIQ2UqeCY",
+              "ID": "111111"
+            },
+            {
+              "Nombre": "Plancha",
+              "Descripcion": "Ejercicio de estabilización del core",
+              "VideoURL": "mMieHCr-H0c",
+              "ID": "121212"
+            },
+            {
+              "Nombre": "Elevación de piernas colgado",
+              "Descripcion": "Ejercicio para trabajar los músculos inferiores del abdomen",
+              "VideoURL": "i7StVAy8RCk",
+              "ID": "131313"
+            },
+            {
+              "Nombre": "Giros rusos",
+              "Descripcion": "Ejercicio para fortalecer los oblicuos",
+              "VideoURL": "VXWd2ROGuSw",
+              "ID": "141414"
+            },
+            {
+              "Nombre": "Plancha lateral",
+              "Descripcion": "Ejercicio para fortalecer los oblicuos",
+              "VideoURL": "bRivOELQVOs",
+              "ID": "151515"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Jueves",
+          "Ejercicios": [
+            {
+              "Nombre": "Sentadillas",
+              "Descripcion": "Ejercicio para fortalecer las piernas",
+              "VideoURL": "VRKdOsad3HQ",
+              "ID": "161616"
+            },
+            {
+              "Nombre": "Prensa de piernas",
+              "Descripcion": "Ejercicio para trabajar los cuádriceps",
+              "VideoURL": "7II31GoNjSo",
+              "ID": "171717"
+            },
+            {
+              "Nombre": "Extensiones de pierna",
+              "Descripcion": "Ejercicio para los cuádriceps",
+              "VideoURL": "4EbWXcePVIQ",
+              "ID": "181818"
+            },
+            {
+              "Nombre": "Curl de piernas tumbado",
+              "Descripcion": "Ejercicio para trabajar los isquiotibiales",
+              "VideoURL": "VEAv16_YIF0",
+              "ID": "191919"
+            },
+            {
+              "Nombre": "Peso muerto rumano",
+              "Descripcion": "Ejercicio para la cadena posterior",
+              "VideoURL": "g137Wyypu-w",
+              "ID": "202020"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Viernes",
+          "Ejercicios": [
+            {
+              "Nombre": "Curl de bíceps con mancuernas",
+              "Descripcion": "Ejercicio para desarrollar los bíceps",
+              "VideoURL": "Sp1L8ZjIAcM",
+              "ID": "212121"
+            },
+            {
+              "Nombre": "Martillo con mancuernas",
+              "Descripcion": "Ejercicio para los bíceps",
+              "VideoURL": "j99intoPKGE",
+              "ID": "222222"
+            },
+            {
+              "Nombre": "Press de tríceps con mancuernas",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "EUm95bHsBds",
+              "ID": "232323"
+            },
+            {
+              "Nombre": "Patada de tríceps con mancuernas",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "wEEP6AOxjpw",
+              "ID": "242424"
+            },
+            {
+              "Nombre": "Flexiones diamante",
+              "Descripcion": "Ejercicio para tríceps",
+              "VideoURL": "PJmOZaGnScA",
+              "ID": "252525"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Sabado",
+          "Ejercicios": [
+            {
+              "Nombre": "Descanso",
+              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "ID": "0",
+              "VideoURL": "1wvL99nmIUU",
+              "ID": "242424"
+            }
+          ]
+        },
+        {
+          "DiaSemana": "Domingo",
+          "Ejercicios": [
+            {
+              "Nombre": "Descanso",
+              "Descripcion": "Día de descanso para permitir que los músculos se recuperen",
+              "VideoURL": "1wvL99nmIUU",
+              "ID": "0"
+            }
+          ]
+        }
+      ]
+    }
+  ]}
