@@ -9,7 +9,6 @@ import android.widget.Button
 import androidx.cardview.widget.CardView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
@@ -30,6 +29,7 @@ class CustomAdapter(private val exercises: List<Exercise>) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val exercise = exercises[position]
         holder.exerciseNameTextView.text = exercise.name
+        holder.descriptionTextView.text = exercise.description
 
         holder.cardView.setOnClickListener {
             expandCardView(holder.cardView)
@@ -51,11 +51,14 @@ class CustomAdapter(private val exercises: List<Exercise>) : RecyclerView.Adapte
         }
     }
 
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val youTubePlayerView: YouTubePlayerView = itemView.findViewById(R.id.youtubePlayerView)
         val cardView: CardView = itemView.findViewById(R.id.cardView)
         val playButton: Button = itemView.findViewById(R.id.playButton)
         val exerciseNameTextView: TextView = itemView.findViewById(R.id.exerciseNameTextView)
+        val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
+
     }
 
     private fun expandCardView(cardView: CardView) {

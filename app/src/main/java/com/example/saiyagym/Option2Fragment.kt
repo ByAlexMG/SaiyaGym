@@ -81,7 +81,8 @@ class Option2Fragment : Fragment() {
                                 val ejercicioObject = ejerciciosArray.getJSONObject(j)
                                 val nombre = ejercicioObject.getString("Nombre")
                                 val videoURL = ejercicioObject.getString("VideoURL")
-                                val exercise = Exercise(nombre, videoURL)
+                                val descripcion = ejercicioObject.getString("Descripcion")
+                                val exercise = Exercise(nombre, videoURL, descripcion)
                                 exerciseList.add(exercise)
                             }
                         }
