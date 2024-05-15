@@ -49,7 +49,6 @@ class Principal : AppCompatActivity() {
             replaceFragment(Option1Fragment())
         }
 
-        // Ocultar opción 4 si el usuario no es administrador
         val menuItem = bottomNavigationView.menu.findItem(R.id.navigation_option4)
         menuItem.isVisible = isAdmin()
     }
@@ -73,7 +72,7 @@ class Principal : AppCompatActivity() {
 
     private fun isAdmin(): Boolean {
         val currentUser = FirebaseAuth.getInstance().currentUser
-        val adminUid = "iiWMCHqIp7Rfg9uyjdOk51NLh932"
+        val adminUid = "JumA5QqcjcTm7o1jSsRVw1OwExE2"
         return currentUser != null && currentUser.uid == adminUid
     }
 
