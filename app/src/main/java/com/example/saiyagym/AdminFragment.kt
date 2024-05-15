@@ -1,5 +1,7 @@
 package com.example.saiyagym
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +17,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AdminFragment : Fragment() {
 
-    data class User(val uid: String, val email: String)
+    data class User(val uid: String, val email: String, val moroso: Int = 0)
+
+
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: UserAdapter
@@ -55,7 +60,8 @@ class AdminFragment : Fragment() {
                 for (document in result) {
                     val uid = document.id
                     val email = document.getString("email") ?: ""
-                    val user = User(uid, email)
+                    val moroso = document.getLong("moroso")?.toInt() ?: 0 // Obtener el valor del campo "moroso"
+                    val user = User(uid, email, moroso) // Pasar el valor de "moroso" al constructor
                     usersList.add(user)
                 }
                 adapter.notifyDataSetChanged()
@@ -101,20 +107,28 @@ class AdminFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
+            val itemView =
+                LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
             return UserViewHolder(itemView)
         }
 
         override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
             val currentUser = users[position]
-            holder.uidTextView.text = currentUser.uid
-            holder.emailTextView.text = currentUser.email
+            if (currentUser.moroso == 1) {
+                // Si el usuario es moroso, ocultar el elemento de la lista
+                holder.itemView.visibility = View.GONE
+            } else {
+                holder.itemView.visibility = View.VISIBLE
+                holder.uidTextView.text = currentUser.uid
+                holder.emailTextView.text = currentUser.email
+            }
         }
 
         override fun getItemCount(): Int {
             return users.size
         }
 
+        /*
         private fun deleteUser(position: Int) {
             val db = FirebaseFirestore.getInstance()
             val userToDelete = users[position]
@@ -149,40 +163,87 @@ class AdminFragment : Fragment() {
                     }
                 }
         }
-    }
+        */
+        private fun deleteUser(position: Int) {
+            val db = FirebaseFirestore.getInstance()
+            val userToDelete = users[position]
+            val uid = userToDelete.uid
 
-    private fun addNewUser(email: String, password: String) {
-        val auth = FirebaseAuth.getInstance()
-        val db = FirebaseFirestore.getInstance()
+            val userRef = db.collection("users").document(uid)
+            // Campos a borrar
+            val fieldsToDelete = listOf("altura", "edad", "grasa", "peso", "genero")
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { createUserTask ->
-                if (createUserTask.isSuccessful) {
-                    val firebaseUser = auth.currentUser
-                    val uid = firebaseUser?.uid ?: ""
-
-                    // Guardar el usuario en la base de datos de Firestore
-                    val user = hashMapOf(
-                        "email" to email,
-                        // Puedes agregar más campos aquí si es necesario
-                    )
-
-                    db.collection("users").document(uid)
-                        .set(user)
-                        .addOnSuccessListener {
-                            //ya veremos como solucionar esto
-                            val adminEmail = "admin@admin.com"
-                            val adminPassword = "Navidad14"
-                            auth.signInWithEmailAndPassword(adminEmail, adminPassword)
+            userRef.get()
+                .addOnSuccessListener { documentSnapshot ->
+                    // Verificar si el documento existe antes de continuar
+                    if (documentSnapshot.exists()) {
+                        // Construir un mapa con los campos a eliminar y sus valores asociados
+                        val updates = mutableMapOf<String, Any?>()
+                        fieldsToDelete.forEach { field ->
+                            updates[field] = FieldValue.delete()
                         }
-                        .addOnFailureListener { exception ->
-                            // Manejar el fallo al agregar el usuario a Firestore
-                            // Aquí podrías mostrar un mensaje de error o manejar de otra manera el fallo
-                        }
-                } else {
-                    // Manejar el fallo al crear el usuario en Firebase Authentication
-                    // Aquí podrías mostrar un mensaje de error o manejar de otra manera el fallo
+
+                        // Borrar los campos específicos
+                        userRef.update(updates)
+                            .addOnSuccessListener {
+                                usersList.removeAt(position)
+                                notifyItemRemoved(position)
+                                notifyItemRangeChanged(position, itemCount)
+                                userRef.update("moroso", 1)
+
+                                    .addOnFailureListener { exception ->
+                                        Log.e(TAG, "Error updating user", exception)
+                                        // Manejar el error según sea necesario
+                                    }
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.e(TAG, "Error deleting fields", exception)
+                                // Manejar el error según sea necesario
+                            }
+                    } else {
+                        Log.d(TAG, "Document does not exist")
+                        // Manejar la situación en la que el documento no existe
+                    }
                 }
-            }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error getting user document", exception)
+                    // Manejar el error según sea necesario
+                }
+        }
+
     }
-}
+        private fun addNewUser(email: String, password: String) {
+            val auth = FirebaseAuth.getInstance()
+            val db = FirebaseFirestore.getInstance()
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { createUserTask ->
+                    if (createUserTask.isSuccessful) {
+                        val firebaseUser = auth.currentUser
+                        val uid = firebaseUser?.uid ?: ""
+
+                        // Guardar el usuario en la base de datos de Firestore
+                        val user = hashMapOf(
+                            "email" to email,
+                            // Puedes agregar más campos aquí si es necesario
+                        )
+
+                        db.collection("users").document(uid)
+                            .set(user)
+                            .addOnSuccessListener {
+                                //ya veremos como solucionar esto
+                                val adminEmail = "admin@admin.com"
+                                val adminPassword = "Navidad14"
+                                auth.signInWithEmailAndPassword(adminEmail, adminPassword)
+                            }
+                            .addOnFailureListener { exception ->
+                                // Manejar el fallo al agregar el usuario a Firestore
+                                // Aquí podrías mostrar un mensaje de error o manejar de otra manera el fallo
+                            }
+                    } else {
+                        // Manejar el fallo al crear el usuario en Firebase Authentication
+                        // Aquí podrías mostrar un mensaje de error o manejar de otra manera el fallo
+                    }
+                }
+        }
+    }

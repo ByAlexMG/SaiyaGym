@@ -44,24 +44,30 @@ class LoginActivity : AppCompatActivity() {
                                 val userDocument = db.collection("users").document(user.uid)
                                 userDocument.get().addOnSuccessListener { document ->
                                     if (document.exists()) {
-                                        val peso = document.getDouble("peso")
-                                        val altura = document.getDouble("altura")
-                                        val edad = document.getLong("edad")
-                                        if (peso != null && altura != null && edad != null) {
-                                            // Si los datos están llenos, ir a la actividad principal
-                                            val intent = Intent(this, Principal::class.java)
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                            startActivity(intent)
-                                            finish()
+                                        val moroso = document.getLong("moroso")
+                                        if (moroso != null && moroso == 1L) {
+                                            // Si el usuario está marcado como moroso, mostrar mensaje y no iniciar sesión
+                                            showAlert("Error", "Usted ha sido baneado")
                                         } else {
-                                            // Si los datos aún no están llenos, ir a la actividad IntroducirDatos
-                                            val intent = Intent(this, IntroducirDatos::class.java)
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                            startActivity(intent)
-                                            finish()
+                                            val peso = document.getDouble("peso")
+                                            val altura = document.getDouble("altura")
+                                            val edad = document.getLong("edad")
+                                            if (peso != null && altura != null && edad != null) {
+                                                // Si los datos están llenos, ir a la actividad principal
+                                                val intent = Intent(this, Principal::class.java)
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                                startActivity(intent)
+                                                finish()
+                                            } else {
+                                                // Si los datos aún no están llenos, ir a la actividad IntroducirDatos
+                                                val intent = Intent(this, IntroducirDatos::class.java)
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                                startActivity(intent)
+                                                finish()
+                                            }
                                         }
                                     } else {
-                                        // Si los datos aún no están llenos, ir a la actividad IntroducirDatos
+                                        // Si los datos del usuario no existen, ir a la actividad IntroducirDatos
                                         val intent = Intent(this, IntroducirDatos::class.java)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                         startActivity(intent)
