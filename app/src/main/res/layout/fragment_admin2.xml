@@ -53,4 +53,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit" />
+
+    <!-- Text input for exercise name to delete -->
+    <TextView
+        android:id="@+id/textViewDeleteHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Ejercicio"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerDeleteCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/categories_array"/>
+
+    <Spinner
+        android:id="@+id/spinnerDeleteDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/days_array"/>
+
+    <EditText
+        android:id="@+id/editTextDeleteExerciseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del Ejercicio"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/buttonDeleteExercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Ejercicio"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -26,7 +27,7 @@ class AdminFragment2 : Fragment() {
 
         database = FirebaseDatabase.getInstance().reference
 
-        // Get references to UI elements
+
         val spinnerCategory: Spinner = view.findViewById(R.id.spinnerCategory)
         val spinnerDay: Spinner = view.findViewById(R.id.spinnerDay)
         val editTextID: EditText = view.findViewById(R.id.editTextID)
@@ -34,8 +35,21 @@ class AdminFragment2 : Fragment() {
         val editTextDescription: EditText = view.findViewById(R.id.editTextDescription)
         val editTextVideoURL: EditText = view.findViewById(R.id.editTextVideoURL)
         val buttonSubmit: Button = view.findViewById(R.id.buttonSubmit)
+        val spinnerDeleteCategory: Spinner = view.findViewById(R.id.spinnerDeleteCategory)
+        val spinnerDeleteDay: Spinner = view.findViewById(R.id.spinnerDeleteDay)
+        val editTextDeleteExerciseName: EditText = view.findViewById(R.id.editTextDeleteExerciseName)
+        val buttonDeleteExercise: Button = view.findViewById(R.id.buttonDeleteExercise)
 
-        // Set up the button click listener
+        // Configurar el botón para eliminar ejercicio
+        buttonDeleteExercise.setOnClickListener {
+            val category = spinnerDeleteCategory.selectedItem.toString()
+            val day = spinnerDeleteDay.selectedItem.toString()
+            val exerciseName = editTextDeleteExerciseName.text.toString()
+
+            // Llamar al método para eliminar el ejercicio de Firebase
+            deleteExerciseFromFirebase(category, day, exerciseName)
+        }
+
         buttonSubmit.setOnClickListener {
             val categoryIndex = spinnerCategory.selectedItemPosition
             val dayIndex = spinnerDay.selectedItemPosition
@@ -44,7 +58,7 @@ class AdminFragment2 : Fragment() {
             val description = editTextDescription.text.toString()
             val videoURL = editTextVideoURL.text.toString()
 
-            // Map category index to category name
+
             val category = when (categoryIndex) {
                 0 -> "1"
                 1 -> "0"
@@ -53,22 +67,22 @@ class AdminFragment2 : Fragment() {
                 else -> "Unknown" // Default case, should not happen if spinner is set up correctly
             }
 
-            // Map day index to day name
+
             val day = when (dayIndex) {
-                0 -> "0" // Lunes
-                1 -> "1" // Martes
-                2 -> "2" // Miércoles
-                3 -> "3" // Jueves
-                4 -> "4" // Viernes
-                5 -> "5" // Sábado
-                6 -> "6" // Domingo
+                0 -> "0"
+                1 -> "1"
+                2 -> "2"
+                3 -> "3"
+                4 -> "4"
+                5 -> "5"
+                6 -> "6"
                 else -> "Unknown" // Default case, should not happen if spinner is set up correctly
             }
 
-            // Create Exercise object
+
             val exercise = Exercise(description, id, name, videoURL)
 
-            // Save to Firebase
+
             saveExerciseToFirebase(category, day, exercise)
         }
 
@@ -82,7 +96,7 @@ class AdminFragment2 : Fragment() {
             .child(day)
             .child("Ejercicios")
 
-        // Obtener el número actual de ejercicios
+
         exerciseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val exerciseCount = dataSnapshot.childrenCount.toInt()
@@ -100,24 +114,19 @@ class AdminFragment2 : Fragment() {
 
                 val exerciseRefWithId = exerciseRef.child(exerciseId)
 
-                // Guardar el nuevo ejercicio en Firebase
                 exerciseRefWithId.setValue(ejercicioMap).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Éxito: el ejercicio se ha guardado correctamente
+
                     } else {
-                        // Error al guardar el ejercicio
+
                     }
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Manejar errores de Firebase
             }
         })
     }
-
-
-
 
     data class Exercise(
         val Descripcion: String,
@@ -125,4 +134,42 @@ class AdminFragment2 : Fragment() {
         val Nombre: String,
         val VideoURL: String
     )
+
+    private fun deleteExerciseFromFirebase(category: String, day: String, exerciseName: String) {
+        val exercisesRef = database.child("Categorias")
+            .child(category)
+            .child("PlanDeEjercicios")
+            .child(day)
+            .child("Ejercicios")
+
+        exercisesRef.orderByChild("Nombre").equalTo(exerciseName)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (exerciseSnapshot in dataSnapshot.children) {
+                            exerciseSnapshot.ref.removeValue()
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        val snackbar = Snackbar.make(requireView(), "Eliminado con exito", Snackbar.LENGTH_SHORT)
+                                        snackbar.show()
+                                    } else {
+                                        val snackbar = Snackbar.make(requireView(), "Error al eliminar el ejercicio", Snackbar.LENGTH_SHORT)
+                                        snackbar.show()
+                                    }
+                                }
+                        }
+                    } else {
+                        val snackbar = Snackbar.make(requireView(), "No se ha encontrado el ejercicio", Snackbar.LENGTH_SHORT)
+                        snackbar.show()
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    val snackbar = Snackbar.make(requireView(), "Error fatal", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
+                }
+            })
+    }
+
+
 }
