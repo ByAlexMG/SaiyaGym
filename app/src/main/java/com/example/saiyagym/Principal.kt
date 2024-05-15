@@ -1,6 +1,5 @@
 package com.example.saiyagym
 
-
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -32,6 +31,12 @@ class Principal : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
             }
+            R.id.navigation_option5 -> {
+                if (isAdmin()) {  // Añade lógica para que solo los administradores puedan ver este fragmento
+                    replaceFragment(AdminFragment2())
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
         }
         false
     }
@@ -49,8 +54,9 @@ class Principal : AppCompatActivity() {
             replaceFragment(Option1Fragment())
         }
 
-        val menuItem = bottomNavigationView.menu.findItem(R.id.navigation_option4)
-        menuItem.isVisible = isAdmin()
+        // Maneja la visibilidad de las opciones del menú
+        bottomNavigationView.menu.findItem(R.id.navigation_option4).isVisible = isAdmin()
+        bottomNavigationView.menu.findItem(R.id.navigation_option5).isVisible = isAdmin()
     }
 
     private fun replaceFragment(fragment: Fragment) {

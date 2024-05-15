@@ -4,4 +4,19 @@
     <string name="x_30"><![CDATA[X > 30%]]></string>
     <string name="_20_x_10"><![CDATA[20% < X > 10%]]></string>
     <string name="x_10"><![CDATA[X < 10%]]></string>
+    <string-array name="categories_array">
+        <item>Volumen</item>
+        <item>Cardio</item>
+        <item>Mantenimiento</item>
+        <item>Definicion</item>
+    </string-array>
+    <string-array name="days_array">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
 </resources>

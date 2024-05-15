@@ -18,4 +18,10 @@
         android:icon="@drawable/admin"
         android:checkable="true"
         android:visible="false"/>
+    <item
+        android:id="@+id/navigation_option5"
+        android:title="Admin"
+        android:icon="@drawable/sports"
+        android:checkable="true"
+        android:visible="false"/>
 </menu>
