@@ -1,16 +1,18 @@
 package com.example.saiyagym
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -35,10 +37,16 @@ class AdminFragment : Fragment() {
 
         loadUsersFromFirestore()
 
+        // Botón para agregar un nuevo usuario
+        val addUserFloatingButton: FloatingActionButton = rootView.findViewById(R.id.adduser)
+        addUserFloatingButton.setOnClickListener {
+            showAddUserDialog()
+        }
+
         return rootView
     }
 
-    private fun loadUsersFromFirestore() {
+    fun loadUsersFromFirestore() {
         progressBar.visibility = View.VISIBLE
         val db = FirebaseFirestore.getInstance()
         db.collection("users")
@@ -53,6 +61,26 @@ class AdminFragment : Fragment() {
                 adapter.notifyDataSetChanged()
                 progressBar.visibility = View.GONE
             }
+    }
+
+    private fun showAddUserDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_user, null)
+        val editTextEmail = dialogView.findViewById<EditText>(R.id.editTextEmail)
+        val editTextPassword = dialogView.findViewById<EditText>(R.id.editTextPassword)
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Agregar Nuevo Usuario")
+            .setView(dialogView)
+            .setPositiveButton("Agregar") { dialog, _ ->
+                val email = editTextEmail.text.toString()
+                val password = editTextPassword.text.toString()
+                addNewUser(email, password)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private inner class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
@@ -110,7 +138,7 @@ class AdminFragment : Fragment() {
                                         notifyItemRangeChanged(position, itemCount)
 
                                         //ya veremos como solucionar esto
-                                        val adminEmail = "nuevo@nuevo.com"
+                                        val adminEmail = "admin@admin.com"
                                         val adminPassword = "Navidad14"
                                         auth.signInWithEmailAndPassword(adminEmail, adminPassword)
 
@@ -121,5 +149,40 @@ class AdminFragment : Fragment() {
                     }
                 }
         }
+    }
+
+    private fun addNewUser(email: String, password: String) {
+        val auth = FirebaseAuth.getInstance()
+        val db = FirebaseFirestore.getInstance()
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { createUserTask ->
+                if (createUserTask.isSuccessful) {
+                    val firebaseUser = auth.currentUser
+                    val uid = firebaseUser?.uid ?: ""
+
+                    // Guardar el usuario en la base de datos de Firestore
+                    val user = hashMapOf(
+                        "email" to email,
+                        // Puedes agregar más campos aquí si es necesario
+                    )
+
+                    db.collection("users").document(uid)
+                        .set(user)
+                        .addOnSuccessListener {
+                            //ya veremos como solucionar esto
+                            val adminEmail = "admin@admin.com"
+                            val adminPassword = "Navidad14"
+                            auth.signInWithEmailAndPassword(adminEmail, adminPassword)
+                        }
+                        .addOnFailureListener { exception ->
+                            // Manejar el fallo al agregar el usuario a Firestore
+                            // Aquí podrías mostrar un mensaje de error o manejar de otra manera el fallo
+                        }
+                } else {
+                    // Manejar el fallo al crear el usuario en Firebase Authentication
+                    // Aquí podrías mostrar un mensaje de error o manejar de otra manera el fallo
+                }
+            }
     }
 }
