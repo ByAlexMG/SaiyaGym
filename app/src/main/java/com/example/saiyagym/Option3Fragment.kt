@@ -23,6 +23,8 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import java.util.Date
 
 class Option3Fragment : Fragment() {
     private  lateinit var firebaseAuth:FirebaseAuth
@@ -115,6 +117,7 @@ class Option3Fragment : Fragment() {
                     user.updatePassword(newPassword)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
+                                saveChangeLog(user.uid)
                                 val snackbar = Snackbar.make(requireView(), "Contraseña actualizada", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             } else {
@@ -127,6 +130,49 @@ class Option3Fragment : Fragment() {
                     snackbar.show()
                 }
             }
+    }
+
+    private fun saveChangeLog(userId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val logEntry = hashMapOf(
+            "UID" to userId,
+            "fecha" to Date(),
+            "action" to "Contraseña Cambiada",
+            "tipo" to "INFO"
+        )
+
+        val docRef = db.collection("log").document("log")
+
+        docRef.get().addOnSuccessListener { document ->
+            if (document.exists()) {
+                // Si el documento existe, añade el nuevo log al array de logs existente
+                docRef.update("logs", FieldValue.arrayUnion(logEntry))
+                    .addOnSuccessListener {
+                        // Log guardado con éxito
+                    }
+                    .addOnFailureListener { e ->
+                        // Maneja cualquier error al guardar el log
+                        val snackbar = Snackbar.make(requireView(), "Error al guardar el log", Snackbar.LENGTH_SHORT)
+                        snackbar.show()
+                    }
+            } else {
+                // Si el documento no existe, crea un nuevo documento con el primer log
+                val logs = arrayListOf(logEntry)
+                docRef.set(hashMapOf("logs" to logs))
+                    .addOnSuccessListener {
+                        // Log guardado con éxito
+                    }
+                    .addOnFailureListener { e ->
+                        // Maneja cualquier error al guardar el log
+                        val snackbar = Snackbar.make(requireView(), "Error al guardar el log", Snackbar.LENGTH_SHORT)
+                        snackbar.show()
+                    }
+            }
+        }.addOnFailureListener { e ->
+            // Maneja cualquier error al obtener el documento
+            val snackbar = Snackbar.make(requireView(), "Error al obtener el documento de log", Snackbar.LENGTH_SHORT)
+            snackbar.show()
+        }
     }
 
     private fun showChangeEmailDialog() {

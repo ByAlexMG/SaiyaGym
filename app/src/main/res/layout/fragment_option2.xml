@@ -34,7 +34,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ajustes"
+        android:src="@drawable/dia_completado"
         android:contentDescription="Dia terminado" />
 
 </RelativeLayout>

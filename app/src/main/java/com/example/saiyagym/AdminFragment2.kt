@@ -9,11 +9,15 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Date
 
 class AdminFragment2 : Fragment() {
 
@@ -155,6 +159,7 @@ class AdminFragment2 : Fragment() {
     )
 
     private fun deleteExerciseFromFirebase(category: String, day: String, exerciseName: String) {
+        val user = FirebaseAuth.getInstance().currentUser
         val exercisesRef = database.child("Categorias")
             .child(category)
             .child("PlanDeEjercicios")
@@ -169,6 +174,9 @@ class AdminFragment2 : Fragment() {
                             exerciseSnapshot.ref.removeValue()
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
+                                        if (user != null) {
+                                            saveChangeLog(user.uid)
+                                        }
                                         val snackbar = Snackbar.make(requireView(), "Eliminado con exito", Snackbar.LENGTH_SHORT)
                                         snackbar.show()
                                     } else {
@@ -189,6 +197,47 @@ class AdminFragment2 : Fragment() {
                 }
             })
     }
+    private fun saveChangeLog(userId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val logEntry = hashMapOf(
+            "UID" to userId,
+            "fecha" to Date(),
+            "action" to "Ejercicio Eliminado",
+            "tipo" to "INFO"
+        )
 
+        val docRef = db.collection("log").document("log")
+
+        docRef.get().addOnSuccessListener { document ->
+            if (document.exists()) {
+                // Si el documento existe, añade el nuevo log al array de logs existente
+                docRef.update("logs", FieldValue.arrayUnion(logEntry))
+                    .addOnSuccessListener {
+                        // Log guardado con éxito
+                    }
+                    .addOnFailureListener { e ->
+                        // Maneja cualquier error al guardar el log
+                        val snackbar = Snackbar.make(requireView(), "Error al guardar el log", Snackbar.LENGTH_SHORT)
+                        snackbar.show()
+                    }
+            } else {
+                // Si el documento no existe, crea un nuevo documento con el primer log
+                val logs = arrayListOf(logEntry)
+                docRef.set(hashMapOf("logs" to logs))
+                    .addOnSuccessListener {
+                        // Log guardado con éxito
+                    }
+                    .addOnFailureListener { e ->
+                        // Maneja cualquier error al guardar el log
+                        val snackbar = Snackbar.make(requireView(), "Error al guardar el log", Snackbar.LENGTH_SHORT)
+                        snackbar.show()
+                    }
+            }
+        }.addOnFailureListener { e ->
+            // Maneja cualquier error al obtener el documento
+            val snackbar = Snackbar.make(requireView(), "Error al obtener el documento de log", Snackbar.LENGTH_SHORT)
+            snackbar.show()
+        }
+    }
 
 }
