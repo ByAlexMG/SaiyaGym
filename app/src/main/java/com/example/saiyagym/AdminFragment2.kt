@@ -40,13 +40,33 @@ class AdminFragment2 : Fragment() {
         val editTextDeleteExerciseName: EditText = view.findViewById(R.id.editTextDeleteExerciseName)
         val buttonDeleteExercise: Button = view.findViewById(R.id.buttonDeleteExercise)
 
-        // Configurar el botón para eliminar ejercicio
+
         buttonDeleteExercise.setOnClickListener {
-            val category = spinnerDeleteCategory.selectedItem.toString()
-            val day = spinnerDeleteDay.selectedItem.toString()
+            val categoryIndex = spinnerDeleteCategory.selectedItemPosition
+            val dayIndex = spinnerDeleteDay.selectedItemPosition
             val exerciseName = editTextDeleteExerciseName.text.toString()
 
-            // Llamar al método para eliminar el ejercicio de Firebase
+
+            val category = when (categoryIndex) {
+                0 -> "1"
+                1 -> "0"
+                2 -> "Mantenimiento"
+                3 -> "Definición"
+                else -> "Unknown"
+            }
+
+            val day = when (dayIndex) {
+                0 -> "0" // lunes
+                1 -> "1" // martes
+                2 -> "2" // miércoles
+                3 -> "3" // jueves
+                4 -> "4" // viernes
+                5 -> "5" // sábado
+                6 -> "6" // domingo
+                else -> "Unknown"
+            }
+
+            // Call the method to delete the exercise from Firebase
             deleteExerciseFromFirebase(category, day, exerciseName)
         }
 
@@ -64,19 +84,19 @@ class AdminFragment2 : Fragment() {
                 1 -> "0"
                 2 -> "Mantenimiento"
                 3 -> "Definición"
-                else -> "Unknown" // Default case, should not happen if spinner is set up correctly
+                else -> "Unknown"
             }
 
 
             val day = when (dayIndex) {
-                0 -> "0"
-                1 -> "1"
-                2 -> "2"
-                3 -> "3"
-                4 -> "4"
-                5 -> "5"
-                6 -> "6"
-                else -> "Unknown" // Default case, should not happen if spinner is set up correctly
+                0 -> "0"//lunes
+                1 -> "1"//martes
+                2 -> "2"//miercoles
+                3 -> "3"//jueves
+                4 -> "4"//viernes
+                5 -> "5"//sabado
+                6 -> "6"//domingo
+                else -> "Unknown"
             }
 
 
@@ -84,6 +104,7 @@ class AdminFragment2 : Fragment() {
 
 
             saveExerciseToFirebase(category, day, exercise)
+
         }
 
         return view
@@ -101,10 +122,8 @@ class AdminFragment2 : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val exerciseCount = dataSnapshot.childrenCount.toInt()
 
-                // El nuevo ID será el siguiente número después del recuento actual
                 val exerciseId = (exerciseCount).toString()
 
-                // Convertir los nombres de los campos a mayúsculas
                 val ejercicioMap = mapOf(
                     "Nombre" to exercise.Nombre,
                     "VideoURL" to exercise.VideoURL,

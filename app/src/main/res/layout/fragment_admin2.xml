@@ -5,42 +5,42 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Dropdown for category -->
+
     <Spinner
         android:id="@+id/spinnerCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/categories_array" />
 
-    <!-- Dropdown for day of the week -->
+
     <Spinner
         android:id="@+id/spinnerDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/days_array" />
 
-    <!-- Text input for ID -->
+
     <EditText
         android:id="@+id/editTextID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="ID" />
 
-    <!-- Text input for Name -->
+
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name" />
 
-    <!-- Text input for Description -->
+
     <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Description" />
 
-    <!-- Text input for VideoURL -->
+
     <EditText
         android:id="@+id/editTextVideoURL"
         android:layout_width="match_parent"
