@@ -139,13 +139,16 @@ class AdminFragment2 : Fragment() {
 
                 exerciseRefWithId.setValue(ejercicioMap).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-
+                        LogHelper.saveChangeLog(requireContext(), "Guardar ejercicio", "INFO")
+                        val snackbar = Snackbar.make(requireView(), "Ejercicio guardado con exito", Snackbar.LENGTH_SHORT)
+                        snackbar.show()
                     } else {
-
+                        LogHelper.saveChangeLog(requireContext(), "Error al guardar ejercicio", "ERROR")
+                        val snackbar = Snackbar.make(requireView(), "Error al guardar ejercicio", Snackbar.LENGTH_SHORT)
+                        snackbar.show()
                     }
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
             }
         })
@@ -175,17 +178,19 @@ class AdminFragment2 : Fragment() {
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
                                         if (user != null) {
-                                            saveChangeLog(user.uid)
-                                        }
+                                            LogHelper.saveChangeLog(requireContext(), "Ejercicio Eliminado", "INFO")
                                         val snackbar = Snackbar.make(requireView(), "Eliminado con exito", Snackbar.LENGTH_SHORT)
                                         snackbar.show()
+                                        }
                                     } else {
+                                        LogHelper.saveChangeLog(requireContext(), "Error al eliminar ejercicio", "ERROR")
                                         val snackbar = Snackbar.make(requireView(), "Error al eliminar el ejercicio", Snackbar.LENGTH_SHORT)
                                         snackbar.show()
                                     }
                                 }
                         }
                     } else {
+                        LogHelper.saveChangeLog(requireContext(), "Ejercicio no encontrado", "ERROR")
                         val snackbar = Snackbar.make(requireView(), "No se ha encontrado el ejercicio", Snackbar.LENGTH_SHORT)
                         snackbar.show()
                     }
@@ -196,48 +201,6 @@ class AdminFragment2 : Fragment() {
                     snackbar.show()
                 }
             })
-    }
-    private fun saveChangeLog(userId: String) {
-        val db = FirebaseFirestore.getInstance()
-        val logEntry = hashMapOf(
-            "UID" to userId,
-            "fecha" to Date(),
-            "action" to "Ejercicio Eliminado",
-            "tipo" to "INFO"
-        )
-
-        val docRef = db.collection("log").document("log")
-
-        docRef.get().addOnSuccessListener { document ->
-            if (document.exists()) {
-                // Si el documento existe, añade el nuevo log al array de logs existente
-                docRef.update("logs", FieldValue.arrayUnion(logEntry))
-                    .addOnSuccessListener {
-                        // Log guardado con éxito
-                    }
-                    .addOnFailureListener { e ->
-                        // Maneja cualquier error al guardar el log
-                        val snackbar = Snackbar.make(requireView(), "Error al guardar el log", Snackbar.LENGTH_SHORT)
-                        snackbar.show()
-                    }
-            } else {
-                // Si el documento no existe, crea un nuevo documento con el primer log
-                val logs = arrayListOf(logEntry)
-                docRef.set(hashMapOf("logs" to logs))
-                    .addOnSuccessListener {
-                        // Log guardado con éxito
-                    }
-                    .addOnFailureListener { e ->
-                        // Maneja cualquier error al guardar el log
-                        val snackbar = Snackbar.make(requireView(), "Error al guardar el log", Snackbar.LENGTH_SHORT)
-                        snackbar.show()
-                    }
-            }
-        }.addOnFailureListener { e ->
-            // Maneja cualquier error al obtener el documento
-            val snackbar = Snackbar.make(requireView(), "Error al obtener el documento de log", Snackbar.LENGTH_SHORT)
-            snackbar.show()
-        }
     }
 
 }

@@ -117,62 +117,21 @@ class Option3Fragment : Fragment() {
                     user.updatePassword(newPassword)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
-                                saveChangeLog(user.uid)
+                                LogHelper.saveChangeLog(requireContext(), "Contraseña actualizada", "INFO")
                                 val snackbar = Snackbar.make(requireView(), "Contraseña actualizada", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             } else {
+                                LogHelper.saveChangeLog(requireContext(), "Error al actualizar contraseña", "ERROR")
                                 val snackbar = Snackbar.make(requireView(), "Error al actualizar", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             }
                         }
                 } else {
+
                     val snackbar = Snackbar.make(requireView(), "Contraseña actual incorrecta", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }
             }
-    }
-
-    private fun saveChangeLog(userId: String) {
-        val db = FirebaseFirestore.getInstance()
-        val logEntry = hashMapOf(
-            "UID" to userId,
-            "fecha" to Date(),
-            "action" to "Contraseña Cambiada",
-            "tipo" to "INFO"
-        )
-
-        val docRef = db.collection("log").document("log")
-
-        docRef.get().addOnSuccessListener { document ->
-            if (document.exists()) {
-                // Si el documento existe, añade el nuevo log al array de logs existente
-                docRef.update("logs", FieldValue.arrayUnion(logEntry))
-                    .addOnSuccessListener {
-                        // Log guardado con éxito
-                    }
-                    .addOnFailureListener { e ->
-                        // Maneja cualquier error al guardar el log
-                        val snackbar = Snackbar.make(requireView(), "Error al guardar el log", Snackbar.LENGTH_SHORT)
-                        snackbar.show()
-                    }
-            } else {
-                // Si el documento no existe, crea un nuevo documento con el primer log
-                val logs = arrayListOf(logEntry)
-                docRef.set(hashMapOf("logs" to logs))
-                    .addOnSuccessListener {
-                        // Log guardado con éxito
-                    }
-                    .addOnFailureListener { e ->
-                        // Maneja cualquier error al guardar el log
-                        val snackbar = Snackbar.make(requireView(), "Error al guardar el log", Snackbar.LENGTH_SHORT)
-                        snackbar.show()
-                    }
-            }
-        }.addOnFailureListener { e ->
-            // Maneja cualquier error al obtener el documento
-            val snackbar = Snackbar.make(requireView(), "Error al obtener el documento de log", Snackbar.LENGTH_SHORT)
-            snackbar.show()
-        }
     }
 
     private fun showChangeEmailDialog() {
@@ -207,9 +166,11 @@ class Option3Fragment : Fragment() {
                     auth.currentUser!!.updateEmail(newEmail)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
+                                LogHelper.saveChangeLog(requireContext(), "Correo Actualizado", "INFO")
                                 val snackbar = Snackbar.make(requireView(), "Correo Actualizado", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             } else {
+                                LogHelper.saveChangeLog(requireContext(), "Error al actualizar el correo", "ERROR")
                                 val snackbar = Snackbar.make(requireView(), "Error al actualizar el correo", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             }
@@ -266,10 +227,12 @@ class Option3Fragment : Fragment() {
                         )
                     )
                         .addOnSuccessListener {
+                            LogHelper.saveChangeLog(requireContext(), "Medidas actualizadas", "INFO")
                             val snackbar = Snackbar.make(requireView(), "Medidas actualizadas correctamente", Snackbar.LENGTH_SHORT)
                             snackbar.show()
                         }
                         .addOnFailureListener { e ->
+                            LogHelper.saveChangeLog(requireContext(), "Error al actualizar las medidas", "ERROR")
                             val snackbar = Snackbar.make(requireView(), "Error al actualizar las medidas", Snackbar.LENGTH_SHORT)
                             snackbar.show()
                         }
@@ -284,11 +247,5 @@ class Option3Fragment : Fragment() {
             val dialog = builder.create()
             dialog.show()
         }
-    }
-
-
-
-    private fun showToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

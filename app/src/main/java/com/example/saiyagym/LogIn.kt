@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                                     if (document.exists()) {
                                         val moroso = document.getLong("moroso")
                                         if (moroso != null && moroso == 1L) {
-                                            // Si el usuario está marcado como moroso, mostrar mensaje y no iniciar sesión
+                                            LogHelper.saveChangeLog(this, "Moroso intenta iniciar sesión", "INFO")
                                             showAlert("Error", "Usted ha sido baneado")
                                         } else {
                                             val peso = document.getDouble("peso")
@@ -58,12 +59,14 @@ class LoginActivity : AppCompatActivity() {
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                                 startActivity(intent)
                                                 finish()
+                                                LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
                                             } else {
                                                 // Si los datos aún no están llenos, ir a la actividad IntroducirDatos
                                                 val intent = Intent(this, IntroducirDatos::class.java)
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                                 startActivity(intent)
                                                 finish()
+                                                LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
                                             }
                                         }
                                     } else {
@@ -72,10 +75,12 @@ class LoginActivity : AppCompatActivity() {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                         startActivity(intent)
                                         finish()
+                                        LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
                                     }
                                 }
                             }
                         } else {
+                            LogHelper.saveChangeLog(this, "Error al iniciar sesión", "ERROR")
                             showAlert("Error", "Se ha producido un error al iniciar sesión")
                         }
                     }

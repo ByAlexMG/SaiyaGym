@@ -99,6 +99,7 @@ class Option2Fragment : Fragment() {
                 }
             } catch (e: Exception) {
                 progressBar.visibility = View.GONE
+                LogHelper.saveChangeLog(requireContext(), "Error al cargar ejercicios", "ERROR")
                 val snackbar = Snackbar.make(requireView(), "Error al cargar ejercicios", Snackbar.LENGTH_SHORT)
                 snackbar.show()  }
         }

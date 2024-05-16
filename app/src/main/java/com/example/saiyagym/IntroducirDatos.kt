@@ -1,4 +1,4 @@
-package com.example.saiyagym;
+package com.example.saiyagym
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,10 +10,10 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.material.snackbar.Snackbar
 
 class IntroducirDatos : AppCompatActivity() {
 
@@ -21,7 +21,6 @@ class IntroducirDatos : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.introducir_datos)
 
         val spinnerGenero: Spinner = findViewById(R.id.spinnerGenero)
@@ -36,7 +35,6 @@ class IntroducirDatos : AppCompatActivity() {
         val editTextEdad = findViewById<EditText>(R.id.editTextEdad)
         val porcentajeTextView = findViewById<TextView>(R.id.porcentaje)
 
-
         editTextPeso.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -47,7 +45,6 @@ class IntroducirDatos : AppCompatActivity() {
             }
         })
 
-
         editTextAltura.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -57,7 +54,6 @@ class IntroducirDatos : AppCompatActivity() {
                 calcularPorcentajeSiEsPosible(porcentajeTextView)
             }
         })
-
 
         editTextEdad.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -111,8 +107,6 @@ class IntroducirDatos : AppCompatActivity() {
         textViewPorcentaje.text = "${String.format("%.2f", grasa)}"
     }
 
-
-
     private fun guardarDatos(genero: String, porcentajeTextView: TextView) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         currentUser?.let { user ->
@@ -126,8 +120,6 @@ class IntroducirDatos : AppCompatActivity() {
             val grasa = porcentajeTextView.text.toString().toFloatOrNull()
 
             if (peso != null && altura != null && edad != null) {
-
-
                 val userData = hashMapOf(
                     "email" to user.email,
                     "peso" to peso,
@@ -143,20 +135,16 @@ class IntroducirDatos : AppCompatActivity() {
                         val intent = Intent(this, ElegirMeta::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)
+                        LogHelper.saveChangeLog(this, "Guardar datos", "INFO")
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(
-                            this,
-                            "Error al guardar los datos: ${e.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-
+                        LogHelper.saveChangeLog(this, "Error al guardar dato", "ERROR")
+                        val snackbar = Snackbar.make(findViewById(android.R.id.content), "Error al guardar los datos", Snackbar.LENGTH_SHORT)
+                        snackbar.show()
                     }
             } else {
-                Toast.makeText(this, "Faltan campos por rellenar", Toast.LENGTH_SHORT).show()
-            }
+                val snackbar = Snackbar.make(findViewById(android.R.id.content), "Faltan campos por rellenar", Snackbar.LENGTH_SHORT)
+                snackbar.show() }
         }
     }
-
 }

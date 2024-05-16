@@ -37,6 +37,7 @@ class PasswordOlvidada : AppCompatActivity() {
         firebaseAuth.sendPasswordResetEmail(email)
             .addOnCompleteListener() { task ->
                 if(task.isSuccessful){
+                    LogHelper.saveChangeLog(this, "Intento de recuperar contraseña", "INFO")
                     Toast.makeText(baseContext,"Correo enviado", Toast.LENGTH_SHORT).show()
                 }
                 else{

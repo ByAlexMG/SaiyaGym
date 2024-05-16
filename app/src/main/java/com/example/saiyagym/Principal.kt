@@ -54,7 +54,7 @@ class Principal : AppCompatActivity() {
             replaceFragment(Option1Fragment())
         }
 
-        // Maneja la visibilidad de las opciones del menú
+        // visibilidad de las opciones del menu de admin
         bottomNavigationView.menu.findItem(R.id.navigation_option4).isVisible = isAdmin()
         bottomNavigationView.menu.findItem(R.id.navigation_option5).isVisible = isAdmin()
     }

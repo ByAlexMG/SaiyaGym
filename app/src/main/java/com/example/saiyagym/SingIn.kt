@@ -45,7 +45,11 @@ class SingIn : AppCompatActivity() {
                                 val intent = Intent(this, LoginActivity::class.java)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 startActivity(intent)
+                                LogHelper.saveChangeLog(this, "Usuario registrado", "INFO")
+
                             }.addOnFailureListener {
+                                LogHelper.saveChangeLog(this, "Error al registrar usuario", "ERROR")
+
                                 showAlert("Error", "Se ha producido un error al registrar los datos")
                             }
                         }

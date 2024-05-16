@@ -176,14 +176,19 @@ class AdminFragment : Fragment() {
                         }
                         userRef.update(updates)
                             .addOnSuccessListener {
+
                                 usersList.removeAt(position)
                                 notifyItemRemoved(position)
                                 notifyItemRangeChanged(position, itemCount)
+                                LogHelper.saveChangeLog(requireContext(), "Usuario eliminado", "INFO")
+                                val snackbar = Snackbar.make(requireView(), "No se puede encontrar el usuario", Snackbar.LENGTH_SHORT)
+                                snackbar.show()
                                 userRef.update("moroso", 1)
-
                                     .addOnFailureListener { exception ->
+                                        LogHelper.saveChangeLog(requireContext(), "Error al borrar usuario", "ERROR")
                                         val snackbar = Snackbar.make(requireView(), "No se puede encontrar el usuario", Snackbar.LENGTH_SHORT)
-                                        snackbar.show()  }
+                                        snackbar.show()
+                                    }
                                     }
                             }
                     }
@@ -191,7 +196,7 @@ class AdminFragment : Fragment() {
 
         }
 
-    }
+
         private fun addNewUser(email: String, password: String) {
             val auth = FirebaseAuth.getInstance()
             val db = FirebaseFirestore.getInstance()
@@ -205,9 +210,9 @@ class AdminFragment : Fragment() {
                         val user = hashMapOf(
                             "email" to email,
                         )
-
                         db.collection("users").document(uid)
                             .set(user)
+
                             .addOnSuccessListener {
                                 /*con esto se ven los huecos de ls invisibles
 
@@ -215,7 +220,9 @@ class AdminFragment : Fragment() {
                                 usersList.add(newUser)
                                 adapter.notifyDataSetChanged()
                                 */
-
+                                LogHelper.saveChangeLog(requireContext(), "Usuario creado", "INFO")
+                                val snackbar = Snackbar.make(requireView(), "No se puede crear usuario", Snackbar.LENGTH_SHORT)
+                                snackbar.show()
                                 //ya veremos como solucionar esto
                                 val adminEmail = "admin@admin.com"
                                 val adminPassword = "Navidad14"
@@ -226,3 +233,4 @@ class AdminFragment : Fragment() {
                     }
                 }
         }
+}
