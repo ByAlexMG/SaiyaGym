@@ -38,7 +38,8 @@ class SingIn : AppCompatActivity() {
                             val userDocument = db.collection("users").document(user.uid)
                             val userData = hashMapOf(
                                 "email" to editTextUsuario.text.toString(),
-                                "contraseña" to editTextContrasena.text.toString()
+                                "contraseña" to editTextContrasena.text.toString(),
+                                "rol" to "user" 
                             )
 
                             userDocument.set(userData).addOnSuccessListener {
