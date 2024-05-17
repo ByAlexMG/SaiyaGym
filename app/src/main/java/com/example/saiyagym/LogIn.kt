@@ -9,9 +9,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import android.util.Log
+import com.google.firebase.auth.FirebaseUser
+
 
 class LoginActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
@@ -42,40 +44,12 @@ class LoginActivity : AppCompatActivity() {
                         if (signInTask.isSuccessful) {
                             val currentUser = FirebaseAuth.getInstance().currentUser
                             currentUser?.let { user ->
-                                val userDocument = db.collection("users").document(user.uid)
-                                userDocument.get().addOnSuccessListener { document ->
-                                    if (document.exists()) {
-                                        val moroso = document.getLong("moroso")
-                                        if (moroso != null && moroso == 1L) {
-                                            LogHelper.saveChangeLog(this, "Moroso intenta iniciar sesión", "INFO")
-                                            showAlert("Error", "Usted ha sido baneado")
-                                        } else {
-                                            val peso = document.getDouble("peso")
-                                            val altura = document.getDouble("altura")
-                                            val edad = document.getLong("edad")
-                                            if (peso != null && altura != null && edad != null) {
-                                                // Si los datos están llenos, ir a la actividad principal
-                                                val intent = Intent(this, Principal::class.java)
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                                startActivity(intent)
-                                                finish()
-                                                LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
-                                            } else {
-                                                // Si los datos aún no están llenos, ir a la actividad IntroducirDatos
-                                                val intent = Intent(this, IntroducirDatos::class.java)
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                                startActivity(intent)
-                                                finish()
-                                                LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
-                                            }
-                                        }
+                                getUserToken(user) { token ->
+                                    if (token != null) {
+                                        saveTokenToSharedPreferences(token)
+                                        checkUserDetails(user)
                                     } else {
-                                        // Si los datos del usuario no existen, ir a la actividad IntroducirDatos
-                                        val intent = Intent(this, IntroducirDatos::class.java)
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                        startActivity(intent)
-                                        finish()
-                                        LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
+                                        showAlert("Error", "No se pudo obtener el token del usuario")
                                     }
                                 }
                             }
@@ -89,6 +63,64 @@ class LoginActivity : AppCompatActivity() {
             } else if (email.isEmpty()) {
                 showAlert("Error", "Correo electrónico vacío")
             }
+        }
+    }
+
+    private fun getUserToken(user: FirebaseUser, callback: (String?) -> Unit) {
+        user.getIdToken(true).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result?.token
+                callback(token)
+            } else {
+                Log.e("LoginActivity", "Error al obtener el token del usuario", task.exception)
+                callback(null)
+            }
+        }
+    }
+
+    private fun saveTokenToSharedPreferences(token: String) {
+        val sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("token", token)
+        editor.apply()
+    }
+
+    private fun checkUserDetails(user: FirebaseUser) {
+        val userDocument = db.collection("users").document(user.uid)
+        userDocument.get().addOnSuccessListener { document ->
+            if (document.exists()) {
+                val moroso = document.getLong("moroso")
+                if (moroso != null && moroso == 1L) {
+                    LogHelper.saveChangeLog(this, "Moroso intenta iniciar sesión", "INFO")
+                    showAlert("Error", "Usted ha sido baneado")
+                } else {
+                    val peso = document.getDouble("peso")
+                    val altura = document.getDouble("altura")
+                    val edad = document.getLong("edad")
+                    if (peso != null && altura != null && edad != null) {
+                        val intent = Intent(this, Principal::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                        finish()
+                        LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
+                    } else {
+                        val intent = Intent(this, IntroducirDatos::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                        finish()
+                        LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
+                    }
+                }
+            } else {
+                val intent = Intent(this, IntroducirDatos::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
+                finish()
+                LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
+            }
+        }.addOnFailureListener { e ->
+            Log.e("LoginActivity", "Error al obtener los detalles del usuario", e)
+            showAlert("Error", "Se ha producido un error al obtener los detalles del usuario")
         }
     }
 

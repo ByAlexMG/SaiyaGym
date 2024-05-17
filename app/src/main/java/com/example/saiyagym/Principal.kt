@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Principal : AppCompatActivity() {
 
@@ -25,17 +26,16 @@ class Principal : AppCompatActivity() {
                 replaceFragment(Option3Fragment())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_option4 -> {
-                if (isAdmin()) {
-                    replaceFragment(AdminFragment())
-                    return@OnNavigationItemSelectedListener true
+            R.id.navigation_option4, R.id.navigation_option5 -> {
+                isAdmin { isAdmin ->
+                    if (isAdmin) {
+                        when (item.itemId) {
+                            R.id.navigation_option4 -> replaceFragment(AdminFragment())
+                            R.id.navigation_option5 -> replaceFragment(AdminFragment2())
+                        }
+                    }
                 }
-            }
-            R.id.navigation_option5 -> {
-                if (isAdmin()) {  // Añade lógica para que solo los administradores puedan ver este fragmento
-                    replaceFragment(AdminFragment2())
-                    return@OnNavigationItemSelectedListener true
-                }
+                return@OnNavigationItemSelectedListener true
             }
         }
         false
@@ -54,9 +54,10 @@ class Principal : AppCompatActivity() {
             replaceFragment(Option1Fragment())
         }
 
-        // visibilidad de las opciones del menu de admin
-        bottomNavigationView.menu.findItem(R.id.navigation_option4).isVisible = isAdmin()
-        bottomNavigationView.menu.findItem(R.id.navigation_option5).isVisible = isAdmin()
+        isAdmin { isAdmin ->
+            bottomNavigationView.menu.findItem(R.id.navigation_option4).isVisible = isAdmin
+            bottomNavigationView.menu.findItem(R.id.navigation_option5).isVisible = isAdmin
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -76,10 +77,26 @@ class Principal : AppCompatActivity() {
         }
     }
 
-    private fun isAdmin(): Boolean {
+    private fun isAdmin(callback: (Boolean) -> Unit) {
         val currentUser = FirebaseAuth.getInstance().currentUser
-        val adminUid = "JumA5QqcjcTm7o1jSsRVw1OwExE2"
-        return currentUser != null && currentUser.uid == adminUid
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            val db = FirebaseFirestore.getInstance()
+            val userRef = db.collection("users").document(uid)
+
+            userRef.get().addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val role = document.getString("rol")
+                    callback(role != null && role == "admin")
+                } else {
+                    callback(false)
+                }
+            }.addOnFailureListener {
+                callback(false)
+            }
+        } else {
+            callback(false)
+        }
     }
 
     fun setDayNight() {
