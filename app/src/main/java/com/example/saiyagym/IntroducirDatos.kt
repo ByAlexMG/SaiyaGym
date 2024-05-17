@@ -83,11 +83,11 @@ class IntroducirDatos : AppCompatActivity() {
         if (peso != null && altura != null && edad != null) {
             val spinnerGenero = findViewById<Spinner>(R.id.spinnerGenero)
             val genero = spinnerGenero.selectedItem.toString()
-            calcularPorcentajeGrasaCorporal(peso, altura, edad, genero, textViewPorcentaje)
+            calcularPorcentajeMasaMusuclar(peso, altura, edad, genero, textViewPorcentaje)
         }
     }
 
-    private fun calcularPorcentajeGrasaCorporal(
+    private fun calcularPorcentajeMasaMusuclar(
         peso: Float,
         altura: Float,
         edad: Int,
@@ -99,9 +99,9 @@ class IntroducirDatos : AppCompatActivity() {
         val grasa: Float
 
         if (genero == "Hombre") {
-            grasa = (1.2 * IMC + 0.23 * edad - 16.2).toFloat()
+            grasa = (100 - (1.2 * IMC + 0.23 * edad - 16.2)).toFloat()
         } else {
-            grasa = (1.2 * IMC + 0.23 * edad - 5.4).toFloat()
+            grasa = (100 - (1.2 * IMC + 0.23 * edad - 5.4)).toFloat()
         }
 
         textViewPorcentaje.text = "${String.format("%.2f", grasa)}"
@@ -117,7 +117,7 @@ class IntroducirDatos : AppCompatActivity() {
             val peso = editTextPeso.text.toString().toFloatOrNull()
             val altura = editTextAltura.text.toString().toFloatOrNull()
             val edad = editTextEdad.text.toString().toIntOrNull()
-            val grasa = porcentajeTextView.text.toString().toFloatOrNull()
+            val musculo = porcentajeTextView.text.toString().toFloatOrNull()
 
             if (peso != null && altura != null && edad != null) {
                 val userData = hashMapOf(
@@ -126,7 +126,7 @@ class IntroducirDatos : AppCompatActivity() {
                     "altura" to altura,
                     "edad" to edad,
                     "genero" to genero,
-                    "grasa" to grasa
+                    "musculo" to musculo
                 )
 
                 val userDocument = db.collection("users").document(user.uid)

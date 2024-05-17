@@ -39,7 +39,7 @@ class SingIn : AppCompatActivity() {
                             val userData = hashMapOf(
                                 "email" to editTextUsuario.text.toString(),
                                 "contraseña" to editTextContrasena.text.toString(),
-                                "rol" to "user" 
+                                "rol" to "user"
                             )
 
                             userDocument.set(userData).addOnSuccessListener {
