@@ -1,5 +1,7 @@
 package com.example.saiyagym
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -123,114 +125,45 @@ class AdminFragment : Fragment() {
             return users.size
         }
 
-        /*
         private fun deleteUser(position: Int) {
-            val db = FirebaseFirestore.getInstance()
-            val userToDelete = users[position]
+            // Aquí implementa la lógica para eliminar un usuario si lo necesitas
+        }
+    }
 
-            val email = userToDelete.email
-            val uid = userToDelete.uid
+    private fun addNewUser(email: String, password: String) {
+        val auth = FirebaseAuth.getInstance()
+        val db = FirebaseFirestore.getInstance()
+        val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
 
-            val auth = FirebaseAuth.getInstance()
-            val credential = EmailAuthProvider.getCredential(email, "Navidad14")
-            auth.signInWithCredential(credential)
-                .addOnCompleteListener { signInTask ->
-                    if (signInTask.isSuccessful) {
-                        val currentUser = auth.currentUser
-                        currentUser?.delete()?.addOnCompleteListener { deleteTask ->
-                            if (deleteTask.isSuccessful) {
-                                db.collection("users").document(uid)
-                                    .delete()
-                                    .addOnSuccessListener {
-                                        usersList.removeAt(position)
-                                        notifyItemRemoved(position)
-                                        notifyItemRangeChanged(position, itemCount)
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { createUserTask ->
+                if (createUserTask.isSuccessful) {
+                    val firebaseUser = auth.currentUser
+                    val uid = firebaseUser?.uid ?: ""
 
-                                        //ya veremos como solucionar esto
-                                        val adminEmail = "admin@admin.com"
-                                        val adminPassword = "Navidad14"
-                                        auth.signInWithEmailAndPassword(adminEmail, adminPassword)
+                    val user = hashMapOf(
+                        "email" to email,
+                    )
+                    db.collection("users").document(uid)
+                        .set(user)
+                        .addOnSuccessListener {
+                            LogHelper.saveChangeLog(requireContext(), "Usuario creado", "INFO")
 
-                                    }
-
-                            }
+                            val intent = Intent(requireContext(), IntroducirDatos::class.java)
+                            startActivity(intent)
+                            activity?.finish()
+                            editor.clear()
+                            editor.apply()
                         }
-                    }
-              }
-        }
-        */
-        private fun deleteUser(position: Int) {
-            val db = FirebaseFirestore.getInstance()
-            val userToDelete = users[position]
-            val uid = userToDelete.uid
-
-            val userRef = db.collection("users").document(uid)
-            val fieldsToDelete = listOf("altura", "edad", "grasa", "peso", "genero")
-
-            userRef.get()
-                .addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        val updates = mutableMapOf<String, Any?>()
-                        fieldsToDelete.forEach { field ->
-                            updates[field] = FieldValue.delete()
-                        }
-                        userRef.update(updates)
-                            .addOnSuccessListener {
-
-                                usersList.removeAt(position)
-                                notifyItemRemoved(position)
-                                notifyItemRangeChanged(position, itemCount)
-                                LogHelper.saveChangeLog(requireContext(), "Usuario eliminado", "INFO")
-                                val snackbar = Snackbar.make(requireView(), "No se puede encontrar el usuario", Snackbar.LENGTH_SHORT)
-                                snackbar.show()
-                                userRef.update("moroso", 1)
-                                    .addOnFailureListener { exception ->
-                                        LogHelper.saveChangeLog(requireContext(), "Error al borrar usuario", "ERROR")
-                                        val snackbar = Snackbar.make(requireView(), "No se puede encontrar el usuario", Snackbar.LENGTH_SHORT)
-                                        snackbar.show()
-                                    }
-                                    }
-                            }
-                    }
+                } else {
+                    LogHelper.saveChangeLog(requireContext(), "Error al crear usuario", "ERROR")
+                    val snackbar = Snackbar.make(requireView(), "Error al crear usuario", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
                 }
+            }
+    }
 
-        }
 
 
-        private fun addNewUser(email: String, password: String) {
-            val auth = FirebaseAuth.getInstance()
-            val db = FirebaseFirestore.getInstance()
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { createUserTask ->
-                    if (createUserTask.isSuccessful) {
-                        val firebaseUser = auth.currentUser
-                        val uid = firebaseUser?.uid ?: ""
-
-                        val user = hashMapOf(
-                            "email" to email,
-                        )
-                        db.collection("users").document(uid)
-                            .set(user)
-
-                            .addOnSuccessListener {
-                                /*con esto se ven los huecos de ls invisibles
-
-                                val newUser = User(uid, email)
-                                usersList.add(newUser)
-                                adapter.notifyDataSetChanged()
-                                */
-                                LogHelper.saveChangeLog(requireContext(), "Usuario creado", "INFO")
-                                val snackbar = Snackbar.make(requireView(), "No se puede crear usuario", Snackbar.LENGTH_SHORT)
-                                snackbar.show()
-                                //ya veremos como solucionar esto
-                                val adminEmail = "admin@admin.com"
-                                val adminPassword = "Navidad14"
-                                auth.signInWithEmailAndPassword(adminEmail, adminPassword)
-
-                            }
-
-                    }
-                }
-        }
 }

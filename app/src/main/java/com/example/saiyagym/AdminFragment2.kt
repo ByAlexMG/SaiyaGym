@@ -197,7 +197,7 @@ class AdminFragment2 : Fragment() {
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    val snackbar = Snackbar.make(requireView(), "Error fatal", Snackbar.LENGTH_SHORT)
+                    val snackbar = Snackbar.make(requireView(), "Error en la base de dato", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }
             })
