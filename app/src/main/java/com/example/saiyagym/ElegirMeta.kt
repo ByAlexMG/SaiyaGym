@@ -39,7 +39,10 @@ class ElegirMeta : AppCompatActivity() {
             if (selectedRadioButtonId != -1) {
                 val selectedRadioButton: RadioButton = findViewById(selectedRadioButtonId)
                 val selectedTag = selectedRadioButton.tag.toString()
-                saveSelectedGoal(selectedTag)
+                val selectedGoal = selectedTag.toDoubleOrNull()
+                if (selectedGoal != null) {
+                    saveSelectedGoal(selectedGoal)
+                }
             } else {
                 Toast.makeText(this, "Por favor, selecciona una meta", Toast.LENGTH_SHORT).show()
             }
@@ -50,15 +53,52 @@ class ElegirMeta : AppCompatActivity() {
         }
     }
 
-    private fun saveSelectedGoal(selectedTag: String) {
+    private fun saveSelectedGoal(selectedGoal: Double) {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
             val userDocRef = firestore.collection("users").document(userId)
-            userDocRef.update("selectedGoal", selectedTag)
-                .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error al guardar la meta: ${e.message}", Toast.LENGTH_SHORT).show()
+            userDocRef.update("selectedGoal", selectedGoal)
+                .addOnSuccessListener {
+                    subtractMuscleFromGoal()
                 }
+        }
+    }
+
+    private fun subtractMuscleFromGoal() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            val userDocRef = firestore.collection("users").document(userId)
+            userDocRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val selectedGoal = document.getDouble("selectedGoal") ?: 0.0
+                        val muscle = document.getDouble("musculo") ?: 0.0
+                        val difference = selectedGoal - muscle
+                        userDocRef.update("diferencia", difference)
+                            .addOnSuccessListener {
+                                updateCategoryBasedOnDifference(difference)
+                            }
+                    }
+                }
+        }
+    }
+
+    private fun updateCategoryBasedOnDifference(difference: Double) {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            val userDocRef = firestore.collection("users").document(userId)
+            val category = when {
+                difference <= -20 -> "cardio"
+                difference > -20 && difference <= -5 -> "definicion"
+                difference > -5 && difference < 10 -> "mantenimiento"
+                difference >= 10 -> "volumen"
+                else -> "mantenimiento"
+            }
+            userDocRef.update("categoria", category)
+
         }
     }
 }
