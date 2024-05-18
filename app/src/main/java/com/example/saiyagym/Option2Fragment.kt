@@ -69,39 +69,56 @@ class Option2Fragment : Fragment() {
             try {
                 val userId = FirebaseAuth.getInstance().currentUser?.uid
                 userId?.let { uid ->
-                    val jsonString =
-                        fetchJsonStringFromUrl("https://saiyagym-9000-default-rtdb.firebaseio.com/Categorias/0.json")
-                    val jsonObject = JSONObject(jsonString)
-                    val planDeEjerciciosArray = jsonObject.getJSONArray("PlanDeEjercicios")
+                    getUserCategory { categoryValue ->
+                        if (categoryValue != -1) {
+                            val urlString = "https://saiyagym-9000-default-rtdb.firebaseio.com/Categorias/$categoryValue.json"
+                            lifecycleScope.launch {
+                                val jsonString = fetchJsonStringFromUrl(urlString)
+                                val jsonObject = JSONObject(jsonString)
+                                val planDeEjerciciosArray = jsonObject.getJSONArray("PlanDeEjercicios")
 
-                    val dayOfWeek = getDayOfWeek()
+                                val dayOfWeek = getDayOfWeek()
 
-                    val exerciseList = mutableListOf<Exercise>()
+                                val exerciseList = mutableListOf<Exercise>()
 
-                    for (i in 0 until planDeEjerciciosArray.length()) {
-                        val planDeEjerciciosObject = planDeEjerciciosArray.getJSONObject(i)
-                        val diaSemana = planDeEjerciciosObject.getString("DiaSemana")
-                        val ejerciciosArray = planDeEjerciciosObject.getJSONArray("Ejercicios")
-                        saveExercisesForDay(uid, diaSemana, ejerciciosArray)
-                        if (diaSemana == dayOfWeek) {
-                            for (j in 0 until ejerciciosArray.length()) {
-                                val ejercicioObject = ejerciciosArray.getJSONObject(j)
-                                val nombre = ejercicioObject.getString("Nombre")
-                                val videoURL = ejercicioObject.getString("VideoURL")
-                                val descripcion = ejercicioObject.getString("Descripcion")
-                                val exercise = Exercise(nombre, videoURL, descripcion)
-                                exerciseList.add(exercise)
+                                for (i in 0 until planDeEjerciciosArray.length()) {
+                                    val planDeEjerciciosObject = planDeEjerciciosArray.getJSONObject(i)
+                                    val diaSemana = planDeEjerciciosObject.getString("DiaSemana")
+                                    val ejerciciosArray = planDeEjerciciosObject.getJSONArray("Ejercicios")
+                                    saveExercisesForDay(uid, diaSemana, ejerciciosArray)
+                                    if (diaSemana == dayOfWeek) {
+                                        for (j in 0 until ejerciciosArray.length()) {
+                                            val ejercicioObject = ejerciciosArray.getJSONObject(j)
+                                            val nombre = ejercicioObject.getString("Nombre")
+                                            val videoURL = ejercicioObject.getString("VideoURL")
+                                            val descripcion = ejercicioObject.getString("Descripcion")
+                                            val exercise = Exercise(nombre, videoURL, descripcion)
+                                            exerciseList.add(exercise)
+                                        }
+                                    }
+                                }
+                                recyclerViewOption2.adapter = CustomAdapter(exerciseList)
+                                progressBar.visibility = View.GONE
                             }
+                        } else {
+                            progressBar.visibility = View.GONE
+                            LogHelper.saveChangeLog(requireContext(), "Error al cargar ejercicios: categoría desconocida", "ERROR")
+                            val snackbar = Snackbar.make(requireView(), "Error al cargar ejercicios: categoría desconocida", Snackbar.LENGTH_SHORT)
+                            snackbar.show()
                         }
                     }
-                    recyclerViewOption2.adapter = CustomAdapter(exerciseList)
+                } ?: run {
                     progressBar.visibility = View.GONE
+                    LogHelper.saveChangeLog(requireContext(), "Error al cargar ejercicios: usuario no logado", "ERROR")
+                    val snackbar = Snackbar.make(requireView(), "Error al cargar ejercicios: usuario no logado", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
                 }
             } catch (e: Exception) {
                 progressBar.visibility = View.GONE
                 LogHelper.saveChangeLog(requireContext(), "Error al cargar ejercicios", "ERROR")
                 val snackbar = Snackbar.make(requireView(), "Error al cargar ejercicios", Snackbar.LENGTH_SHORT)
-                snackbar.show()  }
+                snackbar.show()
+            }
         }
     }
 
@@ -128,6 +145,39 @@ class Option2Fragment : Fragment() {
             exercisesCollection.document(id).set(exerciseData)
         }
     }
+    private fun getUserCategory(onResult: (Int) -> Unit) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        userId?.let { uid ->
+            val db = FirebaseFirestore.getInstance()
+            val userDocRef = db.collection("users").document(uid)
+
+            userDocRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val categoria = document.getString("categoria")
+                        val categoryValue = when (categoria) {
+                            "cardio" -> 0
+                            "volumen" -> 1
+                            "mantenimiento" -> 2
+                            "definicion" -> 3
+                            else -> -1 // Valor por defecto si la categoría no coincide
+                        }
+                        onResult(categoryValue)
+                    } else {
+                        Log.w("Option2Fragment", "No such document")
+                        onResult(-1) // Valor por defecto en caso de error
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w("Option2Fragment", "Error getting documents: ", exception)
+                    onResult(-1) // Valor por defecto en caso de error
+                }
+        } ?: run {
+            Log.w("Option2Fragment", "User not logged in")
+            onResult(-1) // Valor por defecto si el usuario no está logado
+        }
+    }
+
     private suspend fun fetchJsonStringFromUrl(urlString: String): String {
         return withContext(Dispatchers.IO) {
             val url = URL(urlString)
@@ -141,6 +191,5 @@ class Option2Fragment : Fragment() {
             }
         }
     }
-
 
 }
