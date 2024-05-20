@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CalendarAdapter(private val days: List<String>) :
+class CalendarAdapter(private val days: List<String>, private val categoria: String) :
     RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,10 +25,60 @@ class CalendarAdapter(private val days: List<String>) :
         val day = days[position]
         holder.dayTextView.text = day
 
-
-         holder.imageView.setImageResource(R.drawable.ajustes)
-         holder.imageView.visibility = View.VISIBLE
+        val imageResId = getImageResIdForDay(categoria, position % 7)
+        holder.imageView.setImageResource(imageResId)
+        holder.imageView.visibility = View.VISIBLE
     }
 
     override fun getItemCount(): Int = days.size
+
+    private fun getImageResIdForDay(categoria: String, dayIndex: Int): Int {
+        return when (categoria) {
+            "cardio" -> {
+                when (dayIndex) {
+                    0 -> R.drawable.nadar
+                    1 -> R.drawable.nadar
+                    2 -> R.drawable.nadar
+                    3 -> R.drawable.nadar
+                    4 -> R.drawable.nadar
+                    5 -> R.drawable.nadar
+                    else -> R.drawable.nadar
+                }
+            }
+            "volumen" -> {
+                when (dayIndex) {
+                    0 -> R.drawable.nadar
+                    1 -> R.drawable.nadar
+                    2 -> R.drawable.nadar
+                    3 -> R.drawable.nadar
+                    4 -> R.drawable.nadar
+                    5 -> R.drawable.nadar
+                    else -> R.drawable.nadar
+                }
+            }
+            "definicion" -> {
+                when (dayIndex) {
+                    0 -> R.drawable.nadar
+                    1 -> R.drawable.nadar
+                    2 -> R.drawable.nadar
+                    3 -> R.drawable.nadar
+                    4 -> R.drawable.nadar
+                    5 -> R.drawable.nadar
+                    else -> R.drawable.nadar
+                }
+            }
+            "mantenimiento" -> {
+                when (dayIndex) {
+                    0 -> R.drawable.ajustes
+                    1 -> R.drawable.add
+                    2 -> R.drawable.admin
+                    3 -> R.drawable.nadar
+                    4 -> R.drawable.nadar
+                    5 -> R.drawable.calendario
+                    else -> R.drawable.calendario
+                }
+            }
+            else -> R.drawable.ajustes
+        }
+    }
 }
