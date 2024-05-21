@@ -53,6 +53,7 @@ class AdminFragment : Fragment() {
         db.collection("users")
             .get()
             .addOnSuccessListener { result ->
+                usersList.clear() // Limpiar la lista antes de añadir nuevos datos
                 for (document in result) {
                     val uid = document.id
                     val email = document.getString("email") ?: ""
@@ -60,10 +61,18 @@ class AdminFragment : Fragment() {
                     val user = User(uid, email, moroso)
                     usersList.add(user)
                 }
+                // Ordenar la lista: Primero los usuarios sin "moroso"
+                usersList.sortBy { it.moroso }
                 adapter.notifyDataSetChanged()
                 progressBar.visibility = View.GONE
             }
+            .addOnFailureListener { exception ->
+                progressBar.visibility = View.GONE
+                val snackbar = Snackbar.make(requireView(), "Error al cargar usuarios", Snackbar.LENGTH_SHORT)
+                snackbar.show()
+            }
     }
+
 
     private fun showAddUserDialog() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_user, null)
@@ -136,7 +145,9 @@ class AdminFragment : Fragment() {
                 .update("moroso", 1)
                 .addOnSuccessListener {
                     usersList[position] = userToMark.copy(moroso = 1)
-                    notifyItemChanged(position)
+                    // Volver a ordenar la lista después de actualizar
+                    usersList.sortBy { it.moroso }
+                    notifyDataSetChanged()
                     LogHelper.saveChangeLog(requireContext(), "Usuario marcado como moroso", "INFO")
                 }
                 .addOnFailureListener { exception ->
@@ -145,6 +156,7 @@ class AdminFragment : Fragment() {
                     snackbar.show()
                 }
         }
+
     }
 
     private fun addNewUser(email: String, password: String) {
