@@ -25,13 +25,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
-            <!-- RecyclerView para mostrar el calendario -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/calendarRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="447dp"
+                android:layout_height="213dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp" />
         </LinearLayout>

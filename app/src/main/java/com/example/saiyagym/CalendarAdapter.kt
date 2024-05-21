@@ -7,8 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CalendarAdapter(private val days: List<String>, private val categoria: String) :
-    RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
+class CalendarAdapter(
+    private val days: List<String>,
+    private val categoria: String,
+    private val today: Int
+) : RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dayTextView: TextView = itemView.findViewById(R.id.dayTextView)
@@ -28,6 +31,14 @@ class CalendarAdapter(private val days: List<String>, private val categoria: Str
         val imageResId = getImageResIdForDay(categoria, position % 7)
         holder.imageView.setImageResource(imageResId)
         holder.imageView.visibility = View.VISIBLE
+
+        if ((position + 1) == today) {
+            // Aplica el borde al componente
+            holder.itemView.setBackgroundResource(R.drawable.border_highlight)
+        } else {
+            // Restaura el fondo transparente si no coincide
+            holder.itemView.setBackgroundResource(android.R.color.transparent)
+        }
     }
 
     override fun getItemCount(): Int = days.size
@@ -36,46 +47,46 @@ class CalendarAdapter(private val days: List<String>, private val categoria: Str
         return when (categoria) {
             "cardio" -> {
                 when (dayIndex) {
-                    0 -> R.drawable.nadar
-                    1 -> R.drawable.nadar
+                    0 -> R.drawable.correr
+                    1 -> R.drawable.bici
                     2 -> R.drawable.nadar
-                    3 -> R.drawable.nadar
-                    4 -> R.drawable.nadar
-                    5 -> R.drawable.nadar
-                    else -> R.drawable.nadar
+                    3 -> R.drawable.baile
+                    4 -> R.drawable.boxing
+                    5 -> R.drawable.chill
+                    else -> R.drawable.chill
                 }
             }
             "volumen" -> {
                 when (dayIndex) {
-                    0 -> R.drawable.nadar
-                    1 -> R.drawable.nadar
-                    2 -> R.drawable.nadar
-                    3 -> R.drawable.nadar
-                    4 -> R.drawable.nadar
-                    5 -> R.drawable.nadar
-                    else -> R.drawable.nadar
+                    0 -> R.drawable.ejercicios_logo
+                    1 -> R.drawable.press
+                    2 -> R.drawable.abs
+                    3 -> R.drawable.piernas
+                    4 -> R.drawable.arm
+                    5 -> R.drawable.chill
+                    else -> R.drawable.chill
                 }
             }
             "definicion" -> {
                 when (dayIndex) {
-                    0 -> R.drawable.nadar
-                    1 -> R.drawable.nadar
-                    2 -> R.drawable.nadar
-                    3 -> R.drawable.nadar
-                    4 -> R.drawable.nadar
-                    5 -> R.drawable.nadar
-                    else -> R.drawable.nadar
+                    0 -> R.drawable.ejercicios_logo
+                    1 -> R.drawable.press
+                    2 -> R.drawable.abs
+                    3 -> R.drawable.piernas
+                    4 -> R.drawable.arm
+                    5 -> R.drawable.chill
+                    else -> R.drawable.chill
                 }
             }
             "mantenimiento" -> {
                 when (dayIndex) {
-                    0 -> R.drawable.ajustes
-                    1 -> R.drawable.add
-                    2 -> R.drawable.admin
-                    3 -> R.drawable.nadar
-                    4 -> R.drawable.nadar
-                    5 -> R.drawable.calendario
-                    else -> R.drawable.calendario
+                    0 -> R.drawable.ejercicios_logo
+                    1 -> R.drawable.press
+                    2 -> R.drawable.abs
+                    3 -> R.drawable.piernas
+                    4 -> R.drawable.arm
+                    5 -> R.drawable.chill
+                    else -> R.drawable.chill
                 }
             }
             else -> R.drawable.ajustes

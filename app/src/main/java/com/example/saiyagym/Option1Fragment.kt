@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Calendar
 
 
 class Option1Fragment : Fragment() {
@@ -23,6 +24,7 @@ class Option1Fragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.calendarRecyclerView)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 7)
+        val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
 
         db = FirebaseFirestore.getInstance()
 
@@ -30,7 +32,7 @@ class Option1Fragment : Fragment() {
             val days = listOf(
                 "L", "M", "X", "J", "V", "S", "D"
             )
-            val adapter = CalendarAdapter(days, category)
+            val adapter = CalendarAdapter(days, category, today)
             recyclerView.adapter = adapter
         }
 
