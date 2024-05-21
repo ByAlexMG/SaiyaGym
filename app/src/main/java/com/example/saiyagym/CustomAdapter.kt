@@ -1,4 +1,5 @@
 package com.example.saiyagym
+
 import android.animation.ValueAnimator
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import java.lang.Integer.max
+
 class CustomAdapter(private val exercises: List<Exercise>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
     private val originalHeights = mutableMapOf<Int, Int>()
+    private var currentlyPlayingPlayer: YouTubePlayer? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_item, parent, false)
@@ -31,26 +33,32 @@ class CustomAdapter(private val exercises: List<Exercise>) : RecyclerView.Adapte
         holder.exerciseNameTextView.text = exercise.name
         holder.descriptionTextView.text = exercise.description
 
+        holder.youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                holder.youTubePlayer = youTubePlayer
+            }
+        })
+
         holder.cardView.setOnClickListener {
             expandCardView(holder.cardView)
-            holder.youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                override fun onReady(youTubePlayer: YouTubePlayer) {
-                    youTubePlayer.loadVideo(exercise.videoUrl, 0F)
-                }
-            })
+            holder.youTubePlayer?.let { youTubePlayer ->
+                currentlyPlayingPlayer?.pause()
+                currentlyPlayingPlayer = youTubePlayer
+                youTubePlayer.loadVideo(exercise.videoUrl, 0F)
+            }
         }
 
         holder.playButton.setOnClickListener {
             collapseCardView(holder.cardView, holder.itemView)
-            val playerCallback = object : YouTubePlayerCallback {
-                override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
-                    youTubePlayer.pause()
-                }
-            }
-            holder.youTubePlayerView.getYouTubePlayerWhenReady(playerCallback)
+            holder.youTubePlayer?.pause()
         }
     }
 
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+        holder.youTubePlayer?.pause()
+        holder.youTubePlayerView.release()
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val youTubePlayerView: YouTubePlayerView = itemView.findViewById(R.id.youtubePlayerView)
@@ -58,7 +66,7 @@ class CustomAdapter(private val exercises: List<Exercise>) : RecyclerView.Adapte
         val playButton: Button = itemView.findViewById(R.id.playButton)
         val exerciseNameTextView: TextView = itemView.findViewById(R.id.exerciseNameTextView)
         val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
-
+        var youTubePlayer: YouTubePlayer? = null
     }
 
     private fun expandCardView(cardView: CardView) {
