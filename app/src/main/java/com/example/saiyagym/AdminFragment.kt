@@ -145,7 +145,6 @@ class AdminFragment : Fragment() {
                 .update("moroso", 1)
                 .addOnSuccessListener {
                     usersList[position] = userToMark.copy(moroso = 1)
-                    // Volver a ordenar la lista después de actualizar
                     usersList.sortBy { it.moroso }
                     notifyDataSetChanged()
                     LogHelper.saveChangeLog(requireContext(), "Usuario marcado como moroso", "INFO")
