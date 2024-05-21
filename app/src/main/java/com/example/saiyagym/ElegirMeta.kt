@@ -98,7 +98,6 @@ class ElegirMeta : AppCompatActivity() {
                 else -> "mantenimiento"
             }
             userDocRef.update("categoria", category)
-
         }
     }
 

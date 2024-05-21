@@ -118,9 +118,6 @@ class LoginActivity : AppCompatActivity() {
                 finish()
                 LogHelper.saveChangeLog(this, "Inicio de sesion", "INFO")
             }
-        }.addOnFailureListener { e ->
-            Log.e("LoginActivity", "Error al obtener los detalles del usuario", e)
-            showAlert("Error", "Se ha producido un error al obtener los detalles del usuario")
         }
     }
 
@@ -141,7 +138,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun IrAPasswordOlvidada(view: View) {
-        val intent = Intent(this, PasswordOlvidada::class.java)
+        val intent = Intent(this, ForgotPasswordActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }

@@ -126,7 +126,43 @@ class AdminFragment : Fragment() {
         }
 
         private fun deleteUser(position: Int) {
-            // Aquí implementa la lógica para eliminar un usuario si lo necesitas
+            val db = FirebaseFirestore.getInstance()
+            val userToDelete = users[position]
+            val uid = userToDelete.uid
+
+            val userRef = db.collection("users").document(uid)
+            val fieldsToDelete = listOf("altura", "edad", "grasa", "peso", "genero")
+
+            userRef.get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        val updates = mutableMapOf<String, Any?>()
+                        fieldsToDelete.forEach { field ->
+                            updates[field] = FieldValue.delete()
+                            userRef.update(updates)
+                                .addOnSuccessListener {
+
+                                    usersList.removeAt(position)
+                                    notifyItemRemoved(position)
+                                    notifyItemRangeChanged(position, itemCount)
+                                    LogHelper.saveChangeLog(
+                                        requireContext(),
+                                        "Usuario eliminado",
+                                        "INFO"
+                                    )
+                                    userRef.update("moroso", 1)
+                                        .addOnFailureListener { exception ->
+                                            LogHelper.saveChangeLog(
+                                                requireContext(),
+                                                "Error al borrar usuario",
+                                                "ERROR"
+                                            )
+                                        }
+                                }
+                        }
+                    }
+
+                }
         }
     }
 

@@ -30,7 +30,7 @@
             android:configChanges="orientation|screenSize"/>
         <activity android:name="com.example.saiyagym.MainActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.PasswordOlvidada"
+        <activity android:name="com.example.saiyagym.ForgotPasswordActivity"
             android:configChanges="orientation|screenSize"/>
         <activity android:name="com.example.saiyagym.SingIn"
             android:configChanges="orientation|screenSize"/>

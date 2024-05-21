@@ -29,6 +29,7 @@ class SingIn : AppCompatActivity() {
 
         botonRegistrar.setOnClickListener {
             if(editTextUsuario.text.isNotEmpty() && editTextContrasena.text.isNotEmpty()) {
+
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(editTextUsuario.text.toString(),
                     editTextContrasena.text.toString()).addOnCompleteListener { task ->
 

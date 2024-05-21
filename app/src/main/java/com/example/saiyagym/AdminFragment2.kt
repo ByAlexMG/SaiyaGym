@@ -30,8 +30,6 @@ class AdminFragment2 : Fragment() {
         val view = inflater.inflate(R.layout.fragment_admin2, container, false)
 
         database = FirebaseDatabase.getInstance().reference
-
-
         val spinnerCategory: Spinner = view.findViewById(R.id.spinnerCategory)
         val spinnerDay: Spinner = view.findViewById(R.id.spinnerDay)
         val editTextID: EditText = view.findViewById(R.id.editTextID)
@@ -44,12 +42,10 @@ class AdminFragment2 : Fragment() {
         val editTextDeleteExerciseName: EditText = view.findViewById(R.id.editTextDeleteExerciseName)
         val buttonDeleteExercise: Button = view.findViewById(R.id.buttonDeleteExercise)
 
-
         buttonDeleteExercise.setOnClickListener {
             val categoryIndex = spinnerDeleteCategory.selectedItemPosition
             val dayIndex = spinnerDeleteDay.selectedItemPosition
             val exerciseName = editTextDeleteExerciseName.text.toString()
-
 
             val category = when (categoryIndex) {
                 0 -> "1"
@@ -70,7 +66,6 @@ class AdminFragment2 : Fragment() {
                 else -> "Unknown"
             }
 
-            // Call the method to delete the exercise from Firebase
             deleteExerciseFromFirebase(category, day, exerciseName)
         }
 
@@ -81,8 +76,6 @@ class AdminFragment2 : Fragment() {
             val name = editTextName.text.toString()
             val description = editTextDescription.text.toString()
             val videoURL = editTextVideoURL.text.toString()
-
-
             val category = when (categoryIndex) {
                 0 -> "1"
                 1 -> "0"
@@ -90,8 +83,6 @@ class AdminFragment2 : Fragment() {
                 3 -> "Definición"
                 else -> "Unknown"
             }
-
-
             val day = when (dayIndex) {
                 0 -> "0"//lunes
                 1 -> "1"//martes
@@ -102,11 +93,7 @@ class AdminFragment2 : Fragment() {
                 6 -> "6"//domingo
                 else -> "Unknown"
             }
-
-
             val exercise = Exercise(description, id, name, videoURL)
-
-
             saveExerciseToFirebase(category, day, exercise)
 
         }
@@ -195,7 +182,6 @@ class AdminFragment2 : Fragment() {
                         snackbar.show()
                     }
                 }
-
                 override fun onCancelled(databaseError: DatabaseError) {
                     val snackbar = Snackbar.make(requireView(), "Error en la base de dato", Snackbar.LENGTH_SHORT)
                     snackbar.show()

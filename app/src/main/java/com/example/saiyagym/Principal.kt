@@ -47,13 +47,11 @@ class Principal : AppCompatActivity() {
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-
         setDayNight()
 
         if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {
             replaceFragment(Option1Fragment())
         }
-
         isAdmin { isAdmin ->
             bottomNavigationView.menu.findItem(R.id.navigation_option4).isVisible = isAdmin
             bottomNavigationView.menu.findItem(R.id.navigation_option5).isVisible = isAdmin
@@ -64,14 +62,12 @@ class Principal : AppCompatActivity() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (currentFragment?.javaClass != fragment.javaClass) {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
-
             fragmentTransaction.setCustomAnimations(
                 R.anim.slide_in_left,
                 R.anim.slide_out_right,
                 R.anim.slide_out_left,
                 R.anim.slide_in_right
             )
-
             fragmentTransaction.replace(R.id.fragment_container, fragment)
             fragmentTransaction.commit()
         }
@@ -83,7 +79,6 @@ class Principal : AppCompatActivity() {
             val uid = currentUser.uid
             val db = FirebaseFirestore.getInstance()
             val userRef = db.collection("users").document(uid)
-
             userRef.get().addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val role = document.getString("rol")

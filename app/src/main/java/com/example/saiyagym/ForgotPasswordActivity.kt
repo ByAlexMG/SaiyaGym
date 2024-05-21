@@ -5,16 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class PasswordOlvidada : AppCompatActivity() {
+class ForgotPasswordActivity : AppCompatActivity() {
     private  lateinit var firebaseAuth:FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +26,6 @@ class PasswordOlvidada : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             finish()
-
         }
         firebaseAuth= Firebase.auth
     }
@@ -43,14 +40,11 @@ class PasswordOlvidada : AppCompatActivity() {
                 else{
                     Toast.makeText(baseContext,"El correo no está registrado", Toast.LENGTH_SHORT).show()
                 }
-
             }
     }
     fun volverALogin(view: View) {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
-
-
 }
 
