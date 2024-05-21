@@ -1,4 +1,4 @@
-package com.example.saiyagym
+package com.example.saiyagym.IntroducirDatos
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.saiyagym.LogHelper
+import com.example.saiyagym.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.material.snackbar.Snackbar

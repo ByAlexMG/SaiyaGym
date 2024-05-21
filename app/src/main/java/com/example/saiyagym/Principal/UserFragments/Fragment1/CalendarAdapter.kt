@@ -1,4 +1,4 @@
-package com.example.saiyagym
+package com.example.saiyagym.Principal.UserFragments.Fragment1
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.saiyagym.R
 
 class CalendarAdapter(
     private val days: List<String>,

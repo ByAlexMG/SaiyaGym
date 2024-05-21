@@ -1,10 +1,9 @@
-package com.example.saiyagym
+package com.example.saiyagym.Principal.UserFragments
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,16 +14,14 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Switch
 import com.google.firebase.firestore.FirebaseFirestore
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
+import com.example.saiyagym.LogHelper
+import com.example.saiyagym.Principal.Principal
+import com.example.saiyagym.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
-import java.util.Date
 
 class Option3Fragment : Fragment() {
     private  lateinit var firebaseAuth:FirebaseAuth
@@ -117,11 +114,19 @@ class Option3Fragment : Fragment() {
                     user.updatePassword(newPassword)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
-                                LogHelper.saveChangeLog(requireContext(), "Contraseña actualizada", "INFO")
+                                LogHelper.saveChangeLog(
+                                    requireContext(),
+                                    "Contraseña actualizada",
+                                    "INFO"
+                                )
                                 val snackbar = Snackbar.make(requireView(), "Contraseña actualizada", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             } else {
-                                LogHelper.saveChangeLog(requireContext(), "Error al actualizar contraseña", "ERROR")
+                                LogHelper.saveChangeLog(
+                                    requireContext(),
+                                    "Error al actualizar contraseña",
+                                    "ERROR"
+                                )
                                 val snackbar = Snackbar.make(requireView(), "Error al actualizar", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             }
@@ -166,11 +171,19 @@ class Option3Fragment : Fragment() {
                     auth.currentUser!!.updateEmail(newEmail)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
-                                LogHelper.saveChangeLog(requireContext(), "Correo Actualizado", "INFO")
+                                LogHelper.saveChangeLog(
+                                    requireContext(),
+                                    "Correo Actualizado",
+                                    "INFO"
+                                )
                                 val snackbar = Snackbar.make(requireView(), "Correo Actualizado", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             } else {
-                                LogHelper.saveChangeLog(requireContext(), "Error al actualizar el correo", "ERROR")
+                                LogHelper.saveChangeLog(
+                                    requireContext(),
+                                    "Error al actualizar el correo",
+                                    "ERROR"
+                                )
                                 val snackbar = Snackbar.make(requireView(), "Error al actualizar el correo", Snackbar.LENGTH_SHORT)
                                 snackbar.show()
                             }
@@ -227,12 +240,20 @@ class Option3Fragment : Fragment() {
                         )
                     )
                         .addOnSuccessListener {
-                            LogHelper.saveChangeLog(requireContext(), "Medidas actualizadas", "INFO")
+                            LogHelper.saveChangeLog(
+                                requireContext(),
+                                "Medidas actualizadas",
+                                "INFO"
+                            )
                             val snackbar = Snackbar.make(requireView(), "Medidas actualizadas correctamente", Snackbar.LENGTH_SHORT)
                             snackbar.show()
                         }
                         .addOnFailureListener { e ->
-                            LogHelper.saveChangeLog(requireContext(), "Error al actualizar las medidas", "ERROR")
+                            LogHelper.saveChangeLog(
+                                requireContext(),
+                                "Error al actualizar las medidas",
+                                "ERROR"
+                            )
                             val snackbar = Snackbar.make(requireView(), "Error al actualizar las medidas", Snackbar.LENGTH_SHORT)
                             snackbar.show()
                         }

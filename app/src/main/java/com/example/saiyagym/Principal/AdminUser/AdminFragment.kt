@@ -1,7 +1,7 @@
-package com.example.saiyagym
+package com.example.saiyagym.Principal.AdminUser
+
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +15,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.saiyagym.Firebase.LoginActivity
+import com.example.saiyagym.LogHelper
+import com.example.saiyagym.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AdminFragment : Fragment() {
-
     data class User(val uid: String, val email: String, val moroso: Int = 0)
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: UserAdapter
     private lateinit var progressBar: ProgressBar
@@ -31,7 +32,6 @@ class AdminFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_admin, container, false)
-
         recyclerView = rootView.findViewById(R.id.recyclerView)
         progressBar = rootView.findViewById(R.id.progressBar)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -54,7 +54,7 @@ class AdminFragment : Fragment() {
         db.collection("users")
             .get()
             .addOnSuccessListener { result ->
-                usersList.clear() // Limpiar la lista antes de añadir nuevos datos
+                usersList.clear()
                 for (document in result) {
                     val uid = document.id
                     val email = document.getString("email") ?: ""
@@ -62,7 +62,7 @@ class AdminFragment : Fragment() {
                     val user = User(uid, email, moroso)
                     usersList.add(user)
                 }
-                // Ordenar la lista: Primero los usuarios sin "moroso"
+                //Primero los usuarios sin "moroso"
                 usersList.sortBy { it.moroso }
                 adapter.notifyDataSetChanged()
                 progressBar.visibility = View.GONE
@@ -73,8 +73,6 @@ class AdminFragment : Fragment() {
                 snackbar.show()
             }
     }
-
-
     private fun showAddUserDialog() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_user, null)
         val editTextEmail = dialogView.findViewById<EditText>(R.id.editTextEmail)
@@ -94,7 +92,6 @@ class AdminFragment : Fragment() {
             }
             .show()
     }
-
     private inner class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
         inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -123,12 +120,20 @@ class AdminFragment : Fragment() {
             holder.emailTextView.text = currentUser.email
 
             if (currentUser.moroso == 1) {
-                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorMoroso))
-                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorMoroso))
+                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,
+                    R.color.textColorMoroso
+                ))
+                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,
+                    R.color.textColorMoroso
+                ))
                 holder.actionButton.visibility = View.GONE
             } else {
-                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorDefault))
-                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorDefault))
+                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,
+                    R.color.textColorDefault
+                ))
+                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,
+                    R.color.textColorDefault
+                ))
                 holder.actionButton.visibility = View.VISIBLE
             }
         }
@@ -154,14 +159,16 @@ class AdminFragment : Fragment() {
                     loadUsersFromFirestore()
                 }
                 .addOnFailureListener { exception ->
-                    LogHelper.saveChangeLog(requireContext(), "Error al marcar usuario como moroso: ${exception.message}", "ERROR")
+                    LogHelper.saveChangeLog(
+                        requireContext(),
+                        "Error al marcar usuario como moroso: ${exception.message}",
+                        "ERROR"
+                    )
                     val snackbar = Snackbar.make(requireView(), "Error al marcar usuario como moroso", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }
         }
     }
-
-
 
     private fun addNewUser(email: String, password: String) {
         val auth = FirebaseAuth.getInstance()
@@ -183,7 +190,7 @@ class AdminFragment : Fragment() {
                         .addOnSuccessListener {
                             LogHelper.saveChangeLog(requireContext(), "Usuario creado", "INFO")
 
-                            val intent = Intent(requireContext(), IntroducirDatos::class.java)
+                            val intent = Intent(requireContext(), LoginActivity::class.java)
                             startActivity(intent)
                             activity?.finish()
                             editor.clear()

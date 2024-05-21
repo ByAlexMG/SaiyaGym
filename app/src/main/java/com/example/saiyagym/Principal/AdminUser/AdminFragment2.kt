@@ -1,4 +1,4 @@
-package com.example.saiyagym
+package com.example.saiyagym.Principal.AdminUser
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import com.example.saiyagym.LogHelper
+import com.example.saiyagym.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -15,9 +17,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Date
 
 class AdminFragment2 : Fragment() {
 
@@ -130,7 +129,11 @@ class AdminFragment2 : Fragment() {
                         val snackbar = Snackbar.make(requireView(), "Ejercicio guardado con exito", Snackbar.LENGTH_SHORT)
                         snackbar.show()
                     } else {
-                        LogHelper.saveChangeLog(requireContext(), "Error al guardar ejercicio", "ERROR")
+                        LogHelper.saveChangeLog(
+                            requireContext(),
+                            "Error al guardar ejercicio",
+                            "ERROR"
+                        )
                         val snackbar = Snackbar.make(requireView(), "Error al guardar ejercicio", Snackbar.LENGTH_SHORT)
                         snackbar.show()
                     }
@@ -165,19 +168,31 @@ class AdminFragment2 : Fragment() {
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
                                         if (user != null) {
-                                            LogHelper.saveChangeLog(requireContext(), "Ejercicio Eliminado", "INFO")
+                                            LogHelper.saveChangeLog(
+                                                requireContext(),
+                                                "Ejercicio Eliminado",
+                                                "INFO"
+                                            )
                                         val snackbar = Snackbar.make(requireView(), "Eliminado con exito", Snackbar.LENGTH_SHORT)
                                         snackbar.show()
                                         }
                                     } else {
-                                        LogHelper.saveChangeLog(requireContext(), "Error al eliminar ejercicio", "ERROR")
+                                        LogHelper.saveChangeLog(
+                                            requireContext(),
+                                            "Error al eliminar ejercicio",
+                                            "ERROR"
+                                        )
                                         val snackbar = Snackbar.make(requireView(), "Error al eliminar el ejercicio", Snackbar.LENGTH_SHORT)
                                         snackbar.show()
                                     }
                                 }
                         }
                     } else {
-                        LogHelper.saveChangeLog(requireContext(), "Ejercicio no encontrado", "ERROR")
+                        LogHelper.saveChangeLog(
+                            requireContext(),
+                            "Ejercicio no encontrado",
+                            "ERROR"
+                        )
                         val snackbar = Snackbar.make(requireView(), "No se ha encontrado el ejercicio", Snackbar.LENGTH_SHORT)
                         snackbar.show()
                     }

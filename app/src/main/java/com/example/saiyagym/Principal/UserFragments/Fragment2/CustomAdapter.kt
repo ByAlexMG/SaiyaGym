@@ -1,4 +1,4 @@
-package com.example.saiyagym
+package com.example.saiyagym.Principal.UserFragments.Fragment2
 
 import android.animation.ValueAnimator
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import android.widget.Button
 import androidx.cardview.widget.CardView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.saiyagym.Exercise
+import com.example.saiyagym.R
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView

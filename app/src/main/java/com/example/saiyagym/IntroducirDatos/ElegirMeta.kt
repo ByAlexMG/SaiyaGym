@@ -1,4 +1,4 @@
-package com.example.saiyagym
+package com.example.saiyagym.IntroducirDatos
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,8 @@ import androidx.activity.enableEdgeToEdge
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.Toast
+import com.example.saiyagym.Principal.Principal
+import com.example.saiyagym.R
 
 class ElegirMeta : AppCompatActivity() {
 

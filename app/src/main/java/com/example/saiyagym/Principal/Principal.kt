@@ -1,4 +1,4 @@
-package com.example.saiyagym
+package com.example.saiyagym.Principal
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,12 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import com.example.saiyagym.Principal.AdminUser.AdminFragment
+import com.example.saiyagym.Principal.AdminUser.AdminFragment2
+import com.example.saiyagym.Principal.UserFragments.Fragment1.Option1Fragment
+import com.example.saiyagym.Principal.UserFragments.Fragment2.Option2Fragment
+import com.example.saiyagym.Principal.UserFragments.Option3Fragment
+import com.example.saiyagym.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

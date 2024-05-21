@@ -1,4 +1,4 @@
-package com.example.saiyagym
+package com.example.saiyagym.Principal.UserFragments.Fragment2
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.saiyagym.Exercise
+import com.example.saiyagym.LogHelper
+import com.example.saiyagym.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -102,14 +105,22 @@ class Option2Fragment : Fragment() {
                             }
                         } else {
                             progressBar.visibility = View.GONE
-                            LogHelper.saveChangeLog(requireContext(), "Error al cargar ejercicios: categoría desconocida", "ERROR")
+                            LogHelper.saveChangeLog(
+                                requireContext(),
+                                "Error al cargar ejercicios: categoría desconocida",
+                                "ERROR"
+                            )
                             val snackbar = Snackbar.make(requireView(), "Error al cargar ejercicios: categoría desconocida", Snackbar.LENGTH_SHORT)
                             snackbar.show()
                         }
                     }
                 } ?: run {
                     progressBar.visibility = View.GONE
-                    LogHelper.saveChangeLog(requireContext(), "Error al cargar ejercicios: usuario no logado", "ERROR")
+                    LogHelper.saveChangeLog(
+                        requireContext(),
+                        "Error al cargar ejercicios: usuario no logado",
+                        "ERROR"
+                    )
                     val snackbar = Snackbar.make(requireView(), "Error al cargar ejercicios: usuario no logado", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }
