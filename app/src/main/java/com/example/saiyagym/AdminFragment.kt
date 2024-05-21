@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -122,12 +123,12 @@ class AdminFragment : Fragment() {
             holder.emailTextView.text = currentUser.email
 
             if (currentUser.moroso == 1) {
-                holder.uidTextView.setTextColor(Color.RED)
-                holder.emailTextView.setTextColor(Color.RED)
+                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorMoroso))
+                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorMoroso))
                 holder.actionButton.visibility = View.GONE
             } else {
-                holder.uidTextView.setTextColor(Color.BLACK)
-                holder.emailTextView.setTextColor(Color.BLACK)
+                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorDefault))
+                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorDefault))
                 holder.actionButton.visibility = View.VISIBLE
             }
         }
@@ -145,9 +146,12 @@ class AdminFragment : Fragment() {
                 .update("moroso", 1)
                 .addOnSuccessListener {
                     usersList[position] = userToMark.copy(moroso = 1)
+                    // Ordenar y notificar cambios en la lista
                     usersList.sortBy { it.moroso }
                     notifyDataSetChanged()
                     LogHelper.saveChangeLog(requireContext(), "Usuario marcado como moroso", "INFO")
+                    // Llamar a loadUsersFromFirestore() para asegurar la lista actualizada
+                    loadUsersFromFirestore()
                 }
                 .addOnFailureListener { exception ->
                     LogHelper.saveChangeLog(requireContext(), "Error al marcar usuario como moroso: ${exception.message}", "ERROR")
@@ -155,8 +159,9 @@ class AdminFragment : Fragment() {
                     snackbar.show()
                 }
         }
-
     }
+
+
 
     private fun addNewUser(email: String, password: String) {
         val auth = FirebaseAuth.getInstance()

@@ -1,18 +1,18 @@
-
-
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-<!-- Base application theme. -->
-<style name="Base.Theme.SaiyaGym" parent="Theme.Material3.Light.NoActionBar">
-    <!-- Customize your dark theme here. -->
-    <item name="colorPrimary">@color/blue</item>
-    <item name="android:navigationBarColor">@color/blue</item>
-</style>
-<style name="Theme.SaiyaGym" parent="Base.Theme.SaiyaGym" />
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SaiyaGym" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textColor">@color/black</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="android:navigationBarColor">@color/blue</item>
+    </style>
 
-<style name="NoActionBar">
-    <item name="windowActionBar">false</item>
-    <item name="windowNoTitle">false</item>
-    <item name="colorPrimary">@color/blue</item>
-</style>
+    <style name="Theme.SaiyaGym" parent="Base.Theme.SaiyaGym" />
 
+    <style name="NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/blue</item>
+    </style>
 </resources>
