@@ -1,9 +1,8 @@
 package com.example.saiyagym
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AdminFragment : Fragment() {
@@ -105,19 +103,23 @@ class AdminFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-            val itemView =
-                LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
+            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
             return UserViewHolder(itemView)
         }
 
         override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
             val currentUser = users[position]
+            holder.uidTextView.text = currentUser.uid
+            holder.emailTextView.text = currentUser.email
+
             if (currentUser.moroso == 1) {
-                holder.itemView.visibility = View.GONE
+                holder.uidTextView.setTextColor(Color.RED)
+                holder.emailTextView.setTextColor(Color.RED)
+                holder.actionButton.visibility = View.GONE
             } else {
-                holder.itemView.visibility = View.VISIBLE
-                holder.uidTextView.text = currentUser.uid
-                holder.emailTextView.text = currentUser.email
+                holder.uidTextView.setTextColor(Color.BLACK)
+                holder.emailTextView.setTextColor(Color.BLACK)
+                holder.actionButton.visibility = View.VISIBLE
             }
         }
 
@@ -127,41 +129,20 @@ class AdminFragment : Fragment() {
 
         private fun deleteUser(position: Int) {
             val db = FirebaseFirestore.getInstance()
-            val userToDelete = users[position]
-            val uid = userToDelete.uid
+            val userToMark = users[position]
+            val uid = userToMark.uid
 
-            val userRef = db.collection("users").document(uid)
-            val fieldsToDelete = listOf("altura", "edad", "grasa", "peso", "genero")
-
-            userRef.get()
-                .addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-                        val updates = mutableMapOf<String, Any?>()
-                        fieldsToDelete.forEach { field ->
-                            updates[field] = FieldValue.delete()
-                            userRef.update(updates)
-                                .addOnSuccessListener {
-
-                                    usersList.removeAt(position)
-                                    notifyItemRemoved(position)
-                                    notifyItemRangeChanged(position, itemCount)
-                                    LogHelper.saveChangeLog(
-                                        requireContext(),
-                                        "Usuario eliminado",
-                                        "INFO"
-                                    )
-                                    userRef.update("moroso", 1)
-                                        .addOnFailureListener { exception ->
-                                            LogHelper.saveChangeLog(
-                                                requireContext(),
-                                                "Error al borrar usuario",
-                                                "ERROR"
-                                            )
-                                        }
-                                }
-                        }
-                    }
-
+            db.collection("users").document(uid)
+                .update("moroso", 1)
+                .addOnSuccessListener {
+                    usersList[position] = userToMark.copy(moroso = 1)
+                    notifyItemChanged(position)
+                    LogHelper.saveChangeLog(requireContext(), "Usuario marcado como moroso", "INFO")
+                }
+                .addOnFailureListener { exception ->
+                    LogHelper.saveChangeLog(requireContext(), "Error al marcar usuario como moroso: ${exception.message}", "ERROR")
+                    val snackbar = Snackbar.make(requireView(), "Error al marcar usuario como moroso", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
                 }
         }
     }
@@ -199,7 +180,4 @@ class AdminFragment : Fragment() {
                 }
             }
     }
-
-
-
 }

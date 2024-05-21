@@ -27,12 +27,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="798dp"
-        android:layout_height="960dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:padding="8dp" />
 
     <ProgressBar
