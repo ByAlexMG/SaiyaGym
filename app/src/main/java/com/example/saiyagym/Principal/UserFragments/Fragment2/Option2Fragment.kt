@@ -132,8 +132,6 @@ class Option2Fragment : Fragment() {
             }
         }
     }
-
-
     private fun saveExercisesForDay(userId: String, dayOfWeek: String, exercisesArray: JSONArray) {
         val db = FirebaseFirestore.getInstance()
         val exercisesCollection = db.collection("users").document(userId)
@@ -171,21 +169,18 @@ class Option2Fragment : Fragment() {
                             "volumen" -> 1
                             "mantenimiento" -> 2
                             "definicion" -> 3
-                            else -> -1 // Valor por defecto si la categoría no coincide
+                            else -> -1
                         }
                         onResult(categoryValue)
                     } else {
-                        Log.w("Option2Fragment", "No such document")
-                        onResult(-1) // Valor por defecto en caso de error
+                        onResult(-1)
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.w("Option2Fragment", "Error getting documents: ", exception)
-                    onResult(-1) // Valor por defecto en caso de error
+                    onResult(-1)
                 }
         } ?: run {
-            Log.w("Option2Fragment", "User not logged in")
-            onResult(-1) // Valor por defecto si el usuario no está logado
+            onResult(-1)
         }
     }
 
@@ -202,5 +197,4 @@ class Option2Fragment : Fragment() {
             }
         }
     }
-
 }

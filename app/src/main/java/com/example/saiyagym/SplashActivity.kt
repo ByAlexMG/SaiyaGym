@@ -19,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            val username = getUsernameFromSharedPreferences()
+            val username = getTokenFromSharedPreferences()
             if (username != null) {
                 val intent = Intent(this, Principal::class.java)
                 startActivity(intent)
@@ -31,8 +31,8 @@ class SplashActivity : AppCompatActivity() {
         }, SPLASH_TIME_OUT)
     }
 
-    private fun getUsernameFromSharedPreferences(): String? {
+    private fun getTokenFromSharedPreferences(): String? {
         val sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("username", null)
+        return sharedPreferences.getString("token", null)
     }
 }
