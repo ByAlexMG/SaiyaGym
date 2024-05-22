@@ -33,7 +33,7 @@ class CalendarAdapter(
         holder.imageView.setImageResource(imageResId)
         holder.imageView.visibility = View.VISIBLE
 
-        if ((position + 1) == today) {
+        if ((position + 1) == (today - 1)) {
             // Aplica el borde al componente
             holder.itemView.setBackgroundResource(R.drawable.border_highlight)
         } else {
