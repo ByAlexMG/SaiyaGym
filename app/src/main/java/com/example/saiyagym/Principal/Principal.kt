@@ -1,11 +1,13 @@
 package com.example.saiyagym.Principal
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import com.example.saiyagym.Firebase.LoginActivity
 import com.example.saiyagym.Principal.AdminUser.AdminFragment
 import com.example.saiyagym.Principal.AdminUser.AdminFragment2
 import com.example.saiyagym.Principal.UserFragments.Fragment1.Option1Fragment
@@ -55,6 +57,8 @@ class Principal : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         setDayNight()
 
+        checkMorosoAndRedirect()
+
         if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {
             replaceFragment(Option1Fragment())
         }
@@ -98,6 +102,36 @@ class Principal : AppCompatActivity() {
         } else {
             callback(false)
         }
+    }
+
+    private fun checkMorosoAndRedirect() {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            val db = FirebaseFirestore.getInstance()
+            val userRef = db.collection("users").document(uid)
+            userRef.get().addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val moroso = document.getLong("moroso")
+                    if (moroso != null && moroso == 1L) {
+                        clearPreferencesAndLogout()
+                    }
+                }
+            }.addOnFailureListener {
+                // Handle any errors
+            }
+        }
+    }
+
+    private fun clearPreferencesAndLogout() {
+        val sp = getSharedPreferences("my_preferences", MODE_PRIVATE)
+        val editor = sp.edit()
+        editor.clear()
+        editor.apply()
+
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(loginIntent)
     }
 
     fun setDayNight() {
