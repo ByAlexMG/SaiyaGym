@@ -1,4 +1,4 @@
-package com.example.saiyagym.Principal.UserFragments
+package com.example.saiyagym.principal.userFragments
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -16,7 +16,7 @@ import android.widget.Switch
 import com.google.firebase.firestore.FirebaseFirestore
 import androidx.fragment.app.Fragment
 import com.example.saiyagym.LogHelper
-import com.example.saiyagym.Principal.Principal
+import com.example.saiyagym.principal.Principal
 import com.example.saiyagym.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar

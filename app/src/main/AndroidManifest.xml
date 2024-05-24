@@ -26,19 +26,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.saiyagym.Firebase.LoginActivity"
+        <activity android:name="com.example.saiyagym.firebase.LoginActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.Principal.UserFragments.MainActivity"
+        <activity android:name="com.example.saiyagym.firebase.ForgotPasswordActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.Firebase.ForgotPasswordActivity"
+        <activity android:name="com.example.saiyagym.firebase.SingIn"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.Firebase.SingIn"
+        <activity android:name="com.example.saiyagym.introducirDatos.IntroducirDatos"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.IntroducirDatos.IntroducirDatos"
+        <activity android:name="com.example.saiyagym.introducirDatos.ElegirMeta"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.IntroducirDatos.ElegirMeta"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.Principal.Principal"
+        <activity android:name="com.example.saiyagym.principal.Principal"
                android:screenOrientation="portrait"/>
 
 

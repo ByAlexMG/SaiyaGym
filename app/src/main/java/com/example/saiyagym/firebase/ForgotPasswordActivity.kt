@@ -1,4 +1,4 @@
-package com.example.saiyagym.Firebase
+package com.example.saiyagym.firebase
 
 import android.content.Intent
 import android.os.Bundle

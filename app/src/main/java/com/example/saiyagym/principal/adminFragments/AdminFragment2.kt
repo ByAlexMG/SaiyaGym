@@ -1,4 +1,4 @@
-package com.example.saiyagym.Principal.AdminUser
+package com.example.saiyagym.principal.adminFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

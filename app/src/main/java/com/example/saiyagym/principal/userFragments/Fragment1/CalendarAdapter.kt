@@ -1,4 +1,4 @@
-package com.example.saiyagym.Principal.UserFragments.Fragment1
+package com.example.saiyagym.principal.userFragments.Fragment1
 
 import android.view.LayoutInflater
 import android.view.View

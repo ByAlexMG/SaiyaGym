@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewTitle"
         android:layout_width="0dp"
         android:layout_height="36dp"
@@ -16,7 +15,8 @@
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="¿Qué nivel quieres alcanzar?"
-        android:textSize="24sp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
     <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_width="362dp"
-        android:layout_height="540dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -49,28 +49,28 @@
                 android:id="@+id/radioButton1"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="0 - 70"
+                android:text="Menos de 70%"
                 android:tag="65" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="70 - 80%"
+                android:text="Entre 70% y 80%"
                 android:tag="75" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="80 - 90%"
+                android:text="Entre 80% y 90%"
                 android:tag="85" />
 
             <RadioButton
                 android:id="@+id/radioButton4"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="90 - 100%"
+                android:text="Mas de 90%"
                 android:tag="95" />
 
 

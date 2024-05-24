@@ -1,4 +1,4 @@
-package com.example.saiyagym.Principal.AdminUser
+package com.example.saiyagym.principal.adminFragments
 
 import android.content.Context
 import android.content.Intent
@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.saiyagym.Firebase.LoginActivity
+import com.example.saiyagym.firebase.LoginActivity
 import com.example.saiyagym.LogHelper
 import com.example.saiyagym.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton

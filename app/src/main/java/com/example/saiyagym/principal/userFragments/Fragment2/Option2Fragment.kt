@@ -1,7 +1,6 @@
-package com.example.saiyagym.Principal.UserFragments.Fragment2
+package com.example.saiyagym.principal.userFragments.Fragment2
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -110,7 +109,7 @@ class Option2Fragment : Fragment() {
                                 "Error al cargar ejercicios: categoría desconocida",
                                 "ERROR"
                             )
-                            val snackbar = Snackbar.make(requireView(), "Error al cargar ejercicios: categoría desconocida", Snackbar.LENGTH_SHORT)
+                            val snackbar = Snackbar.make(requireView(), "Por favor, vuelva a iniciar sesión", Snackbar.LENGTH_SHORT)
                             snackbar.show()
                         }
                     }

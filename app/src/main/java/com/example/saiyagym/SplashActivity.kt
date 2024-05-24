@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.example.saiyagym.Firebase.LoginActivity
-import com.example.saiyagym.Principal.Principal
+import com.example.saiyagym.firebase.LoginActivity
+import com.example.saiyagym.principal.Principal
 
 class SplashActivity : AppCompatActivity() {
 

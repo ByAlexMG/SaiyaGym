@@ -1,4 +1,4 @@
-package com.example.saiyagym.Principal
+package com.example.saiyagym.principal
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,12 +7,12 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.example.saiyagym.Firebase.LoginActivity
-import com.example.saiyagym.Principal.AdminUser.AdminFragment
-import com.example.saiyagym.Principal.AdminUser.AdminFragment2
-import com.example.saiyagym.Principal.UserFragments.Fragment1.Option1Fragment
-import com.example.saiyagym.Principal.UserFragments.Fragment2.Option2Fragment
-import com.example.saiyagym.Principal.UserFragments.Option3Fragment
+import com.example.saiyagym.firebase.LoginActivity
+import com.example.saiyagym.principal.adminFragments.AdminFragment
+import com.example.saiyagym.principal.adminFragments.AdminFragment2
+import com.example.saiyagym.principal.userFragments.Fragment1.Option1Fragment
+import com.example.saiyagym.principal.userFragments.Fragment2.Option2Fragment
+import com.example.saiyagym.principal.userFragments.Option3Fragment
 import com.example.saiyagym.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -60,8 +60,11 @@ class Principal : AppCompatActivity() {
         checkMorosoAndRedirect()
 
         if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {
-            replaceFragment(Option1Fragment())
+            replaceFragment(Option2Fragment())
         }
+
+
+        bottomNavigationView.selectedItemId = R.id.navigation_option2
         isAdmin { isAdmin ->
             bottomNavigationView.menu.findItem(R.id.navigation_option4).isVisible = isAdmin
             bottomNavigationView.menu.findItem(R.id.navigation_option5).isVisible = isAdmin

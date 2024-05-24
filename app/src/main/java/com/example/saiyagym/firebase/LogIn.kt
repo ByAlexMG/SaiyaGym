@@ -1,4 +1,4 @@
-package com.example.saiyagym.Firebase
+package com.example.saiyagym.firebase
 
 import android.content.Context
 import android.content.Intent
@@ -12,9 +12,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.util.Log
-import com.example.saiyagym.IntroducirDatos.IntroducirDatos
+import com.example.saiyagym.introducirDatos.IntroducirDatos
 import com.example.saiyagym.LogHelper
-import com.example.saiyagym.Principal.Principal
+import com.example.saiyagym.principal.Principal
 import com.example.saiyagym.R
 import com.google.firebase.auth.FirebaseUser
 
@@ -42,18 +42,17 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { signInTask ->
-                        if (checkBoxRecordar.isChecked) {
-                            saveUsernameToSharedPreferences(email)
-                        }
                         if (signInTask.isSuccessful) {
                             val currentUser = FirebaseAuth.getInstance().currentUser
                             currentUser?.let { user ->
                                 getUserToken(user) { token ->
                                     if (token != null) {
-                                        saveTokenToSharedPreferences(token)
+                                        if (checkBoxRecordar.isChecked) {
+                                            saveTokenToSharedPreferences(token)
+                                        }
                                         checkUserDetails(user)
                                     } else {
-                                        showAlert("Error", "No se pudo obtener el token del usuario")
+                                        showAlert("Error", "Error de conexión")
                                     }
                                 }
                             }
@@ -101,7 +100,8 @@ class LoginActivity : AppCompatActivity() {
                     val peso = document.getDouble("peso")
                     val altura = document.getDouble("altura")
                     val edad = document.getLong("edad")
-                    if (peso != null && altura != null && edad != null) {
+                    val categoria = document.getString("categoria")
+                    if (peso != null && altura != null && edad != null && categoria != null) {
                         val intent = Intent(this, Principal::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)
@@ -124,14 +124,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun saveUsernameToSharedPreferences(username: String) {
-        val sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("username", username)
-        editor.apply()
-    }
-
     private fun showAlert(title: String, message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(title)

@@ -8,7 +8,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="Calendario"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -16,25 +15,38 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- ScrollView que contiene el RecyclerView -->
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <LinearLayout
+        <!-- ScrollView que contiene el RecyclerView -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/calendarRecyclerView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="213dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
-    </ScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/calendarRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="213dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ProgressBar centrada en la pantalla -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"/>
+    </FrameLayout>
 </LinearLayout>

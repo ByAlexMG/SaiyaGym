@@ -1,7 +1,10 @@
-package com.example.saiyagym.IntroducirDatos
+package com.example.saiyagym.introducirDatos
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.RadioButton
@@ -10,7 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.Toast
-import com.example.saiyagym.Principal.Principal
+import com.example.saiyagym.principal.Principal
 import com.example.saiyagym.R
 
 class ElegirMeta : AppCompatActivity() {
@@ -20,7 +23,6 @@ class ElegirMeta : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.elegir_nivel)
 
         firestore = FirebaseFirestore.getInstance()
@@ -34,6 +36,7 @@ class ElegirMeta : AppCompatActivity() {
             val intent = Intent(this, IntroducirDatos::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
+            finish()
         }
 
         botonTerminar.setOnClickListener {
@@ -49,9 +52,12 @@ class ElegirMeta : AppCompatActivity() {
                 Toast.makeText(this, "Por favor, selecciona una meta", Toast.LENGTH_SHORT).show()
             }
 
-            val intent = Intent(this, Principal::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, Principal::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
+                finish()
+            }, 1000)
         }
     }
 
@@ -82,8 +88,15 @@ class ElegirMeta : AppCompatActivity() {
                             .addOnSuccessListener {
                                 updateCategoryBasedOnDifference(difference)
                             }
+
+
+                        Log.e("coche", document.data.toString())
                     }
+
+
                 }
+
+
         }
     }
 
@@ -103,5 +116,5 @@ class ElegirMeta : AppCompatActivity() {
         }
     }
 
-
 }
+

@@ -1,4 +1,4 @@
-package com.example.saiyagym.IntroducirDatos
+package com.example.saiyagym.introducirDatos
 
 import android.content.Intent
 import android.os.Bundle
