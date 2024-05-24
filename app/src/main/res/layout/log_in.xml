@@ -20,7 +20,6 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="69dp"
-        app:hintTextColor="@color/orange"
         android:imeOptions="actionDone">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -28,8 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="Usuario"
-            android:textColorHint="@color/orange"
+            android:hint="Correo electronico"
             android:imeOptions="actionDone"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -44,7 +42,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
-        app:hintTextColor="@color/orange"
+        app:endIconMode="password_toggle"
         android:imeOptions="actionDone">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -53,7 +51,6 @@
             android:layout_height="wrap_content"
             android:hint="Contraseña"
             android:inputType="textPassword"
-            android:textColorHint="@color/orange"
             android:imeOptions="actionDone"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +66,7 @@
         android:layout_marginEnd="150dp"
         android:layout_marginBottom="48dp"
         android:checked="false"
-        android:shadowColor="@color/orange"
+        
         android:text="Recordar contraseña"
         app:useMaterialThemeColors="true" />
 

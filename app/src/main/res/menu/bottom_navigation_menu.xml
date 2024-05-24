@@ -14,13 +14,13 @@
         android:icon="@drawable/ajustes" />
     <item
         android:id="@+id/navigation_option4"
-        android:title="Admin"
+        android:title="Usuarios"
         android:icon="@drawable/admin"
         android:checkable="true"
         android:visible="false"/>
     <item
         android:id="@+id/navigation_option5"
-        android:title="Admin"
+        android:title="Ejercicios"
         android:icon="@drawable/sports"
         android:checkable="true"
         android:visible="false"/>

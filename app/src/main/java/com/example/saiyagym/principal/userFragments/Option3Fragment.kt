@@ -9,10 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Switch
+import androidx.appcompat.widget.AppCompatSpinner
 import com.google.firebase.firestore.FirebaseFirestore
 import androidx.fragment.app.Fragment
 import com.example.saiyagym.LogHelper
@@ -20,6 +22,7 @@ import com.example.saiyagym.principal.Principal
 import com.example.saiyagym.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
@@ -188,20 +191,40 @@ class Option3Fragment : Fragment() {
         auth.signInWithEmailAndPassword(currentEmail, currentPassword)
             .addOnCompleteListener { signInTask ->
                 if (signInTask.isSuccessful) {
-                    auth.currentUser!!.updateEmail(newEmail)
+                    val user = auth.currentUser
+                    user!!.updateEmail(newEmail)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
-                                LogHelper.saveChangeLog(
-                                    requireContext(),
-                                    "Correo Actualizado",
-                                    "INFO"
-                                )
-                                val snackbar = Snackbar.make(
-                                    requireView(),
-                                    "Correo Actualizado",
-                                    Snackbar.LENGTH_SHORT
-                                )
-                                snackbar.show()
+                                // Actualizar el campo "email" en el documento del usuario
+                                val userId = user.uid
+                                val userDocRef = db.collection("users").document(userId)
+                                userDocRef.update("email", newEmail)
+                                    .addOnSuccessListener {
+                                        LogHelper.saveChangeLog(
+                                            requireContext(),
+                                            "Correo Actualizado",
+                                            "INFO"
+                                        )
+                                        val snackbar = Snackbar.make(
+                                            requireView(),
+                                            "Correo Actualizado",
+                                            Snackbar.LENGTH_SHORT
+                                        )
+                                        snackbar.show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        LogHelper.saveChangeLog(
+                                            requireContext(),
+                                            "Error al actualizar el correo",
+                                            "ERROR"
+                                        )
+                                        val snackbar = Snackbar.make(
+                                            requireView(),
+                                            "Error al actualizar el correo",
+                                            Snackbar.LENGTH_SHORT
+                                        )
+                                        snackbar.show()
+                                    }
                             } else {
                                 LogHelper.saveChangeLog(
                                     requireContext(),
@@ -219,13 +242,14 @@ class Option3Fragment : Fragment() {
                 } else {
                     val snackbar = Snackbar.make(
                         requireView(),
-                        "Datos de sesión erroneos",
+                        "Datos de sesión erróneos",
                         Snackbar.LENGTH_SHORT
                     )
                     snackbar.show()
                 }
             }
     }
+
 
     private fun calcularPorcentajeMasaMuscular(
         peso: Float,
@@ -261,10 +285,10 @@ class Option3Fragment : Fragment() {
                     builder.setTitle("Cambiar Medidas")
 
                     val view = layoutInflater.inflate(R.layout.change_measurements_dialog, null)
-                    val weightEditText = view.findViewById<EditText>(R.id.weightEditText)
-                    val heightEditText = view.findViewById<EditText>(R.id.heightEditText)
-                    val ageEditText = view.findViewById<EditText>(R.id.ageEditText)
-                    val genderSpinner = view.findViewById<Spinner>(R.id.genderSpinner)
+                    val weightEditText = view.findViewById<TextInputEditText>(R.id.weightEditText)
+                    val heightEditText = view.findViewById<TextInputEditText>(R.id.heightEditText)
+                    val ageEditText = view.findViewById<TextInputEditText>(R.id.ageEditText)
+                    val genderSpinner = view.findViewById<AppCompatSpinner>(R.id.genderSpinner)
                     weightEditText.hint = "peso = $currentWeight"
                     heightEditText.hint = "altura = $currentHeight"
                     ageEditText.hint = "edad = $currentAge"
@@ -275,7 +299,7 @@ class Option3Fragment : Fragment() {
                         android.R.layout.simple_spinner_item
                     ).also { adapter ->
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                        genderSpinner.adapter = adapter
+                        genderSpinner.setAdapter(adapter)
                     }
 
                     // Seleccionar el género actual
@@ -314,10 +338,8 @@ class Option3Fragment : Fragment() {
                                         "Medidas y masa muscular actualizadas",
                                         "INFO"
                                     )
-                                    val snackbar = Snackbar.make(requireView(), "Medidas y masa muscular actualizadas correctamente", Snackbar.LENGTH_SHORT)
+                                    val snackbar = Snackbar.make(requireView(), "Medidas actualizadas", Snackbar.LENGTH_SHORT)
                                     snackbar.show()
-
-                                    // Llamar a la función para actualizar la diferencia y la categoría
                                     subtractMuscleFromGoal()
                                 }
                                 .addOnFailureListener { e ->
@@ -326,11 +348,11 @@ class Option3Fragment : Fragment() {
                                         "Error al actualizar las medidas y masa muscular",
                                         "ERROR"
                                     )
-                                    val snackbar = Snackbar.make(requireView(), "Error al actualizar las medidas y masa muscular", Snackbar.LENGTH_SHORT)
+                                    val snackbar = Snackbar.make(requireView(), "Error al actualizar medidas", Snackbar.LENGTH_SHORT)
                                     snackbar.show()
                                 }
                         } else {
-                            val snackbar = Snackbar.make(requireView(), "Los valores de peso, altura y edad deben ser números válidos", Snackbar.LENGTH_SHORT)
+                            val snackbar = Snackbar.make(requireView(), "Valores no validos", Snackbar.LENGTH_SHORT)
                             snackbar.show()
                         }
                     }
@@ -339,11 +361,7 @@ class Option3Fragment : Fragment() {
                     }
                     val dialog = builder.create()
                     dialog.show()
-                } else {
-                    Snackbar.make(requireView(), "No se encontraron datos del usuario", Snackbar.LENGTH_SHORT).show()
                 }
-            }.addOnFailureListener { e ->
-                Snackbar.make(requireView(), "Error al obtener los datos del usuario", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

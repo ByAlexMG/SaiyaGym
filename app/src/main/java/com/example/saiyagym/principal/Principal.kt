@@ -55,20 +55,20 @@ class Principal : AppCompatActivity() {
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        setDayNight()
+
 
         checkMorosoAndRedirect()
 
         if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {
-            replaceFragment(Option2Fragment())
+            replaceFragment(Option1Fragment())
         }
 
 
-        bottomNavigationView.selectedItemId = R.id.navigation_option2
         isAdmin { isAdmin ->
             bottomNavigationView.menu.findItem(R.id.navigation_option4).isVisible = isAdmin
             bottomNavigationView.menu.findItem(R.id.navigation_option5).isVisible = isAdmin
         }
+        setDayNight()
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -120,8 +120,6 @@ class Principal : AppCompatActivity() {
                         clearPreferencesAndLogout()
                     }
                 }
-            }.addOnFailureListener {
-                // Handle any errors
             }
         }
     }
