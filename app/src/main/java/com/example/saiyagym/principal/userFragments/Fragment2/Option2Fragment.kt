@@ -39,7 +39,6 @@ class Option2Fragment : Fragment() {
         val view = binding.root
         progressBar = view.findViewById(R.id.progressBar)
 
-        // Mostrar ProgressBar mientras se cargan los datos
         progressBar.visibility = View.VISIBLE
 
         recyclerViewOption2 = view.findViewById(R.id.recyclerViewOption2)
@@ -78,9 +77,7 @@ class Option2Fragment : Fragment() {
                                 val jsonString = fetchJsonStringFromUrl(urlString)
                                 val jsonObject = JSONObject(jsonString)
                                 val planDeEjerciciosArray = jsonObject.getJSONArray("PlanDeEjercicios")
-
                                 val dayOfWeek = getDayOfWeek()
-
                                 val exerciseList = mutableListOf<Exercise>()
 
                                 for (i in 0 until planDeEjerciciosArray.length()) {
@@ -158,7 +155,6 @@ class Option2Fragment : Fragment() {
         userId?.let { uid ->
             val db = FirebaseFirestore.getInstance()
             val userDocRef = db.collection("users").document(uid)
-
             userDocRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {

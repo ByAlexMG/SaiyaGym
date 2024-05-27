@@ -34,10 +34,8 @@ class CalendarAdapter(
         holder.imageView.visibility = View.VISIBLE
 
         if ((position + 1) == (today - 1)) {
-            // Aplica el borde al componente
             holder.itemView.setBackgroundResource(R.drawable.border_highlight)
         } else {
-            // Restaura el fondo transparente si no coincide
             holder.itemView.setBackgroundResource(android.R.color.transparent)
         }
     }

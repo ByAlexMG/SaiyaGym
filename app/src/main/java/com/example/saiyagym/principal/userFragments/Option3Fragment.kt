@@ -49,6 +49,7 @@ class Option3Fragment : Fragment() {
         button1.setOnClickListener {
             showChangeEmailDialog()
         }
+
         closeButton.setOnClickListener {
             val sharedPreferences =
                 requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
@@ -301,16 +302,12 @@ class Option3Fragment : Fragment() {
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         genderSpinner.setAdapter(adapter)
                     }
-
-                    // Seleccionar el género actual
                     val genderArray = resources.getStringArray(R.array.gender_array)
                     val genderIndex = genderArray.indexOf(currentGender)
                     if (genderIndex >= 0) {
                         genderSpinner.setSelection(genderIndex)
                     }
-
                     builder.setView(view)
-
                     builder.setPositiveButton("Guardar") { _, _ ->
                         val weightString = weightEditText.text.toString()
                         val heightString = heightEditText.text.toString()

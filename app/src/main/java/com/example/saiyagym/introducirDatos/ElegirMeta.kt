@@ -88,15 +88,8 @@ class ElegirMeta : AppCompatActivity() {
                             .addOnSuccessListener {
                                 updateCategoryBasedOnDifference(difference)
                             }
-
-
-                        Log.e("coche", document.data.toString())
                     }
-
-
                 }
-
-
         }
     }
 

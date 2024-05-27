@@ -15,11 +15,12 @@ object LogHelper {
         if (currentUser == null) {
             Snackbar.make(
                 (context as AppCompatActivity).findViewById(android.R.id.content),
-                "Usuario no autenticado",
+                "Por favor vuelva a iniciar sesión",
                 Snackbar.LENGTH_SHORT
             ).show()
             return
         }
+
         val userId = currentUser.uid
         val db = FirebaseFirestore.getInstance()
         val logEntry = hashMapOf(

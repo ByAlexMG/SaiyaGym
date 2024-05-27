@@ -56,7 +56,6 @@ class Principal : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-
         checkMorosoAndRedirect()
 
         if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {

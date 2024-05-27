@@ -44,7 +44,6 @@ class AdminFragment : Fragment() {
         addUserFloatingButton.setOnClickListener {
             showAddUserDialog()
         }
-
         return rootView
     }
 
@@ -62,7 +61,7 @@ class AdminFragment : Fragment() {
                     val user = User(uid, email, moroso)
                     usersList.add(user)
                 }
-                //Primero los usuarios sin "moroso"
+
                 usersList.sortBy { it.moroso }
                 adapter.notifyDataSetChanged()
                 progressBar.visibility = View.GONE
@@ -92,6 +91,8 @@ class AdminFragment : Fragment() {
             }
             .show()
     }
+
+
     private inner class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
         inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -151,11 +152,9 @@ class AdminFragment : Fragment() {
                 .update("moroso", 1)
                 .addOnSuccessListener {
                     usersList[position] = userToMark.copy(moroso = 1)
-                    // Ordenar y notificar cambios en la lista
                     usersList.sortBy { it.moroso }
                     notifyDataSetChanged()
                     LogHelper.saveChangeLog(requireContext(), "Usuario marcado como moroso", "INFO")
-                    // Llamar a loadUsersFromFirestore() para asegurar la lista actualizada
                     loadUsersFromFirestore()
                 }
                 .addOnFailureListener { exception ->
@@ -169,7 +168,6 @@ class AdminFragment : Fragment() {
                 }
         }
     }
-
     private fun addNewUser(email: String, password: String) {
         val auth = FirebaseAuth.getInstance()
         val db = FirebaseFirestore.getInstance()

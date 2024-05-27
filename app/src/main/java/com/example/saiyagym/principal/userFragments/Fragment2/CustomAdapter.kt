@@ -103,11 +103,8 @@ class CustomAdapter(private val exercises: List<Exercise>) : RecyclerView.Adapte
                 cardView.requestLayout()
             }
         })
-
         cardView.startAnimation(collapseAnimation)
-
         originalHeights[cardView.hashCode()] = originalHeights[cardView.hashCode()] ?: cardView.height
-
         val initialHeight = cardView.height
         val animation = object : Animation() {
             override fun applyTransformation(interpolatedTime: Float, t: android.view.animation.Transformation?) {
@@ -115,12 +112,10 @@ class CustomAdapter(private val exercises: List<Exercise>) : RecyclerView.Adapte
                 cardView.layoutParams.height = max(newHeight, originalHeight)
                 cardView.requestLayout()
             }
-
             override fun willChangeBounds(): Boolean {
                 return true
             }
         }
-
         animation.duration = 500
         cardView.startAnimation(animation)
     }

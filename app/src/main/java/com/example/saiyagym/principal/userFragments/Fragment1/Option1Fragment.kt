@@ -38,7 +38,6 @@ class Option1Fragment : Fragment() {
             val adapter = CalendarAdapter(days, category, today)
             recyclerView.adapter = adapter
 
-            // Oculta la ProgressBar y muestra el RecyclerView cuando los datos estén listos
             progressBar.visibility = View.GONE
             recyclerView.visibility = View.VISIBLE
         }
@@ -49,7 +48,6 @@ class Option1Fragment : Fragment() {
     private fun fetchCategory(callback: (String) -> Unit) {
         val auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
-
         if (currentUser != null) {
             val uid = currentUser.uid
             db.collection("users").document(uid)
@@ -59,16 +57,13 @@ class Option1Fragment : Fragment() {
                         val category = document.getString("categoria") ?: "default"
                         callback(category)
                     } else {
-                        // Maneja el caso en que el documento es nulo
                         callback("default")
                     }
                 }
                 .addOnFailureListener {
-                    // Maneja el caso de error al obtener el documento
                     callback("default")
                 }
         } else {
-            // Maneja el caso en que el usuario no está autenticado
             callback("default")
         }
     }
