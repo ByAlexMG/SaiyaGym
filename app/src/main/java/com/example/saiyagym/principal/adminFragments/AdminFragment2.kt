@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.saiyagym.LogHelper
 import com.example.saiyagym.R
@@ -101,6 +102,10 @@ class AdminFragment2 : Fragment() {
     }
 
     private fun saveExerciseToFirebase(category: String, day: String, exercise: Exercise) {
+        if (!validateExerciseFields(exercise)) {
+            Toast.makeText(requireContext(), "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show()
+            return
+        }
         val exerciseRef = database.child("Categorias")
             .child(category)
             .child("PlanDeEjercicios")
@@ -143,7 +148,9 @@ class AdminFragment2 : Fragment() {
             }
         })
     }
-
+    private fun validateExerciseFields(exercise: Exercise): Boolean {
+        return exercise.Nombre.isNotEmpty() && exercise.VideoURL.isNotEmpty() && exercise.Descripcion.isNotEmpty()
+    }
     data class Exercise(
         val Descripcion: String,
         val ID: String,
