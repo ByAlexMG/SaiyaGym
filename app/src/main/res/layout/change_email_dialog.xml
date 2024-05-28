@@ -9,7 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Correo electrónico actual">
+        android:hint="@string/correo_electr_nico_actual">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/currentEmailEditText"
@@ -22,7 +22,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
+        android:hint="@string/contra"
         android:layout_marginVertical="10dp"
         app:endIconMode="password_toggle"
         >
@@ -38,7 +38,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nuevo correo electrónico"
+        android:hint="@string/nuevo_correo_electr_nico"
         >
 
         <com.google.android.material.textfield.TextInputEditText

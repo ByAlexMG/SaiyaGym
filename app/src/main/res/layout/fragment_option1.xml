@@ -4,11 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- TextView para el título "Calendario" -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calendario"
+        android:text="@string/calendario"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
@@ -20,7 +19,6 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- ScrollView que contiene el RecyclerView -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -41,7 +39,6 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- ProgressBar centrada en la pantalla -->
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"

@@ -48,6 +48,6 @@
         android:id="@+id/genderSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Género" />
+        android:hint="@string/g_nero" />
 
 </LinearLayout>

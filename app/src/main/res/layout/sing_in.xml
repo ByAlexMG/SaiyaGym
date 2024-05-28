@@ -36,7 +36,7 @@
                 android:id="@+id/editTextCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Correo Electrónico"
+                android:hint="@string/correo_electronico"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:textColorHint="@color/orange" />
@@ -60,7 +60,7 @@
                 android:id="@+id/editTextContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
+                android:hint="@string/contra"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:textColorHint="@color/orange" />
@@ -81,7 +81,7 @@
                 android:id="@+id/editTextContraseña2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Repite al Contraseña"
+                android:hint="@string/repita_la_nueva_contrase_a"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:textColorHint="@color/orange" />
@@ -99,7 +99,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="82dp"
         android:layout_marginEnd="40dp"
-        android:text="Registrarse"
+        android:text="Sign In"
         app:cornerRadius="4dp" />
 
     <TextView
@@ -114,6 +114,6 @@
         android:layout_marginBottom="47dp"
         android:gravity="center"
         android:onClick="IrALogIn"
-        android:text="Ya tengo cuenta creada" />
+        android:text="@string/ya_tengo_cuenta_creada" />
 
 </RelativeLayout>

@@ -49,28 +49,28 @@
                 android:id="@+id/radioButton1"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="Menos de 70%"
+                android:text="@string/menos_de_70"
                 android:tag="65" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="Entre 70% y 80%"
+                android:text="@string/entre_70_y_80"
                 android:tag="75" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="Entre 80% y 90%"
+                android:text="@string/entre_80_y_90"
                 android:tag="85" />
 
             <RadioButton
                 android:id="@+id/radioButton4"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:text="Mas de 90%"
+                android:text="@string/mas_de_90"
                 android:tag="95" />
 
 
@@ -127,7 +127,7 @@
             android:id="@+id/backButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Volver"
+            android:text="@string/volver"
             android:layout_weight="1"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_marginEnd="8dp"/>
@@ -136,7 +136,7 @@
             android:id="@+id/finishButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Terminar"
+            android:text="@string/terminar"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             app:cornerRadius="4dp"
