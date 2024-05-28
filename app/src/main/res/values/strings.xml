@@ -37,7 +37,7 @@
     <string name="modo_claro_oscuro">Dark/Light Mode</string>
     <string name="ingrese_su_peso_kg">Enter your weight(Kg)</string>
     <string name="ingrese_su_altura_cm">Enter your height(cm)</string>
-    <string name="ingrese_su_edad_a_os">Enter your age(años)</string>
+    <string name="ingrese_su_edad_a_os">Enter your age(years)</string>
     <string name="de_masa_muscular">% of Muscle Mass :</string>
     <string name="guardar_cambios">Save Changes</string>
     <string name="correo_electronico">Email</string>
