@@ -15,6 +15,7 @@ import com.example.saiyagym.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.SetOptions
 
 class IntroducirDatos : AppCompatActivity() {
 
@@ -104,7 +105,6 @@ class IntroducirDatos : AppCompatActivity() {
         } else {
             grasa = (100 - (1.2 * IMC + 0.23 * edad - 5.4)).toFloat()
         }
-
         textViewPorcentaje.text = "${String.format("%.2f", grasa)}"
     }
 
@@ -131,7 +131,7 @@ class IntroducirDatos : AppCompatActivity() {
                 )
 
                 val userDocument = db.collection("users").document(user.uid)
-                userDocument.set(userData)
+                userDocument.set(userData, SetOptions.merge())
                     .addOnSuccessListener {
                         val intent = Intent(this, ElegirMeta::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

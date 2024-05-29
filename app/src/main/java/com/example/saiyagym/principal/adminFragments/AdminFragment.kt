@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.saiyagym.firebase.LoginActivity
 import com.example.saiyagym.LogHelper
 import com.example.saiyagym.R
+import com.example.saiyagym.SplashActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -76,6 +78,7 @@ class AdminFragment : Fragment() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_user, null)
         val editTextEmail = dialogView.findViewById<EditText>(R.id.editTextEmail)
         val editTextPassword = dialogView.findViewById<EditText>(R.id.editTextPassword)
+        val roleSpinner = dialogView.findViewById<Spinner>(R.id.roleSpinner)
 
         AlertDialog.Builder(requireContext())
             .setTitle("Agregar Nuevo Usuario")
@@ -83,7 +86,8 @@ class AdminFragment : Fragment() {
             .setPositiveButton("Agregar") { dialog, _ ->
                 val email = editTextEmail.text.toString()
                 val password = editTextPassword.text.toString()
-                addNewUser(email, password)
+                val rol = roleSpinner.selectedItem.toString().toLowerCase()
+                addNewUser(email, password, rol)
                 dialog.dismiss()
             }
             .setNegativeButton("Cancelar") { dialog, _ ->
@@ -168,7 +172,7 @@ class AdminFragment : Fragment() {
                 }
         }
     }
-    private fun addNewUser(email: String, password: String) {
+    private fun addNewUser(email: String, password: String, role: String) {
         val auth = FirebaseAuth.getInstance()
         val db = FirebaseFirestore.getInstance()
         val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
@@ -179,16 +183,16 @@ class AdminFragment : Fragment() {
                 if (createUserTask.isSuccessful) {
                     val firebaseUser = auth.currentUser
                     val uid = firebaseUser?.uid ?: ""
-
                     val user = hashMapOf(
                         "email" to email,
+                        "rol" to role
                     )
                     db.collection("users").document(uid)
                         .set(user)
                         .addOnSuccessListener {
                             LogHelper.saveChangeLog(requireContext(), "Usuario creado", "INFO")
 
-                            val intent = Intent(requireContext(), LoginActivity::class.java)
+                            val intent = Intent(requireContext(), SplashActivity::class.java)
                             startActivity(intent)
                             activity?.finish()
                             editor.clear()

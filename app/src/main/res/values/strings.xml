@@ -65,4 +65,8 @@
         <item>Sábado</item>
         <item>Domingo</item>
     </string-array>
+    <string-array name="user_roles">
+        <item>user</item>
+        <item>admin</item>
+    </string-array>
 </resources>
