@@ -64,5 +64,4 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore:25.0.0")
     implementation("com.google.firebase:firebase-database-ktx")
     implementation ("com.auth0.android:jwtdecode:2.0.0")
-
 }

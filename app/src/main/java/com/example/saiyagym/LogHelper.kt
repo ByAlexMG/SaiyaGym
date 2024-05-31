@@ -11,6 +11,7 @@ import java.util.Date
 object LogHelper {
 
     fun saveChangeLog(context: Context, action: String, tipo: String) {
+
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null) {
             Snackbar.make(
