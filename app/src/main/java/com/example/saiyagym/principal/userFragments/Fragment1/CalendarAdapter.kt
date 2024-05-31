@@ -1,4 +1,5 @@
 package com.example.saiyagym.principal.userFragments.Fragment1
+
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -43,7 +44,7 @@ class CalendarAdapter(
         }
 
         holder.imageButton.setOnClickListener {
-            showPopup(holder.itemView.context, day)
+            showPopup(holder.itemView.context, day, position)
         }
     }
 
@@ -77,14 +78,65 @@ class CalendarAdapter(
         }
     }
 
-    private fun showPopup(context: Context, day: String) {
+    private fun getPopupText(categoria: String, day: String, dayIndex: Int): String {
+        return when (categoria) {
+            "cardio" -> {
+                when (dayIndex % 7) {
+                    0 -> "Detalles de correr para el día $day"
+                    1 -> "Detalles de bici para el día $day"
+                    2 -> "Detalles de nadar para el día $day"
+                    3 -> "Detalles de baile para el día $day"
+                    4 -> "Detalles de boxing para el día $day"
+                    5 -> "Detalles de chill para el día $day"
+                    else -> "Detalles de chill para el día $day"
+                }
+            }
+            "volumen" -> {
+                when (dayIndex % 7) {
+                    0 -> "Detalles de ejercicios para el día $day"
+                    1 -> "Detalles de press para el día $day"
+                    2 -> "Detalles de abs para el día $day"
+                    3 -> "Detalles de piernas para el día $day"
+                    4 -> "Hoy se van a realizar ejercicios apra fortalecer las extremidades superiores sobre todo la aprte de biceps y triceps, ya que han paado als 72 horas encesarias para volver a entrenar musculos grandes  "
+                    5 -> "Detalles de chill para el día $day"
+                    else -> "Detalles de chill para el día $day"
+                }
+            }
+            "definicion" -> {
+                when (dayIndex % 7) {
+                    0 -> "Detalles de ejercicios de definición para el día $day"
+                    1 -> "Detalles de press de definición para el día $day"
+                    2 -> "Detalles de abs de definición para el día $day"
+                    3 -> "Detalles de piernas de definición para el día $day"
+                    4 -> "Detalles de arm de definición para el día $day"
+                    5 -> "Detalles de chill para el día $day"
+                    else -> "Detalles de chill para el día $day"
+                }
+            }
+            "mantenimiento" -> {
+                when (dayIndex % 7) {
+                    0 -> "Detalles de ejercicios de mantenimiento para el día $day"
+                    1 -> "Detalles de press de mantenimiento para el día $day"
+                    2 -> "Detalles de abs de mantenimiento para el día $day"
+                    3 -> "Detalles de piernas de mantenimiento para el día $day"
+                    4 -> "Detalles de arm de mantenimiento para el día $day"
+                    5 -> "Detalles de chill para el día $day"
+                    else -> "Detalles de chill para el día $day"
+                }
+            }
+            else -> "Detalles del día $day"
+        }
+    }
+
+    private fun showPopup(context: Context, day: String, dayIndex: Int) {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.dialog_exercise, null)
 
         val popupTextView: TextView = view.findViewById(R.id.textViewExercise)
         val popupButton: Button = view.findViewById(R.id.buttonClose)
 
-        popupTextView.text = "Detalles del día: $day"
+        val popupText = getPopupText(categoria, day, dayIndex)
+        popupTextView.text = popupText
 
         val alertDialog = AlertDialog.Builder(context)
             .setView(view)
