@@ -1,9 +1,11 @@
 package com.example.saiyagym.principal.userFragments.Fragment1
-
+import android.app.AlertDialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.saiyagym.R
@@ -16,7 +18,7 @@ class CalendarAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dayTextView: TextView = itemView.findViewById(R.id.dayTextView)
-        val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        val imageButton: ImageButton = itemView.findViewById(R.id.imageButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,13 +32,18 @@ class CalendarAdapter(
         holder.dayTextView.text = day
 
         val imageResId = getImageResIdForDay(categoria, position % 7)
-        holder.imageView.setImageResource(imageResId)
-        holder.imageView.visibility = View.VISIBLE
+        holder.imageButton.setImageResource(imageResId)
+        holder.imageButton.setBackgroundResource(android.R.color.transparent)
+        holder.imageButton.visibility = View.VISIBLE
 
         if ((position + 1) == (today - 1)) {
             holder.itemView.setBackgroundResource(R.drawable.border_highlight)
         } else {
             holder.itemView.setBackgroundResource(android.R.color.transparent)
+        }
+
+        holder.imageButton.setOnClickListener {
+            showPopup(holder.itemView.context, day)
         }
     }
 
@@ -55,29 +62,7 @@ class CalendarAdapter(
                     else -> R.drawable.chill
                 }
             }
-            "volumen" -> {
-                when (dayIndex) {
-                    0 -> R.drawable.ejercicios_logo
-                    1 -> R.drawable.press
-                    2 -> R.drawable.abs
-                    3 -> R.drawable.piernas
-                    4 -> R.drawable.arm
-                    5 -> R.drawable.chill
-                    else -> R.drawable.chill
-                }
-            }
-            "definicion" -> {
-                when (dayIndex) {
-                    0 -> R.drawable.ejercicios_logo
-                    1 -> R.drawable.press
-                    2 -> R.drawable.abs
-                    3 -> R.drawable.piernas
-                    4 -> R.drawable.arm
-                    5 -> R.drawable.chill
-                    else -> R.drawable.chill
-                }
-            }
-            "mantenimiento" -> {
+            "volumen", "definicion", "mantenimiento" -> {
                 when (dayIndex) {
                     0 -> R.drawable.ejercicios_logo
                     1 -> R.drawable.press
@@ -90,5 +75,25 @@ class CalendarAdapter(
             }
             else -> R.drawable.ajustes
         }
+    }
+
+    private fun showPopup(context: Context, day: String) {
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.dialog_exercise, null)
+
+        val popupTextView: TextView = view.findViewById(R.id.textViewExercise)
+        val popupButton: Button = view.findViewById(R.id.buttonClose)
+
+        popupTextView.text = "Detalles del día: $day"
+
+        val alertDialog = AlertDialog.Builder(context)
+            .setView(view)
+            .create()
+
+        popupButton.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 }
