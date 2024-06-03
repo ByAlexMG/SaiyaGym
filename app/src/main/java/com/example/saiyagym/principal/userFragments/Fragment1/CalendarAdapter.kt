@@ -70,7 +70,7 @@ class CalendarAdapter(
                     1 -> R.drawable.press
                     2 -> R.drawable.abs
                     3 -> R.drawable.piernas
-                    4 -> R.drawable.arm
+                    4 -> R.drawable.baile
                     5 -> R.drawable.chill
                     else -> R.drawable.chill
                 }
@@ -83,54 +83,27 @@ class CalendarAdapter(
 
             "cardio" -> {
                 when (dayIndex % 7) {
-                    0 -> R.drawable.abs
-                    1 -> R.drawable.abs
-                    2 -> R.drawable.abs
-                    3 -> R.drawable.abs
-                    4 -> R.drawable.abs
-                    5 -> R.drawable.abs
-                    else -> R.drawable.abs
+                    0 -> R.drawable.gokucarrera
+                    1 -> R.drawable.bicitruco
+                    2 -> R.drawable.nadatruco
+                    3 -> R.drawable.bailegif
+                    4 -> R.drawable.boxeotruco
+                    5 -> R.drawable.descanso
+                    else -> R.drawable.descanso
                 }
             }
-
-
-            "volumen" -> {
-                when (dayIndex % 7) {
-                    0 -> R.drawable.abs
-                    1 -> R.drawable.abs
-                    2 -> R.drawable.abs
-                    3 -> R.drawable.abs
-                    4 -> R.drawable.abs
-                    5 -> R.drawable.abs
-                    else -> R.drawable.abs
+            "volumen", "definicion", "mantenimiento" -> {
+                when (dayIndex) {
+                    0 -> R.drawable.biceps
+                    1 -> R.drawable.pecho
+                    2 -> R.drawable.abdominales
+                    3 -> R.drawable.piernas_br
+                    4 -> R.drawable.brazos
+                    5 -> R.drawable.descanso
+                    else -> R.drawable.descanso
                 }
             }
-
-
-            "definicion" -> {
-                when (dayIndex % 7) {
-                    0 -> R.drawable.abs
-                    1 -> R.drawable.abs
-                    2 -> R.drawable.abs
-                    3 -> R.drawable.abs
-                    4 -> R.drawable.abs
-                    5 -> R.drawable.abs
-                    else -> R.drawable.abs
-                }
-            }
-
-            "mantenimiento" -> {
-                when (dayIndex % 7) {
-                    0 -> R.drawable.abs
-                    1 -> R.drawable.abs
-                    2 -> R.drawable.abs
-                    3 -> R.drawable.abs
-                    4 -> R.drawable.abs
-                    5 -> R.drawable.abs
-                    else -> R.drawable.admin
-                }
-            }
-            else -> R.drawable.piernas
+            else -> R.drawable.ajustes
         }
     }
     private fun getPopupText(categoria: String, day: String, dayIndex: Int): String {

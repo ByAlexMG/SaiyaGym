@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="¿Qué nivel quieres alcanzar?"
@@ -22,14 +22,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_width="362dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,28 +83,27 @@
 
             <ImageView
                 android:id="@+id/imageView1"
-
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:src="@drawable/ajustes" />
+                android:src="@drawable/sata_imagen" />
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:src="@drawable/ajustes" />
+                android:src="@drawable/kefla_imagen" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:src="@drawable/ajustes" />
+                android:src="@drawable/goku_imagen" />
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:src="@drawable/ajustes" />
+                android:src="@drawable/broly_imagen" />
 
         </LinearLayout>
 
