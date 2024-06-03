@@ -5,6 +5,6 @@
     <color name="orange">#FFA500</color>
     <color name="blue">#0036DA</color>
     <color name="gray_transparent">#BACDCDCD</color>
-    <color name="textColorDefault">#FFFFFF</color> <!-- Blanco para el modo oscuro -->
-    <color name="textColorMoroso">#FF0000</color> <!-- Rojo para moroso -->
+    <color name="textColorDefault">#FFFFFF</color>
+    <color name="textColorMoroso">#DA3B2F</color>
 </resources>

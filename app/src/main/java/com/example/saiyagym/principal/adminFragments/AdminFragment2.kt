@@ -103,7 +103,8 @@ class AdminFragment2 : Fragment() {
 
     private fun saveExerciseToFirebase(category: String, day: String, exercise: Exercise) {
         if (!validateExerciseFields(exercise)) {
-            Toast.makeText(requireContext(), "Por favor, rellene todos los campos", Toast.LENGTH_SHORT).show()
+            val snackbar = Snackbar.make(requireView(), "Rellena todos los campos", Snackbar.LENGTH_SHORT)
+            snackbar.show()
             return
         }
         val exerciseRef = database.child("Categorias")

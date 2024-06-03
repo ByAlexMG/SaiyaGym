@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.saiyagym.R
@@ -77,54 +78,108 @@ class CalendarAdapter(
             else -> R.drawable.ajustes
         }
     }
+    private fun getPopupImageResId(categoria: String, dayIndex: Int): Int {
+        return when (categoria) {
 
+            "cardio" -> {
+                when (dayIndex % 7) {
+                    0 -> R.drawable.abs
+                    1 -> R.drawable.abs
+                    2 -> R.drawable.abs
+                    3 -> R.drawable.abs
+                    4 -> R.drawable.abs
+                    5 -> R.drawable.abs
+                    else -> R.drawable.abs
+                }
+            }
+
+
+            "volumen" -> {
+                when (dayIndex % 7) {
+                    0 -> R.drawable.abs
+                    1 -> R.drawable.abs
+                    2 -> R.drawable.abs
+                    3 -> R.drawable.abs
+                    4 -> R.drawable.abs
+                    5 -> R.drawable.abs
+                    else -> R.drawable.abs
+                }
+            }
+
+
+            "definicion" -> {
+                when (dayIndex % 7) {
+                    0 -> R.drawable.abs
+                    1 -> R.drawable.abs
+                    2 -> R.drawable.abs
+                    3 -> R.drawable.abs
+                    4 -> R.drawable.abs
+                    5 -> R.drawable.abs
+                    else -> R.drawable.abs
+                }
+            }
+
+            "mantenimiento" -> {
+                when (dayIndex % 7) {
+                    0 -> R.drawable.abs
+                    1 -> R.drawable.abs
+                    2 -> R.drawable.abs
+                    3 -> R.drawable.abs
+                    4 -> R.drawable.abs
+                    5 -> R.drawable.abs
+                    else -> R.drawable.admin
+                }
+            }
+            else -> R.drawable.piernas
+        }
+    }
     private fun getPopupText(categoria: String, day: String, dayIndex: Int): String {
         return when (categoria) {
             "cardio" -> {
                 when (dayIndex % 7) {
-                    0 -> "Detalles de correr para el día $day"
-                    1 -> "Detalles de bici para el día $day"
-                    2 -> "Detalles de nadar para el día $day"
-                    3 -> "Detalles de baile para el día $day"
-                    4 -> "Detalles de boxing para el día $day"
-                    5 -> "Detalles de chill para el día $day"
-                    else -> "Detalles de chill para el día $day"
+                    0 -> "Hoy se realizarán ejercicios cardiovaculares de una intensidad moderada para comenzar a reducir las reservas de glocógeno que hemos llenado durante el fin de semana."
+                    1 -> "Realizaremos ejercicios con intervalos de alta intensidad para comenzar a adaptar el cuerpo a esfuerzos con intensidad moderada-intensa."
+                    2 -> "Practicaremos ejercicios multiarticulares para favorecer la adaptación del cuerpoa  ciertos movimientos."
+                    3 -> "Hoy se reealizarán ejercicios en los que se priorizará el entetenimiento del propio usuario para ahcer mas ameno el entretenimiento."
+                    4 -> "Se realizarán ejercicios con un poco de mas imacto articular per que ayudarána  despegar la grasa del tejido adiposo con mayor facilidad."
+                    5 -> "Descanso"
+                    else -> "Descanso"
                 }
             }
             "volumen" -> {
                 when (dayIndex % 7) {
-                    0 -> "Detalles de ejercicios para el día $day"
-                    1 -> "Detalles de press para el día $day"
-                    2 -> "Detalles de abs para el día $day"
-                    3 -> "Detalles de piernas para el día $day"
-                    4 -> "Hoy se van a realizar ejercicios apra fortalecer las extremidades superiores sobre todo la aprte de biceps y triceps, ya que han paado als 72 horas encesarias para volver a entrenar musculos grandes  "
-                    5 -> "Detalles de chill para el día $day"
-                    else -> "Detalles de chill para el día $day"
+                    0 -> "Comenzaremos la semana con ejercicios centrados en fortalecer al musculatura de la espalda y como musuclo secundario nos centraremos en el biceps."
+                    1 -> "Continuaremos la semana con ejercicios centrados en fortalecer al musculatura del pecho y como musuclo secundario nos centraremos en el triceps."
+                    2 -> "Toca realizar ejercicios apra fortalecer y desarrollar la pared abdominal, debes tener en cuenta de que par marcar abdominales, lo primero que debes hacer es reducir tu % de grasa corporal para poder sacarlos a lucir."
+                    3 -> "Hoy toca el dia mas temido por todos los usuarios de gym, ya que a ninguna persona le gusta hacer piernas, eso si... preparate para las agujetas en 2 días."
+                    4 -> "Hoy se van a realizar ejercicios para fortalecer las extremidades superiores sobre todo la parte de biceps y triceps, ya que han pasado las 72 horas necesarias para volver a entrenar musculos con fibras de contraccion rápida."
+                    5 -> "Descanso"
+                    else -> "Descanso"
                 }
             }
             "definicion" -> {
                 when (dayIndex % 7) {
-                    0 -> "Detalles de ejercicios de definición para el día $day"
-                    1 -> "Detalles de press de definición para el día $day"
-                    2 -> "Detalles de abs de definición para el día $day"
-                    3 -> "Detalles de piernas de definición para el día $day"
-                    4 -> "Detalles de arm de definición para el día $day"
-                    5 -> "Detalles de chill para el día $day"
-                    else -> "Detalles de chill para el día $day"
+                    0 -> "Comenzaremos la semana con ejercicios centrados en fortalecer al musculatura de la espalda y como musuclo secundario nos centraremos en el biceps."
+                    1 -> "Continuaremos la semana con ejercicios centrados en fortalecer al musculatura del pecho y como musuclo secundario nos centraremos en el triceps."
+                    2 -> "Toca realizar ejercicios apra fortalecer y desarrollar la pared abdominal, debes tener en cuenta de que par marcar abdominales, lo primero que debes hacer es reducir tu % de grasa corporal para poder sacarlos a lucir."
+                    3 -> "Hoy toca el dia mas temido por todos los usuarios de gym, ya que a ninguna persona le gusta hacer piernas, eso si... preparate para las agujetas en 2 días."
+                    4 -> "Hoy se van a realizar ejercicios para fortalecer las extremidades superiores sobre todo la parte de biceps y triceps, ya que han pasado las 72 horas necesarias para volver a entrenar musculos con fibras de contraccion rápida."
+                    5 -> "Descanso"
+                    else -> "Descanso"
                 }
             }
             "mantenimiento" -> {
                 when (dayIndex % 7) {
-                    0 -> "Detalles de ejercicios de mantenimiento para el día $day"
-                    1 -> "Detalles de press de mantenimiento para el día $day"
-                    2 -> "Detalles de abs de mantenimiento para el día $day"
-                    3 -> "Detalles de piernas de mantenimiento para el día $day"
-                    4 -> "Detalles de arm de mantenimiento para el día $day"
-                    5 -> "Detalles de chill para el día $day"
-                    else -> "Detalles de chill para el día $day"
+                    0 -> "Comenzaremos la semana con ejercicios centrados en fortalecer al musculatura de la espalda y como musuclo secundario nos centraremos en el biceps."
+                    1 -> "Continuaremos la semana con ejercicios centrados en fortalecer al musculatura del pecho y como musuclo secundario nos centraremos en el triceps."
+                    2 -> "Toca realizar ejercicios apra fortalecer y desarrollar la pared abdominal, debes tener en cuenta de que par marcar abdominales, lo primero que debes hacer es reducir tu % de grasa corporal para poder sacarlos a lucir."
+                    3 -> "Hoy toca el dia mas temido por todos los usuarios de gym, ya que a ninguna persona le gusta hacer piernas, eso si... preparate para las agujetas en 2 días."
+                    4 -> "Hoy se van a realizar ejercicios para fortalecer las extremidades superiores sobre todo la parte de biceps y triceps, ya que han pasado las 72 horas necesarias para volver a entrenar musculos con fibras de contraccion rápida."
+                    5 -> "Descanso"
+                    else -> "Descanso"
                 }
             }
-            else -> "Detalles del día $day"
+            else -> "Error al cargar datos"
         }
     }
 
@@ -132,8 +187,12 @@ class CalendarAdapter(
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.dialog_exercise, null)
 
+        val popupImageView: ImageView = view.findViewById(R.id.imageViewExercise)
         val popupTextView: TextView = view.findViewById(R.id.textViewExercise)
         val popupButton: Button = view.findViewById(R.id.buttonClose)
+
+        val popupImageResId = getPopupImageResId(categoria, dayIndex)
+        popupImageView.setImageResource(popupImageResId)
 
         val popupText = getPopupText(categoria, day, dayIndex)
         popupTextView.text = popupText
@@ -148,4 +207,5 @@ class CalendarAdapter(
 
         alertDialog.show()
     }
+
 }

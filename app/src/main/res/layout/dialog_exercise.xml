@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewExercise"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ajustes" />
 
     <TextView
         android:id="@+id/textViewExercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ejercicio"
         android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:padding="16dp"/>
+        android:layout_marginTop="8dp"
+        android:text="Detalles del día"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/buttonClose"
-        android:layout_width="match_parent"
+        app:cornerRadius="4dp"
+        android:layout_width="281dp"
         android:layout_height="wrap_content"
-        android:text="Cerrar"
-        android:background="@android:color/darker_gray"
-        android:textColor="@android:color/white"
-        android:layout_margin="16dp"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:text="Cerrar" />
+
 </LinearLayout>
