@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/orange</item>
         <item name="android:navigationBarColor">@color/orange</item>
     </style>
+    <color name="background_color">#232323</color>
     <style name="Theme.SaiyaGym" parent="Base.Theme.SaiyaGym" />
     <style name="NoActionBar">
         <item name="windowActionBar">false</item>
