@@ -2,20 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_option1"
-        android:title="Calendario"
+        android:title="@string/calendario_menu"
         android:icon="@drawable/calendario" />
     <item
         android:id="@+id/navigation_option2"
-        android:title="Rutina"
+        android:title="@string/rutina"
         android:icon="@drawable/ejercicios_logo" />
     <item
         android:id="@+id/navigation_option3"
-        android:title="Ajustes"
+        android:title="@string/ajustes"
         android:icon="@drawable/ajustes" />
     <item
         android:id="@+id/navigation_option4"
-        android:title="Admin"
-        android:icon="@drawable/ajustes"
+        android:title="@string/usuarios"
+        android:icon="@drawable/users"
+        android:checkable="true"
+        android:visible="false"/>
+    <item
+        android:id="@+id/navigation_option5"
+        android:title="@string/ejercicios"
+        android:icon="@drawable/sports"
         android:checkable="true"
         android:visible="false"/>
 </menu>

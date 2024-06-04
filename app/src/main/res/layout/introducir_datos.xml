@@ -1,115 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:textColor="@color/orange"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="612dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputPeso"
+        android:layout_width="379dp"
+        android:layout_height="60dp"
         android:layout_marginTop="111dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputPeso"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPeso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            app:hintTextColor="@color/orange">
+            android:hint="@string/ingrese_su_peso_kg"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextPeso"
-                android:hint="Ingrese su peso(Kg)"
-                android:textColorHint="@color/orange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputAltura"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/ingrese_su_altura_cm"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputPeso"
+        app:layout_constraintVertical_bias="0.097">
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputAltura"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextAltura"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:hint="Ingrese su altura(cm)"
-            app:hintTextColor="@color/orange">
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:textColorHint="@color/orange"
-                android:id="@+id/editTextAltura"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputEdad"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/ingrese_su_edad_a_os"
 
-        </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputEdad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputAltura"
+        app:layout_constraintVertical_bias="0.153">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextEdad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:hint="Ingrese su edad(años)"
-            app:hintTextColor="@color/orange">
+            android:inputType="number"
+             />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextEdad"
-                android:textColorHint="@color/orange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
+    <Spinner
+        android:id="@+id/spinnerGenero"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputEdad"
+        app:layout_constraintVertical_bias="0.265"
+        app:layout_constraintWidth_percent="0.9" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="108dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuardarCambios"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.9">
 
-
-        <Spinner
-            android:id="@+id/spinnerGenero"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp" />
+            android:text="@string/de_masa_muscular"
+            android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="264dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="% de Masa Corporal :  "
-                android:textSize="20sp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/porcentaje"
-                android:layout_width="72dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:inputType="textMultiLine"
-                android:shadowColor="@color/orange"
-                android:textSize="17dp" />
-
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonGuardarCambios"
-            android:layout_width="293dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="30dp"
-            android:text="Guardar cambios"
-            app:cornerRadius="4dp" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/porcentaje"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:inputType="textMultiLine"
+            android:shadowColor="@color/orange"
+             />
     </LinearLayout>
 
-</RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonGuardarCambios"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="52dp"
+        android:text="@string/guardar_cambios"
+        app:cornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

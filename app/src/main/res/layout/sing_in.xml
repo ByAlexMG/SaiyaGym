@@ -4,42 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--
+
        <ImageView
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:scaleType="centerCrop"
-           android:src="@drawable/fondo" />
-   -->
+           android:alpha="0.2"
+           android:src="@drawable/fondo5" />
 
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginTop="271dp"
         android:orientation="vertical">
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputUsuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:imeOptions="actionDone"
-            app:hintTextColor="@color/orange">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Usuario"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:textColorHint="@color/orange" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -47,19 +28,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
             android:imeOptions="actionDone"
-            app:hintTextColor="@color/orange">
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Correo Electrónico"
+                android:hint="@string/correo_electronico"
                 android:imeOptions="actionDone"
-                android:inputType="text"
-                android:textColorHint="@color/orange" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,36 +50,53 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="40dp"
             android:imeOptions="actionDone"
-            app:hintTextColor="@color/orange">
+
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
+                android:hint="@string/contra"
                 android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:textColorHint="@color/orange" />
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputContraseña2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:imeOptions="actionDone"
+
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextContraseña2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/repita_la_nueva_contrase_a"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonRegistrarse"
         android:layout_width="330dp"
-        android:layout_height="51dp"
-        android:layout_above="@+id/textViewSiTengo"
+        android:layout_height="55dp"
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="82dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="49dp"
-        android:text="Registrarse"
+        android:text="@string/sign_in"
         app:cornerRadius="4dp" />
 
     <TextView
@@ -110,11 +106,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="94dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:onClick="IrALogIn"
-        android:text="Ya tengo cuenta creada" />
+        android:text="@string/ya_tengo_cuenta_creada" />
 
 </RelativeLayout>

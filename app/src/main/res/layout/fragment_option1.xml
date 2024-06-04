@@ -1,40 +1,51 @@
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- TextView para el título "Calendario" -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="Calendario"
+        android:text="@string/calendario"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- ScrollView que contiene el RecyclerView -->
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- RecyclerView para mostrar el calendario -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/calendarRecyclerView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="447dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-40dp"
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
-    </ScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/calendarRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="213dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        <ImageView
+            android:layout_marginTop="-70dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.4"
+            android:src="@drawable/fondo_calendario" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"/>
+    </FrameLayout>
 </LinearLayout>

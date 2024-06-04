@@ -1,0 +1,10 @@
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green">#8BC34A</color>
+    <color name="orange">#FFA500</color>
+    <color name="blue">#0036DA</color>
+    <color name="gray_transparent">#BACDCDCD</color>
+    <color name="textColorDefault">#FFFFFF</color>
+    <color name="textColorMoroso">#DA3B2F</color>
+</resources>

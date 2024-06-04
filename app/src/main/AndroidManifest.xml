@@ -9,9 +9,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaiyaGym"
         tools:targetApi="31">
@@ -26,22 +26,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.saiyagym.LoginActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.MainActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.PasswordOlvidada"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.SingIn"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.IntroducirDatos"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.ElegirMeta"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.example.saiyagym.Principal"
+        <activity android:name="com.example.saiyagym.firebase.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.example.saiyagym.firebase.ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.example.saiyagym.firebase.SingIn"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.example.saiyagym.introducirDatos.IntroducirDatos"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.example.saiyagym.introducirDatos.ElegirMeta"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.example.saiyagym.principal.Principal"
                android:screenOrientation="portrait"/>
-
-
     </application>
-
 </manifest>
