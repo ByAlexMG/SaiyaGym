@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +16,13 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Switch
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.core.content.ContextCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import androidx.fragment.app.Fragment
 import com.example.saiyagym.LogHelper
 import com.example.saiyagym.principal.Principal
 import com.example.saiyagym.R
+import com.example.saiyagym.firebase.LoginActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -55,6 +58,9 @@ class Option3Fragment : Fragment() {
                 requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.clear().apply()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
             requireActivity().finish()
         }
 
@@ -114,6 +120,8 @@ class Option3Fragment : Fragment() {
         }
         val dialog = builder.create()
         dialog.show()
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(),R.color.textColorMoroso))
+
     }
 
     private fun changePassword(currentPassword: String, newPassword: String) {
@@ -184,8 +192,14 @@ class Option3Fragment : Fragment() {
         builder.setNegativeButton("Cancelar") { dialog, _ ->
             dialog.dismiss()
         }
-        builder.show()
+
+        val dialog = builder.create()
+        dialog.show()
+
+        // Cambiar el color del botón de "Cancelar" a rojo
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(),R.color.textColorMoroso))
     }
+
 
     private fun changeEmail(currentEmail: String, currentPassword: String, newEmail: String) {
         val auth = FirebaseAuth.getInstance()
@@ -358,6 +372,7 @@ class Option3Fragment : Fragment() {
                     }
                     val dialog = builder.create()
                     dialog.show()
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(),R.color.textColorMoroso))
                 }
             }
         }

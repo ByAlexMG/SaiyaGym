@@ -25,7 +25,7 @@
     <string name="id">ID</string>
     <string name="name">Nombre</string>
     <string name="description">Descripción</string>
-    <string name="video_url">VideoURL</string>
+    <string name="video_url">ID del Video</string>
     <string name="add_ejercicio">Añadir Ejercicio</string>
     <string name="eliminar_ejercicio">Eliminar Ejercicios</string>
     <string name="remove_ejercicio">Eliminar</string>
@@ -51,4 +51,5 @@
     <string name="ya_tengo_cuenta_creada">Ya Tengo Cuenta Creada</string>
     <string name="calendario_menu">Calendario</string>
     <string name="ejercicios">Ejercicios</string>
+    <string name="sign_in">Registrar</string>
 </resources>

@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import android.util.Log
+import android.widget.ProgressBar
 import com.example.saiyagym.introducirDatos.IntroducirDatos
 import com.example.saiyagym.LogHelper
 import com.example.saiyagym.principal.Principal
@@ -34,14 +35,17 @@ class LoginActivity : AppCompatActivity() {
         val correo = findViewById<TextView>(R.id.editTextUsuario)
         val contra = findViewById<TextView>(R.id.editTextContraseña)
         val checkBoxRecordar = findViewById<CheckBox>(R.id.checkboxRecordar)
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         botonEntrar.setOnClickListener {
             val email = correo.text.toString()
             val password = contra.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
+                progressBar.visibility = View.VISIBLE
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { signInTask ->
+                        progressBar.visibility = View.GONE
                         if (signInTask.isSuccessful) {
                             val currentUser = FirebaseAuth.getInstance().currentUser
                             currentUser?.let { user ->
@@ -124,6 +128,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun showAlert(title: String, message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(title)

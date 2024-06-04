@@ -3,6 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="589dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="44dp"
+        android:alpha="0.2"
+        android:scaleType="centerCrop"
+        android:src="@drawable/capsule_corp" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/userTextView"
         android:layout_width="wrap_content"

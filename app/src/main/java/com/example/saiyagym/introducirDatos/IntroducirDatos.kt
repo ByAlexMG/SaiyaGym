@@ -136,6 +136,7 @@ class IntroducirDatos : AppCompatActivity() {
                         val intent = Intent(this, ElegirMeta::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)
+                        finish()
                         LogHelper.saveChangeLog(this, "Guardar datos", "INFO")
                     }
                     .addOnFailureListener { e ->

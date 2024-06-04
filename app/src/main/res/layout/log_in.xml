@@ -3,55 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!--
+
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:layout_width="419dp"
+        android:layout_height="361dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="19dp"
+        android:alpha="0.7"
         android:scaleType="centerCrop"
-        android:src="@drawable/fondo" />
--->
+        android:src="@drawable/logo_app" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="378dp"
+        android:layout_height="67dp"
         android:layout_above="@+id/textInputContraseña"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="69dp"
+        android:layout_marginBottom="22dp"
         android:imeOptions="actionDone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:hint="@string/correo_electronico"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputContraseña"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
         android:layout_above="@+id/checkboxRecordar"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="16dp"
-        app:endIconMode="password_toggle"
-        android:imeOptions="actionDone">
+        android:layout_marginBottom="18dp"
+        android:imeOptions="actionDone" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/contra"
-            android:inputType="textPassword"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,11 +66,11 @@
         android:layout_above="@+id/buttonLogIn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="14dp"
         android:checked="false"
-        
+
         android:text="@string/recordar_contrase_a"
         app:useMaterialThemeColors="true" />
 
@@ -79,7 +83,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="63dp"
+        android:layout_marginBottom="17dp"
         android:gravity="center"
         android:onClick="IrAIntroduciratos"
         android:text="@string/log_in"
@@ -112,5 +116,11 @@
         android:layout_marginBottom="27dp"
         android:onClick="IrASingIn"
         android:text="@string/no_tengo_cuenta" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

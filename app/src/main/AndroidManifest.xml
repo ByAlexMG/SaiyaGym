@@ -27,15 +27,15 @@
         </activity>
 
         <activity android:name="com.example.saiyagym.firebase.LoginActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:screenOrientation="portrait"/>
         <activity android:name="com.example.saiyagym.firebase.ForgotPasswordActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:screenOrientation="portrait"/>
         <activity android:name="com.example.saiyagym.firebase.SingIn"
-            android:configChanges="orientation|screenSize"/>
+            android:screenOrientation="portrait"/>
         <activity android:name="com.example.saiyagym.introducirDatos.IntroducirDatos"
-            android:configChanges="orientation|screenSize"/>
+            android:screenOrientation="portrait"/>
         <activity android:name="com.example.saiyagym.introducirDatos.ElegirMeta"
-            android:configChanges="orientation|screenSize"/>
+            android:screenOrientation="portrait"/>
         <activity android:name="com.example.saiyagym.principal.Principal"
                android:screenOrientation="portrait"/>
     </application>

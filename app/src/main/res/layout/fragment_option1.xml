@@ -1,3 +1,4 @@
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -18,14 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-40dp"
                 android:orientation="vertical"
                 android:layout_gravity="center">
 
@@ -34,10 +31,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="213dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
                     android:visibility="gone"/>
             </LinearLayout>
-        </ScrollView>
+        <ImageView
+            android:layout_marginTop="-70dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.4"
+            android:src="@drawable/fondo_calendario" />
 
         <ProgressBar
             android:id="@+id/progressBar"

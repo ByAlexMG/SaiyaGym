@@ -24,7 +24,7 @@
     <string name="id">ID</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
-    <string name="video_url">Video URL</string>
+    <string name="video_url">Video ID</string>
     <string name="add_ejercicio">Add</string>
     <string name="eliminar_ejercicio">Remove an Exercise:</string>
     <string name="remove_ejercicio">Remove</string>
@@ -50,6 +50,7 @@
     <string name="ya_tengo_cuenta_creada">I Have an Account</string>
     <string name="calendario_menu">Calendar</string>
     <string name="ejercicios">Exercises</string>
+    <string name="sign_in">Sign In</string>
     <string-array name="categories_array">
         <item>Volumen</item>
         <item>Cardio</item>
