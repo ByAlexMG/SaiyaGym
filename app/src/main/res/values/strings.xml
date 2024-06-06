@@ -39,7 +39,7 @@
     <string name="ingrese_su_altura_cm">Enter your height(cm)</string>
     <string name="ingrese_su_edad_a_os">Enter your age(years)</string>
     <string name="de_masa_muscular">% of Muscle Mass :</string>
-    <string name="guardar_cambios">Save Changes</string>
+    <string name="guardar_cambios">Save Data</string>
     <string name="correo_electronico">Email</string>
     <string name="recordar_contrase_a">Remember Password</string>
     <string name="log_in">Log In</string>
@@ -70,4 +70,17 @@
         <item>user</item>
         <item>admin</item>
     </string-array>
+        <string name="day_0">Today we will do moderate intensity cardiovascular exercises to start reducing the glycogen reserves that we have filled over the weekend.</string>
+        <string name="day_1">We will do high-intensity interval training to start adapting the body to moderate-intense efforts.</string>
+        <string name="day_2">We will practice multi-joint exercises to help the body adapt to certain movements.</string>
+        <string name="day_3">Today we will perform exercises that prioritize the users entertainment to make the workout more enjoyable.</string>
+        <string name="day_4">We will do exercises with a bit more joint impact, which will help to dislodge fat from the adipose tissue more easily.</string>
+        <string name="rest_day">Rest</string>
+
+    <string name="day_en_0">We will start the week with exercises focused on strengthening the back muscles, and as a secondary muscle, we will focus on the biceps.</string>
+    <string name="day_en_1">We will continue the week with exercises focused on strengthening the chest muscles, and as a secondary muscle, we will focus on the triceps.</string>
+    <string name="day_en_2">Its time to do exercises to strengthen and develop the abdominal wall. Keep in mind that to show abs, the first thing you need to do is reduce your body fat percentage.</string>
+    <string name="day_en_3">Today is the most dreaded day for all gym users, as nobody likes to do legs, but... get ready for muscle soreness in 2 days.</string>
+    <string name="day_en_4">Today we will do exercises to strengthen the upper extremities, especially the biceps and triceps, as the necessary 72 hours have passed to train muscles with fast-twitch fibers again.</string>
+    <string name="day_en_rest">Rest</string>
 </resources>

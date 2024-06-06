@@ -7,14 +7,19 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="399dp"
-        android:layout_height="452dp"
+        android:layout_width="384dp"
+        android:layout_height="389dp"
         android:alpha="0.1"
         android:scaleType="centerCrop"
         android:src="@drawable/visor"
-        tools:layout_editor_absoluteX="-10dp"
-        tools:layout_editor_absoluteY="157dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.568"
         tools:ignore="MissingConstraints" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputPeso"
         android:layout_width="379dp"

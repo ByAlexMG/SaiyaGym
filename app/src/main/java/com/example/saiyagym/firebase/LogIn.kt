@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                             }
                         } else {
                             LogHelper.saveChangeLog(this, "Error al iniciar sesión", "ERROR")
-                            showAlert("Error", "Se ha producido un error al iniciar sesión")
+                            showAlert("Error", "Correo o contraseña incorrectos")
                         }
                     }
             } else if (password.isEmpty()) {
@@ -98,8 +98,7 @@ class LoginActivity : AppCompatActivity() {
             if (document.exists()) {
                 val moroso = document.getLong("moroso")
                 if (moroso != null && moroso == 1L) {
-                    LogHelper.saveChangeLog(this, "Moroso intenta iniciar sesión", "INFO")
-                    showAlert("Error", "Usted ha sido baneado")
+                    showAlert("Error", "Usted no tiene permitido el acceso a la aplicación por impago o uso indebido")
                 } else {
                     val peso = document.getDouble("peso")
                     val altura = document.getDouble("altura")

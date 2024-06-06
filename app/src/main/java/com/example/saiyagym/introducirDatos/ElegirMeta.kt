@@ -49,7 +49,7 @@ class ElegirMeta : AppCompatActivity() {
                     saveSelectedGoal(selectedGoal)
                 }
             } else {
-                Toast.makeText(this, "Por favor, selecciona una meta", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Es necesaio rellenar todos los campos", Toast.LENGTH_SHORT).show()
             }
 
             Handler(Looper.getMainLooper()).postDelayed({

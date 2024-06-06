@@ -65,15 +65,7 @@ class SingIn : AppCompatActivity() {
                     showAlert("Error", "Las contraseñas no coinciden")
                 }
             } else {
-                if (email.isEmpty()) {
-                    showAlert("Error", "Correo electrónico vacío")
-                }
-                if (password.isEmpty()) {
-                    showAlert("Error", "Contraseña vacía")
-                }
-                if (confirmPassword.isEmpty()) {
-                    showAlert("Error", "Confirmación de contraseña vacía")
-                }
+                    showAlert("Error", "Es necesario que todos los campos estén rellenos")
             }
         }
     }

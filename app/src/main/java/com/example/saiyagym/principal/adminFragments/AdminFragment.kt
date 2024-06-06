@@ -20,6 +20,7 @@ import com.example.saiyagym.firebase.LoginActivity
 import com.example.saiyagym.LogHelper
 import com.example.saiyagym.R
 import com.example.saiyagym.SplashActivity
+import com.example.saiyagym.introducirDatos.IntroducirDatos
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -167,7 +168,7 @@ class AdminFragment : Fragment() {
                         "Error al marcar usuario como moroso: ${exception.message}",
                         "ERROR"
                     )
-                    val snackbar = Snackbar.make(requireView(), "Error al marcar usuario como moroso", Snackbar.LENGTH_SHORT)
+                    val snackbar = Snackbar.make(requireView(), "No se ha podido eliminar usuario", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }
         }
@@ -192,7 +193,7 @@ class AdminFragment : Fragment() {
                         .addOnSuccessListener {
                             LogHelper.saveChangeLog(requireContext(), "Usuario creado", "INFO")
 
-                            val intent = Intent(requireContext(), SplashActivity::class.java)
+                            val intent = Intent(requireContext(), IntroducirDatos::class.java)
                             startActivity(intent)
                             activity?.finish()
                             editor.clear()
@@ -200,7 +201,7 @@ class AdminFragment : Fragment() {
                         }
                 } else {
                     LogHelper.saveChangeLog(requireContext(), "Error al crear usuario", "ERROR")
-                    val snackbar = Snackbar.make(requireView(), "Error al crear usuario", Snackbar.LENGTH_SHORT)
+                    val snackbar = Snackbar.make(requireView(), "No se ha podido crear el usuario", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }
             }

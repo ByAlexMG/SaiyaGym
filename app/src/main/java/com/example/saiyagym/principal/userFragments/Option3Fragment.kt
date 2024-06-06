@@ -196,7 +196,6 @@ class Option3Fragment : Fragment() {
         val dialog = builder.create()
         dialog.show()
 
-        // Cambiar el color del botón de "Cancelar" a rojo
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(),R.color.textColorMoroso))
     }
 

@@ -40,7 +40,7 @@
     <string name="ingrese_su_altura_cm">Introduce tu altura(Cm)</string>
     <string name="ingrese_su_edad_a_os">Introduce tu edad(años)</string>
     <string name="de_masa_muscular">% de Masa Muscular</string>
-    <string name="guardar_cambios">Guardar Cambios</string>
+    <string name="guardar_cambios">Guardar Datos</string>
     <string name="correo_electronico">Correo Electrónico</string>
     <string name="recordar_contrase_a">Recordar Contraseña</string>
     <string name="log_in">Iniciar Sesión</string>
@@ -52,4 +52,17 @@
     <string name="calendario_menu">Calendario</string>
     <string name="ejercicios">Ejercicios</string>
     <string name="sign_in">Registrar</string>
+
+        <string name="day_0">Hoy se realizarán ejercicios cardiovaculares de una intensidad moderada para comenzar a reducir las reservas de glocógeno que hemos llenado durante el fin de semana.</string>
+        <string name="day_1">Realizaremos ejercicios con intervalos de alta intensidad para comenzar a adaptar el cuerpo a esfuerzos con intensidad moderada-intensa.</string>
+        <string name="day_2">Practicaremos ejercicios multiarticulares para favorecer la adaptación del cuerpoa  ciertos movimientos.</string>
+        <string name="day_3">Hoy se reealizarán ejercicios en los que se priorizará el entetenimiento del propio usuario para ahcer mas ameno el entretenimiento.</string>
+        <string name="day_4">Se realizarán ejercicios con un poco de mas imacto articular per que ayudarána  despegar la grasa del tejido adiposo con mayor facilidad.</string>
+        <string name="rest_day">Descanso</string>
+    <string name="day_en_0">Comenzaremos la semana con ejercicios centrados en fortalecer la musculatura de la espalda y como músculo secundario nos centraremos en el bíceps.</string>
+    <string name="day_en_1">Continuaremos la semana con ejercicios centrados en fortalecer la musculatura del pecho y como músculo secundario nos centraremos en el tríceps.</string>
+    <string name="day_en_2">Toca realizar ejercicios para fortalecer y desarrollar la pared abdominal, debes tener en cuenta que para marcar abdominales, lo primero que debes hacer es reducir tu % de grasa corporal para poder sacarlos a lucir.</string>
+    <string name="day_en_3">Hoy toca el día más temido por todos los usuarios de gimnasio, ya que a ninguna persona le gusta hacer piernas, eso sí... prepárate para las agujetas en 2 días.</string>
+    <string name="day_en_4">Hoy se van a realizar ejercicios para fortalecer las extremidades superiores, sobre todo la parte de bíceps y tríceps, ya que han pasado las 72 horas necesarias para volver a entrenar músculos con fibras de contracción rápida.</string>
+    <string name="day_en_rest">Descanso</string>
 </resources>
