@@ -19,7 +19,6 @@ import com.example.saiyagym.principal.Principal
 import com.example.saiyagym.R
 import com.google.firebase.auth.FirebaseUser
 
-
 class LoginActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
 
@@ -54,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
                                         if (checkBoxRecordar.isChecked) {
                                             saveTokenToSharedPreferences(token)
                                         }
-                                        checkUserDetails(user)
+                                        checkUserDetails(user, email, password)
                                     } else {
                                         showAlert("Error", "Error de conexión")
                                     }
@@ -92,9 +91,18 @@ class LoginActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    private fun checkUserDetails(user: FirebaseUser) {
+    private fun saveDataToSharedPreferences(email: String, password: String) {
+        val sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("email", email)
+        editor.putString("password", password)
+        editor.apply()
+    }
+
+    private fun checkUserDetails(user: FirebaseUser, email: String, password: String) {
         val userDocument = db.collection("users").document(user.uid)
         userDocument.get().addOnSuccessListener { document ->
+            saveDataToSharedPreferences(email, password)  // Guardar datos aquí
             if (document.exists()) {
                 val moroso = document.getLong("moroso")
                 if (moroso != null && moroso == 1L) {

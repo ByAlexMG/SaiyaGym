@@ -61,6 +61,7 @@ class AdminFragment : Fragment() {
                 usersList.clear()
                 for (document in result) {
                     val uid = document.id
+                    // Excluir al usuario actualmente logado
                     if (uid != currentUserId) {
                         val email = document.getString("email") ?: ""
                         val moroso = document.getLong("moroso")?.toInt() ?: 0
@@ -69,6 +70,7 @@ class AdminFragment : Fragment() {
                     }
                 }
 
+                // Ordenar por moroso y actualizar la lista
                 usersList.sortBy { it.moroso }
                 adapter.notifyDataSetChanged()
                 progressBar.visibility = View.GONE
@@ -186,12 +188,28 @@ class AdminFragment : Fragment() {
                         .addOnSuccessListener {
                             LogHelper.saveChangeLog(requireContext(), "Usuario creado", "INFO")
 
-                            val intent = Intent(requireContext(), IntroducirDatos::class.java)
-                            startActivity(intent)
-                            activity?.finish()
-                            editor.clear()
-                            editor.apply()
+                            // Recargar la lista de usuarios después de agregar uno nuevo
+                            loadUsersFromFirestore()
+
+                            // Recuperar email y contraseña de las preferencias compartidas
+                            val storedEmail = sharedPreferences.getString("email", "")
+                            val storedPassword = sharedPreferences.getString("password", "")
+
+                            if (storedEmail != null && storedPassword != null) {
+                                // Iniciar sesión con el usuario almacenado en las preferencias compartidas
+                                auth.signInWithEmailAndPassword(storedEmail, storedPassword)
+                                    .addOnCompleteListener { signInTask ->
+                                        if (signInTask.isSuccessful) {
+                                            loadUsersFromFirestore()
+                                        }
+                                    }
+                            } else {
+                                LogHelper.saveChangeLog(requireContext(), "Datos de inicio de sesión no encontrados", "ERROR")
+                                val snackbar = Snackbar.make(requireView(), "No se encontraron datos de inicio de sesión", Snackbar.LENGTH_SHORT)
+                                snackbar.show()
+                            }
                         }
+                    loadUsersFromFirestore()
                 } else {
                     LogHelper.saveChangeLog(requireContext(), "Error al crear usuario", "ERROR")
                     val snackbar = Snackbar.make(requireView(), "No se ha podido crear el usuario", Snackbar.LENGTH_SHORT)
@@ -199,4 +217,6 @@ class AdminFragment : Fragment() {
                 }
             }
     }
+
+
 }
