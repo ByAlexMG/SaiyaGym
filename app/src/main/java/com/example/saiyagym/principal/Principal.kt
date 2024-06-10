@@ -115,7 +115,7 @@ class Principal : AppCompatActivity() {
             userRef.get().addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val moroso = document.getLong("moroso")
-                    if (moroso != null && moroso == 1L) {
+                    if (moroso != null) {
                         clearPreferencesAndLogout()
                     }
                 }

@@ -1,6 +1,7 @@
 package com.example.saiyagym.principal.userFragments.Fragment2
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -97,6 +98,8 @@ class Option2Fragment : Fragment() {
                                     }
                                 }
                                 recyclerViewOption2.adapter = CustomAdapter(exerciseList)
+                                Log.d("Prueba", "Adapter set with ${exerciseList.size} exercises")
+
                                 progressBar.visibility = View.GONE
                             }
                         } else {

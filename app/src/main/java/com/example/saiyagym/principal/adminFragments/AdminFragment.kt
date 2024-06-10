@@ -53,16 +53,20 @@ class AdminFragment : Fragment() {
     fun loadUsersFromFirestore() {
         progressBar.visibility = View.VISIBLE
         val db = FirebaseFirestore.getInstance()
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
+
         db.collection("users")
             .get()
             .addOnSuccessListener { result ->
                 usersList.clear()
                 for (document in result) {
                     val uid = document.id
-                    val email = document.getString("email") ?: ""
-                    val moroso = document.getLong("moroso")?.toInt() ?: 0
-                    val user = User(uid, email, moroso)
-                    usersList.add(user)
+                    if (uid != currentUserId) {
+                        val email = document.getString("email") ?: ""
+                        val moroso = document.getLong("moroso")?.toInt() ?: 0
+                        val user = User(uid, email, moroso)
+                        usersList.add(user)
+                    }
                 }
 
                 usersList.sortBy { it.moroso }
@@ -75,6 +79,7 @@ class AdminFragment : Fragment() {
                 snackbar.show()
             }
     }
+
     private fun showAddUserDialog() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_user, null)
         val editTextEmail = dialogView.findViewById<EditText>(R.id.editTextEmail)
@@ -96,7 +101,6 @@ class AdminFragment : Fragment() {
             }
             .show()
     }
-
 
     private inner class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
@@ -126,20 +130,12 @@ class AdminFragment : Fragment() {
             holder.emailTextView.text = currentUser.email
 
             if (currentUser.moroso == 1) {
-                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,
-                    R.color.textColorMoroso
-                ))
-                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,
-                    R.color.textColorMoroso
-                ))
+                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorMoroso))
+                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorMoroso))
                 holder.actionButton.visibility = View.GONE
             } else {
-                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,
-                    R.color.textColorDefault
-                ))
-                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,
-                    R.color.textColorDefault
-                ))
+                holder.uidTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorDefault))
+                holder.emailTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.textColorDefault))
                 holder.actionButton.visibility = View.VISIBLE
             }
         }
@@ -163,16 +159,13 @@ class AdminFragment : Fragment() {
                     loadUsersFromFirestore()
                 }
                 .addOnFailureListener { exception ->
-                    LogHelper.saveChangeLog(
-                        requireContext(),
-                        "Error al marcar usuario como moroso: ${exception.message}",
-                        "ERROR"
-                    )
+                    LogHelper.saveChangeLog(requireContext(), "Error al marcar usuario como moroso: ${exception.message}", "ERROR")
                     val snackbar = Snackbar.make(requireView(), "No se ha podido eliminar usuario", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }
         }
     }
+
     private fun addNewUser(email: String, password: String, role: String) {
         val auth = FirebaseAuth.getInstance()
         val db = FirebaseFirestore.getInstance()

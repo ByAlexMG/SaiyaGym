@@ -54,11 +54,11 @@ class SingIn : AppCompatActivity() {
                                     LogHelper.saveChangeLog(this, "Usuario registrado", "INFO")
                                 }.addOnFailureListener {
                                     LogHelper.saveChangeLog(this, "Error al registrar usuario", "ERROR")
-                                    showAlert("Error", "Se ha producido un error al registrar los datos")
+                                    showAlert("Error de Conexión", "Error al registrar el usuario, vuelva a intentarlo más tarde ")
                                 }
                             }
                         } else {
-                            showAlert("Error", "Se ha producido un error al registrarse")
+                            showAlert("Error", "El usuario ya está siendo usado.")
                         }
                     }
                 } else {

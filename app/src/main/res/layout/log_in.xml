@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="419dp"
-        android:layout_height="361dp"
+        android:layout_width="395dp"
+        android:layout_height="351dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="13dp"
         android:alpha="0.7"
         android:scaleType="centerCrop"
         android:src="@drawable/logo_app" />
@@ -46,6 +46,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="40dp"
+        app:endIconMode="password_toggle"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="18dp"
         android:imeOptions="actionDone" >
