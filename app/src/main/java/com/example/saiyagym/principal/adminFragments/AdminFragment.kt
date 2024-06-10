@@ -97,8 +97,11 @@ class AdminFragment : Fragment() {
                 val rol = roleSpinner.selectedItem.toString().toLowerCase()
                 addNewUser(email, password, rol)
                 dialog.dismiss()
+
             }
+
             .setNegativeButton("Cancelar") { dialog, _ ->
+
                 dialog.dismiss()
             }
             .show()
@@ -188,25 +191,18 @@ class AdminFragment : Fragment() {
                         .addOnSuccessListener {
                             LogHelper.saveChangeLog(requireContext(), "Usuario creado", "INFO")
 
-                            // Recargar la lista de usuarios después de agregar uno nuevo
                             loadUsersFromFirestore()
 
-                            // Recuperar email y contraseña de las preferencias compartidas
                             val storedEmail = sharedPreferences.getString("email", "")
                             val storedPassword = sharedPreferences.getString("password", "")
 
                             if (storedEmail != null && storedPassword != null) {
-                                // Iniciar sesión con el usuario almacenado en las preferencias compartidas
                                 auth.signInWithEmailAndPassword(storedEmail, storedPassword)
                                     .addOnCompleteListener { signInTask ->
                                         if (signInTask.isSuccessful) {
                                             loadUsersFromFirestore()
                                         }
                                     }
-                            } else {
-                                LogHelper.saveChangeLog(requireContext(), "Datos de inicio de sesión no encontrados", "ERROR")
-                                val snackbar = Snackbar.make(requireView(), "No se encontraron datos de inicio de sesión", Snackbar.LENGTH_SHORT)
-                                snackbar.show()
                             }
                         }
                     loadUsersFromFirestore()
