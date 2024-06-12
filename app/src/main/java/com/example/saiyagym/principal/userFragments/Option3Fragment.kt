@@ -89,6 +89,11 @@ class Option3Fragment : Fragment() {
             showChangePasswordDialog()
         }
 
+        isAdmin { isAdmin ->
+            if (isAdmin) {
+                button1.visibility = View.GONE
+            }
+        }
         return view
     }
 
@@ -123,6 +128,26 @@ class Option3Fragment : Fragment() {
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(),R.color.textColorMoroso))
 
     }
+    private fun isAdmin(callback: (Boolean) -> Unit) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            val db = FirebaseFirestore.getInstance()
+            val userRef = db.collection("users").document(uid)
+            userRef.get().addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val role = document.getString("rol")
+                    callback(role != null && role == "admin")
+                } else {
+                    callback(false)
+                }
+            }.addOnFailureListener {
+                callback(false)
+            }
+        } else {
+            callback(false)
+        }
+    }
 
     private fun changePassword(currentPassword: String, newPassword: String) {
         val user = FirebaseAuth.getInstance().currentUser
@@ -139,6 +164,13 @@ class Option3Fragment : Fragment() {
                                     "Contraseña actualizada",
                                     "INFO"
                                 )
+
+                                // Update the password in shared preferences
+                                val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putString("password", newPassword)
+                                editor.apply()
+
                                 val snackbar = Snackbar.make(
                                     requireView(),
                                     "Contraseña actualizada",
@@ -169,6 +201,7 @@ class Option3Fragment : Fragment() {
                 }
             }
     }
+
 
     private fun showChangeEmailDialog() {
         val builder = AlertDialog.Builder(context)
@@ -209,7 +242,7 @@ class Option3Fragment : Fragment() {
                     user!!.updateEmail(newEmail)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
-                                // Actualizar el campo "email" en el documento del usuario
+                                // Update the email field in the user's document
                                 val userId = user.uid
                                 val userDocRef = db.collection("users").document(userId)
                                 userDocRef.update("email", newEmail)
@@ -219,6 +252,12 @@ class Option3Fragment : Fragment() {
                                             "Correo Actualizado",
                                             "INFO"
                                         )
+                                        // Update the email in shared preferences
+                                        val sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+                                        val editor = sharedPreferences.edit()
+                                        editor.putString("email", newEmail)
+                                        editor.apply()
+
                                         val snackbar = Snackbar.make(
                                             requireView(),
                                             "Correo Actualizado",
@@ -263,6 +302,7 @@ class Option3Fragment : Fragment() {
                 }
             }
     }
+
 
 
     private fun calcularPorcentajeMasaMuscular(
