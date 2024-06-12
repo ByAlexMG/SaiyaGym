@@ -23,6 +23,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputPeso"
         android:layout_width="379dp"
+        app:endIconMode="clear_text"
         android:layout_height="60dp"
         android:layout_marginTop="111dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
@@ -42,6 +43,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputAltura"
         android:layout_width="379dp"
+        app:endIconMode="clear_text"
         android:layout_height="wrap_content"
         android:hint="@string/ingrese_su_altura_cm"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
@@ -60,11 +62,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEdad"
         android:layout_width="379dp"
+        app:endIconMode="clear_text"
         android:layout_height="wrap_content"
         android:hint="@string/ingrese_su_edad_a_os"
-
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputAltura"

@@ -19,6 +19,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputUsuario"
         android:layout_width="378dp"
+        app:endIconMode="clear_text"
         android:layout_height="67dp"
         android:layout_above="@+id/textInputContraseña"
         android:layout_alignParentStart="true"

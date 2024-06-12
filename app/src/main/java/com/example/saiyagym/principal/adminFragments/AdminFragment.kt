@@ -3,9 +3,13 @@ package com.example.saiyagym.principal.adminFragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ProgressBar
@@ -87,8 +91,36 @@ class AdminFragment : Fragment() {
         val editTextEmail = dialogView.findViewById<EditText>(R.id.editTextEmail)
         val editTextPassword = dialogView.findViewById<EditText>(R.id.editTextPassword)
         val roleSpinner = dialogView.findViewById<Spinner>(R.id.roleSpinner)
+        val adminEmailHint = dialogView.findViewById<TextView>(R.id.adminEmailHint)
 
-        AlertDialog.Builder(requireContext())
+        roleSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                val email = editTextEmail.text.toString().trim()
+
+
+                if (selectedItem == "admin") {
+                    adminEmailHint.visibility = View.VISIBLE
+                    adminEmailHint.setTextColor(ContextCompat.getColor(requireContext(), R.color.textColorMoroso))
+                        adminEmailHint.text = "Domino @saiyagym.com reservado para admins"
+                }
+                else if ((selectedItem == "user") && (email.endsWith("@saiyagym.com"))) {
+                    adminEmailHint.visibility = View.VISIBLE
+                    adminEmailHint.setTextColor(ContextCompat.getColor(requireContext(), R.color.textColorMoroso))
+                    adminEmailHint.text = "Domino @saiyagym.com reservado para admins." +
+                            "ESTE USER NO ES ADMINISTRADOR"
+                } else {
+                    adminEmailHint.visibility = View.GONE
+                }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+
+        val dialogBuilder = AlertDialog.Builder(requireContext())
             .setTitle("Agregar Nuevo Usuario")
             .setView(dialogView)
             .setPositiveButton("Agregar") { dialog, _ ->
@@ -97,15 +129,19 @@ class AdminFragment : Fragment() {
                 val rol = roleSpinner.selectedItem.toString().toLowerCase()
                 addNewUser(email, password, rol)
                 dialog.dismiss()
-
             }
 
-            .setNegativeButton("Cancelar") { dialog, _ ->
+        val cancelText = "Cancelar"
+        val spannable = SpannableString(cancelText)
+        spannable.setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.textColorMoroso)), 0, cancelText.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-                dialog.dismiss()
-            }
-            .show()
+        dialogBuilder.setNegativeButton(spannable) { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        dialogBuilder.show()
     }
+
 
     private inner class UserAdapter(private val users: List<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
@@ -175,7 +211,6 @@ class AdminFragment : Fragment() {
         val auth = FirebaseAuth.getInstance()
         val db = FirebaseFirestore.getInstance()
         val sharedPreferences = requireContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { createUserTask ->

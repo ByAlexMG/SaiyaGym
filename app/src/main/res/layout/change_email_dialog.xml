@@ -9,6 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
         android:hint="@string/correo_electr_nico_actual">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -38,6 +39,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
         android:hint="@string/nuevo_correo_electr_nico"
         >
 

@@ -32,12 +32,17 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <Spinner
         android:id="@+id/roleSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/user_roles" />
 
-
+    <TextView
+        android:id="@+id/adminEmailHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Los admins deben terminar en @saiyagym.com"
+        android:textColor="@color/textColorMoroso"
+        android:visibility="gone" />
 </LinearLayout>
