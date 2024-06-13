@@ -19,5 +19,4 @@ https://youtu.be/HQC_107LtoA
 https://limononada.notion.site/SaiyaGym-TFG-7e913d8d54a448119e7341e3a4cff5ed?pvs=4
 
 ### Enlace video:
-
-Pendiente de subir a Youtube
+https://youtu.be/Yd0p1S3ox1I
