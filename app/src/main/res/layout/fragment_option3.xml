@@ -11,7 +11,7 @@
         android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="589dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="16dp"
         android:alpha="0.4"
         android:scaleType="centerCrop"
         android:src="@drawable/capsule_corp"
@@ -42,9 +42,11 @@
         android:layout_marginTop="152dp"
         android:text="@string/cambiar_correo_electr_nico"
         app:cornerRadius="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.873" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button2"
@@ -55,33 +57,30 @@
         app:cornerRadius="4dp"
         app:layout_constraintBottom_toTopOf="@+id/cambiarMedidas"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cambiarMedidas"
         android:layout_width="275dp"
         android:layout_height="58dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/cambiar_medidas"
         app:cornerRadius="4dp"
         app:layout_constraintBottom_toTopOf="@+id/CerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/CerrarSesion"
         android:layout_width="275dp"
         android:layout_height="58dp"
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="236dp"
         android:backgroundTint="#DA3B2F"
         android:text="@string/cerrar_sesi_n"
         android:textColor="@color/white"
         app:cornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent" />
 
     <Switch
@@ -94,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CerrarSesion"
-        app:layout_constraintVertical_bias="0.63"
+        app:layout_constraintVertical_bias="0.914"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 

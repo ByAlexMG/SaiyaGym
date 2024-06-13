@@ -36,6 +36,7 @@
         <activity android:name="com.example.saiyagym.introducirDatos.ElegirMeta"
             android:screenOrientation="portrait"/>
         <activity android:name="com.example.saiyagym.principal.Principal"
-               android:screenOrientation="portrait"/>
+               android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 </manifest>

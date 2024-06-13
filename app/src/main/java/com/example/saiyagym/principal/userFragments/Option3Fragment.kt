@@ -32,6 +32,8 @@ import com.google.firebase.auth.FirebaseAuth
 class Option3Fragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+    private lateinit var button1: MaterialButton
+
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
@@ -48,9 +50,11 @@ class Option3Fragment : Fragment() {
         }
 
         val closeButton = view.findViewById<MaterialButton>(R.id.CerrarSesion)
-        val button1 = view.findViewById<Button>(R.id.button1)
+        button1 = view.findViewById<MaterialButton>(R.id.button1)
         button1.setOnClickListener {
+
             showChangeEmailDialog()
+
         }
 
         closeButton.setOnClickListener {
@@ -88,12 +92,7 @@ class Option3Fragment : Fragment() {
         changePasswordButton.setOnClickListener {
             showChangePasswordDialog()
         }
-
-        isAdmin { isAdmin ->
-            if (isAdmin) {
-                button1.visibility = View.GONE
-            }
-        }
+        checkButtonVisibility()
         return view
     }
 
@@ -127,6 +126,16 @@ class Option3Fragment : Fragment() {
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(),R.color.textColorMoroso))
 
+    }
+
+    private fun checkButtonVisibility() {
+        isAdmin { isAdmin ->
+            if (isAdmin) {
+                button1.visibility = View.GONE
+            } else {
+                button1.visibility = View.VISIBLE
+            }
+        }
     }
     private fun isAdmin(callback: (Boolean) -> Unit) {
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -227,13 +236,20 @@ class Option3Fragment : Fragment() {
         }
 
         val dialog = builder.create()
+        dialog.setOnDismissListener {
+            checkButtonVisibility()
+        }
         dialog.show()
-
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(),R.color.textColorMoroso))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(requireContext(), R.color.textColorMoroso))
     }
 
 
+
     private fun changeEmail(currentEmail: String, currentPassword: String, newEmail: String) {
+        if (newEmail.endsWith("@saiyagym.com")) {
+            Snackbar.make(requireView(), "Dominio inválido", Snackbar.LENGTH_SHORT).show()
+            return
+        }
         val auth = FirebaseAuth.getInstance()
         auth.signInWithEmailAndPassword(currentEmail, currentPassword)
             .addOnCompleteListener { signInTask ->
